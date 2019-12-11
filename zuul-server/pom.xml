@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.library</groupId>
 	<artifactId>zuul-server</artifactId>
-	<version>1.0.0</version>
+	<version>0.0.1-SNAPSHOT</version>
 	<name>zuul-server</name>
 	<description>P7 - API GateWay zuul-server</description>
 
