@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/config/config.iml" filepath="$PROJECT_DIR$/config/config.iml" />
+      <module fileurl="file://$PROJECT_DIR$/config-dev/config-dev.iml" filepath="$PROJECT_DIR$/config-dev/config-dev.iml" />
+      <module fileurl="file://$PROJECT_DIR$/config-prod/config-prod.iml" filepath="$PROJECT_DIR$/config-prod/config-prod.iml" />
       <module fileurl="file://$PROJECT_DIR$/config-server/config-server.iml" filepath="$PROJECT_DIR$/config-server/config-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/config-test/config-test.iml" filepath="$PROJECT_DIR$/config-test/config-test.iml" />
       <module fileurl="file://$PROJECT_DIR$/eureka-server/eureka-server.iml" filepath="$PROJECT_DIR$/eureka-server/eureka-server.iml" />
       <module fileurl="file://$PROJECT_DIR$/library/library.iml" filepath="$PROJECT_DIR$/library/library.iml" />
       <module fileurl="file://$PROJECT_DIR$/mbooks/mbooks.iml" filepath="$PROJECT_DIR$/mbooks/mbooks.iml" />
