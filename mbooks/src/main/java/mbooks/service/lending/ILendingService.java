@@ -15,4 +15,5 @@ public interface ILendingService {
     boolean delete(Long id);
 
     void sendLendingRevival();
+    boolean isRenewable(Lending lending);
 }

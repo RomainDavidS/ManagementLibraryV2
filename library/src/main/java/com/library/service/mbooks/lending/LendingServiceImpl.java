@@ -171,12 +171,11 @@ public class LendingServiceImpl implements ILendingService {
 
     /**
      * Permet de vérifier le renouvellement est encore possible
-     * @param renewal Nombre de renouvelement déjà réalisé
+     * @param lending Nombre de renouvelement déjà réalisé
      * @return true si le renouvellement est encore possible sinon false
      */
-    public boolean isRenewable(Integer renewal){
-        return (renewal < booksPropertiesProxy.renewalNumber() );
-      //  return (renewal < appPropertiesConfig.getRenewalNumber() );
+    public boolean isRenewable(LendingBean lending){
+        return  lendingProxy.isRenewable( lending.getId() );
     }
 
     /**

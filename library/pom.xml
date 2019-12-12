@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.library</groupId>
 	<artifactId>library</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<name>library</name>
 	<description>P7 - Application web de la gestion de la bibliothèque</description>
 

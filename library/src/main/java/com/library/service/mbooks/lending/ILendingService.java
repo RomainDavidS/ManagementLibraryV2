@@ -27,7 +27,7 @@ public interface ILendingService {
     boolean isOutOfTime(  LendingBean lending );
     boolean isReturn( LendingBean lending );
 
-    boolean isRenewable(Integer renewal);
+    boolean isRenewable(LendingBean lending);
     String renewalDate(Date date);
     String getEndDate(Date date);
 

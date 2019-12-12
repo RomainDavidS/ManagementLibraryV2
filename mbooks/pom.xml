@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.mbooks</groupId>
 	<artifactId>mbooks</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<name>mbooks</name>
 	<description>P7 - Microservice de la gestion des livres</description>
 

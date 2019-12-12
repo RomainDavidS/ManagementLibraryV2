@@ -44,6 +44,9 @@ public class BooksFunction {
 
     public String getDate(Date date){return simpleDate.getDate( date ); }
 
+    public boolean isRenewable(LendingBean lending){
+        return  lendingService.isRenewable( lending );
+    }
 
 
 
