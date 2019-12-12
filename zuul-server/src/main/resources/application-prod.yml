@@ -1,0 +1,27 @@
+
+# issu de https://stackoverflow.com/questions/55418340/com-netflix-zuul-exception-zuulexception-hystrix-readed-time-out
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 126000
+
+
+ribbon:
+  ReadTimeout: 60000
+  ConnectTimeout: 3000
+  eureka:
+    enabled: true
+
+
+zuul:
+  host:
+    time-to-live: -1
+    connect-timeout-millis: 5000
+    max-per-route-connections: 10000
+    max-total-connections: 5000
+    socket-timeout-millis: 60000
+  semaphore:
+    max-semaphores: 500
