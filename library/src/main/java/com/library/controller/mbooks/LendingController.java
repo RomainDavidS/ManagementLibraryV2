@@ -72,7 +72,13 @@ public class LendingController  {
         model.addAttribute("id",id);
         model.addAttribute("title", lendingBean.getBook().getTitle() );
         model.addAttribute("endDate",lendingService.renewalDate( lendingBean.getEndDate() ) );
-        return "books/lending/renewal-lending";
+
+        if( lendingService.isRenewable( lendingBean) )
+            return "books/lending/renewal-lending";
+        else {
+            model.addAttribute("endDate",lendingService.getEndDate( lendingBean.getEndDate() ) );
+            return "books/lending/renewal-lending-ko";
+        }
     }
 
     @GetMapping("/renewal/yes/{id}")

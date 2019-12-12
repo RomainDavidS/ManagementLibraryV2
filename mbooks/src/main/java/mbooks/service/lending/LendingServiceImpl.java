@@ -47,7 +47,7 @@ public class LendingServiceImpl implements ILendingService {
     public void renewal(Long id){
     Lending lending = this.find( id );
 
-        if(lending.getRenewal() < appPropertiesConfig.getRenewalNumber() ){
+        if( isRenewable( lending ) ){
             lending.setRenewal( lending.getRenewal() + 1);
             Calendar c = Calendar.getInstance();
             c.setTime( lending.getEndDate() );
@@ -115,6 +115,57 @@ public class LendingServiceImpl implements ILendingService {
         }
     }
 
+    /**
+     * Permet de vérifier si l'emprunt est en cours
+     * @param lending Emprunt à vérifier
+     * @return true si l'emprunt est toujours en vous sinon fdalse
+     */
+    private boolean isInProgress( Lending lending){
+        return isStartDateBeforeEndDate(  lending);
+    }
+
+    /**
+     * Permet de vérifier si l'emprunt est hors délais
+     * @param lending Emprunt à vérifier
+     * @return true si l'emprunt est hors délai sinon false
+     */
+    private boolean isOutOfTime( Lending lending ){
+        return !isStartDateBeforeEndDate(  lending);
+    }
+
+    /**
+     * Permet de vérifier si le livre emprunté a été rendu
+     * @param lending Emprunt à vérifier
+     * @return true si le livre a été rendu sinon false
+     */
+    private boolean isReturn(Lending lending){
+        if ( lending.getReturnDate() == null)
+            return false;
+
+        return true;
+    }
+
+    /**
+     * Permet de vérifier si la date de fin d'un emprunt en cours ou hors délai est dépassée
+     * @param lending Emprunt à vérifier
+     * @return true si la date de fin est dépassé sinon false
+     */
+    private boolean isStartDateBeforeEndDate( Lending lending){
+        Date now = new Date();
+        if( !this.isReturn( lending ) )
+            return ( now.compareTo( lending.getEndDate() ) <= 0 );
+
+        return false;
+    }
+
+    /**
+     * Permet de vérifier le renouvellement est encore possible
+     * @param lending Nombre de renouvelement déjà réalisé
+     * @return true si le renouvellement est encore possible sinon false
+     */
+    public boolean isRenewable(Lending lending){
+        return ( lending.getRenewal() < appPropertiesConfig.getRenewalNumber() && isInProgress( lending ) );
+    }
 
     /**
      * Permet de réaliser l'envoi d'un mail de relancer des emprunts des livres non rendus

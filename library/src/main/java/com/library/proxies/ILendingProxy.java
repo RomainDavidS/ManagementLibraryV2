@@ -38,4 +38,7 @@ public interface ILendingProxy {
     @DeleteMapping("/{id}")
     boolean delete(@PathVariable("id") Long id);
 
+    @GetMapping("/isRenewable/{id}")
+    boolean  isRenewable(@PathVariable("id") Long id);
+
 }

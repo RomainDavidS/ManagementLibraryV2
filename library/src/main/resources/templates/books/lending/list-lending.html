@@ -72,7 +72,7 @@
                                     <!---------------------------------------------- Fin des  p.card-text -->
                                     <!-- Debut de div : button - Infos & Longueurs -------------------------------------------->
 
-                                    <div class="d-flex justify-content-between align-items-center flex-wrap" th:if="${ l.renewal < renewalNumber }" >
+                                    <div class="d-flex justify-content-between align-items-center flex-wrap" th:if="${ fn.isRenewable( l ) }" >
                                         <a class="btn btn-sm btn-outline-secondary mt-1" role="button" th:href="@{/lending/renewal/{id}(id=${l.id})}"  >Renouvellement</a>
                                     </div>
 

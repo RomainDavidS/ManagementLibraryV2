@@ -8,8 +8,8 @@
         <option value="$PROJECT_DIR$/musers/pom.xml" />
         <option value="$PROJECT_DIR$/config-server/pom.xml" />
         <option value="$PROJECT_DIR$/eureka-server/pom.xml" />
-        <option value="$PROJECT_DIR$/zuul-server/pom.xml" />
         <option value="$PROJECT_DIR$/mfile/pom.xml" />
+        <option value="$PROJECT_DIR$/zuul-server/pom.xml" />
       </list>
     </option>
   </component>
