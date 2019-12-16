@@ -1,10 +1,12 @@
 package mbooks.service.reservation;
 
+
 import mbooks.config.ApplicationPropertiesConfig;
 import mbooks.model.Books;
 import mbooks.model.Reservation;
 import mbooks.model.ReservationState;
 import mbooks.repository.IReservationRepository;
+import mbooks.service.BooksServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -17,11 +19,16 @@ public class ReservationServiceImpl implements IReservationService {
     @Autowired
     private IReservationRepository reservationRepository;
 
+
     @Autowired
     private ApplicationPropertiesConfig appProperties;
 
     @Autowired
     private ReservationStateServiceImpl reservationStateService;
+
+    @Autowired
+    private BooksServiceImpl booksService;
+
 
     public Reservation find(Long id){
         return  reservationRepository.getOne( id );
@@ -31,49 +38,38 @@ public class ReservationServiceImpl implements IReservationService {
         return reservationRepository.findAll();
     }
 
-    public List<Reservation> listInprogress(){
+    public List<Reservation> list( Long idUserReservation){
+        return reservationRepository.findAllByIdUserReservationOrderByReservationDateBookDesc( idUserReservation );
+    }
+
+    public List<Reservation> list(Books books){
+        return reservationRepository.findAllByBookOrderByReservationDateDesc( books);
+    }
+
+    public List<Reservation> listInProgress(Books books){
         ReservationState reservationState = reservationStateService.find( appProperties.getReservationInprogress() );
-        return reservationRepository.findAllByReservationStateOrderByReservationDate( reservationState );
+        return reservationRepository.findAllByBookAndReservationStateOrderByReservationDateDesc(books, reservationState);
     }
 
-    public List<Reservation> listCanceled(){
-        ReservationState reservationState = reservationStateService.find( appProperties.getReservationCanceled() );
-        return reservationRepository.findAllByReservationStateOrderByReservationDate( reservationState );
-    }
+    public Integer positionUser(Long idBook , Long idUserReservation){
 
-    public List<Reservation> listCompleted(){
-        ReservationState reservationState = reservationStateService.find( appProperties.getReservationCompleted() );
-        return reservationRepository.findAllByReservationStateOrderByReservationDate( reservationState );
-    }
+        List<Reservation> reservationList = listInProgress( booksService.find( idBook ) );
 
-    public List<Reservation> listInprogress(Books books){
-        ReservationState reservationState = reservationStateService.find( appProperties.getReservationInprogress() );
-        return reservationRepository.findAllByBookAndReservationStateOrderByReservationDate( books,reservationState );
-    }
+        Integer pos = 1;
+        boolean trouve = false;
 
-    public List<Reservation> listInprogress(Long idUserReservation){
-        ReservationState reservationState = reservationStateService.find( appProperties.getReservationInprogress() );
-        return reservationRepository.findAllByIdUserReservationAndReservationStateOrderByReservationDate(idUserReservation,reservationState );
-    }
+        for ( Reservation reservation : reservationList ) {
+            if ( idUserReservation.equals( reservation.getIdUserReservation() ) ){
+                trouve = true;
+                break;
+            }
+            pos++;
+        }
 
-    public List<Reservation> listCanceled(Books books){
-        ReservationState reservationState = reservationStateService.find( appProperties.getReservationCanceled() );
-        return reservationRepository.findAllByBookAndReservationStateOrderByReservationDate( books,reservationState );
-    }
-
-    public List<Reservation> listCanceled(Long idUserReservation){
-        ReservationState reservationState = reservationStateService.find( appProperties.getReservationCanceled() );
-        return reservationRepository.findAllByIdUserReservationAndReservationStateOrderByReservationDate(idUserReservation,reservationState );
-    }
-
-    public List<Reservation> listCompleted(Books books){
-        ReservationState reservationState = reservationStateService.find( appProperties.getReservationCompleted() );
-        return reservationRepository.findAllByBookAndReservationStateOrderByReservationDate( books,reservationState );
-    }
-
-    public List<Reservation> listCompleted(Long idUserReservation){
-        ReservationState reservationState = reservationStateService.find( appProperties.getReservationCompleted() );
-        return reservationRepository.findAllByIdUserReservationAndReservationStateOrderByReservationDate(idUserReservation,reservationState );
+        if( trouve == true )
+            return pos;
+        else
+            return 0;
     }
 
     public Reservation save(Reservation reservation){
@@ -89,5 +85,10 @@ public class ReservationServiceImpl implements IReservationService {
             return false;
         }
     }
+
+
+
+
+
 
 }

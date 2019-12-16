@@ -11,4 +11,5 @@ public interface IBooksService {
     List<Books> list();
     Books save(Books book);
     boolean delete(Long id);
+    boolean isAvailability(Long id);
 }

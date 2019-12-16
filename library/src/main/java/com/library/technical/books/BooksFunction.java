@@ -10,6 +10,7 @@ import com.library.service.mbooks.author.AuthorServiceImpl;
 import com.library.service.mbooks.author.IAuthorService;
 import com.library.service.mbooks.lending.ILendingService;
 import com.library.service.mbooks.lending.LendingServiceImpl;
+import com.library.service.mbooks.reservation.IReservationService;
 import com.library.technical.date.SimpleDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -27,6 +28,9 @@ public class BooksFunction {
 
     @Autowired
     private ILendingService lendingService;
+
+    @Autowired
+    private IReservationService reservationService;
 
     @Autowired
     private SimpleDate simpleDate;
@@ -48,6 +52,9 @@ public class BooksFunction {
         return  lendingService.isRenewable( lending );
     }
 
+    public boolean isReservationPossible(BookBean book){
+        return reservationService.isReservationPossible( book );
+    }
 
 
 

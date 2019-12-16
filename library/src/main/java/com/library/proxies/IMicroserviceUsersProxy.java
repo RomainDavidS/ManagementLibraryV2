@@ -19,5 +19,8 @@ public interface IMicroserviceUsersProxy {
     @GetMapping(value = "/byEmail/{id}")
     UsersBean user(@PathVariable("id") String  id);
 
+    @GetMapping("/reservation/{id}")
+    String getUserNameReservation(@PathVariable("id") Long  id);
+
 
 }

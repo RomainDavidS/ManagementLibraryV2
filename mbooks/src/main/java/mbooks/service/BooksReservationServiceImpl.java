@@ -1,5 +1,6 @@
 package mbooks.service;
 
+import mbooks.model.Books;
 import mbooks.model.BooksReservation;
 import mbooks.repository.IBooksReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +15,13 @@ public class BooksReservationServiceImpl implements IBooksReservationService {
     @Autowired
     private IBooksReservationRepository booksReservationRepository;
 
+
+
     public BooksReservation find(Long id){
         return booksReservationRepository.getOne( id );
     }
+
+    public BooksReservation find(Books books){return  booksReservationRepository.findAllByBooks( books );}
 
     public List<BooksReservation> list(){
         return booksReservationRepository.findAll();
@@ -33,5 +38,10 @@ public class BooksReservationServiceImpl implements IBooksReservationService {
         }catch (DataIntegrityViolationException ee){
             return false;
         }
+    }
+
+    public boolean isReservationPossible(Books books){
+        BooksReservation booksReservation = find( books );
+        return booksReservation.getNumber() < booksReservation.getPossible() ;
     }
 }

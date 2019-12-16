@@ -19,6 +19,8 @@ public interface IUsersService  {
 
     void updateRole(Long idUser, String newRole);
 
+    String getUserNameReservation(Long id);
+
 
 
 

@@ -7,27 +7,19 @@ import java.util.List;
 
 public interface IReservationService {
 
+
+
     Reservation find(Long id);
 
     List<Reservation> list();
 
-    List<Reservation> listInprogress();
+    List<Reservation> list(Long idUserReservation);
 
-    List<Reservation> listCanceled();
+    List<Reservation> list(Books books);
 
-    List<Reservation> listCompleted();
+    List<Reservation> listInProgress(Books books);
 
-    List<Reservation> listInprogress(Books books);
-
-    List<Reservation> listInprogress(Long idUserReservation);
-
-    List<Reservation> listCanceled(Books books);
-
-    List<Reservation> listCanceled(Long idUserReservation);
-
-    List<Reservation> listCompleted(Books books);
-
-    List<Reservation> listCompleted(Long idUserReservation);
+    Integer positionUser(Long idBook , Long idUserReservation);
 
     Reservation save(Reservation reservation);
 

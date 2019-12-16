@@ -1,5 +1,6 @@
 package mbooks.model;
 
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -11,7 +12,7 @@ import java.util.Date;
 @NoArgsConstructor
 @RequiredArgsConstructor
 @Entity
-public class BooksReservation {
+public @Data class BooksReservation {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

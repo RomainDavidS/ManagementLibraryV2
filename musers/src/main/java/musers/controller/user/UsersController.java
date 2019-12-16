@@ -36,6 +36,11 @@ public class UsersController implements HealthIndicator {
         return usersService.findUser( id );
     }
 
+    @GetMapping("/reservation/{id}")
+    public String getUserNameReservation(@PathVariable Long  id){
+        return usersService.getUserNameReservation( id );
+    }
+
     @GetMapping(value = "/byEmail/{id}")
     public Users user(@PathVariable String  id){
         return usersService.findUser( id );

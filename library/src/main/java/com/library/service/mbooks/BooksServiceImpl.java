@@ -109,8 +109,10 @@ public class BooksServiceImpl implements IBooksService {
      * @return true si le livre est encore disponible sinon false
      */
     public boolean isAvailability(BookBean book){
-        return ( book.getAvailability() > 0) ;
+        return booksProxy.isAvailable( book.getId() );
     }
+
+
 
 
 }

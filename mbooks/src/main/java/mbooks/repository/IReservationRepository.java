@@ -9,9 +9,8 @@ import java.util.List;
 
 public interface IReservationRepository extends JpaRepository<Reservation,Long> {
 
-   List< Reservation > findAllByReservationStateOrderByReservationDate(ReservationState reservationState );
+   List<Reservation> findAllByBookOrderByReservationDateDesc(Books books);
+   List<Reservation> findAllByBookAndReservationStateOrderByReservationDateDesc(Books books,ReservationState reservationState);
 
-   List< Reservation > findAllByBookAndReservationStateOrderByReservationDate(Books books, ReservationState reservationState );
-
-   List< Reservation > findAllByIdUserReservationAndReservationStateOrderByReservationDate(Long idUserReservation, ReservationState reservationState );
+   List<Reservation> findAllByIdUserReservationOrderByReservationDateBookDesc( Long idUserReservation );
 }

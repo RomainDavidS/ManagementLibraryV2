@@ -143,5 +143,7 @@ public class UserServiceImpl implements IUsersService {
         return roleChecker.hasRole("USER");
     }
 
-
+    public String getUserReservation(Long id){
+        return mUsersProxy.getUserNameReservation(id );
+    }
 }

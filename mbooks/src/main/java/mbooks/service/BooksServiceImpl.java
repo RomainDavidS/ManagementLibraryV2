@@ -62,4 +62,10 @@ public class BooksServiceImpl implements IBooksService {
             return false;
         }
     }
+
+    public boolean isAvailability(Long id){
+        Books books = bookRepository.getOne( id );
+        return books.getAvailability() <= 0;
+    }
 }
+

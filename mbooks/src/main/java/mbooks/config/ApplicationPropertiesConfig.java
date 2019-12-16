@@ -21,4 +21,5 @@ public class ApplicationPropertiesConfig {
     private Long reservationInprogress;
     private Long reservationCanceled;
     private Long reservationCompleted;
+    private String cron;
 }

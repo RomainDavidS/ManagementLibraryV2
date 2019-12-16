@@ -1,5 +1,6 @@
 package mbooks.batch;
 
+
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobParameters;
 import org.springframework.batch.core.JobParametersBuilder;
@@ -22,7 +23,7 @@ public class BatchJob {
      * Programmation de la relance des emprunts à 3h00 du matin tous les jours
      * @throws Exception
      */
-    @Scheduled(cron = "0 0 3 * * *")
+    @Scheduled(cron = "${microservice.config.cron.job}")
     public void lendingRevival() throws Exception
     {
         JobParameters params = new JobParametersBuilder()

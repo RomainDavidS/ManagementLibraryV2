@@ -33,6 +33,9 @@ public interface IBooksProxy {
     @DeleteMapping("/{id}")
     boolean delete(@PathVariable("id") Long id);
 
+    @GetMapping("/availability/{id}")
+    boolean isAvailable(@PathVariable("id") Long id);
+
 
 
 

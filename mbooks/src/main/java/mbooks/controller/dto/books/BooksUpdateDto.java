@@ -1,4 +1,4 @@
-package mbooks.controller.dto;
+package mbooks.controller.dto.books;
 
 
 import lombok.Getter;
@@ -8,13 +8,17 @@ import mbooks.model.Author;
 import mbooks.model.Language;
 import mbooks.model.Theme;
 
+import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @NoArgsConstructor
 @Getter
 @Setter
-public class BooksCreateDto {
+public class BooksUpdateDto {
+
+    @Id
+    private Long id;
 
     @NotBlank(message = "Le numéro ISBN est obligatoire.")
     private String isbn;
@@ -30,7 +34,6 @@ public class BooksCreateDto {
 
     @NotBlank(message = "Le nombre de livre disponible est obligatoire.")
     private Long availability;
-
 
     @NotNull(message = "Le choix de la couverture est obligatoire.")
     private String idCover;
