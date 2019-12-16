@@ -6,9 +6,9 @@ import lombok.Getter;
 @Getter
 public enum State {
 
-    INPROGRESS(new BooksPropertiesImpl().getReservationInprogress() ),
-    CANCELED(new BooksPropertiesImpl().getReservationCanceled() ),
-    COMPLETED(new BooksPropertiesImpl().getReservationCompleted() );
+    INPROGRESS( "En cours" ),
+    CANCELED( "Annulé" ),
+    COMPLETED("Terminé");
 
     private String code;
 

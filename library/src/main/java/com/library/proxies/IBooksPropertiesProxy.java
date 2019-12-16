@@ -16,16 +16,4 @@ public interface IBooksPropertiesProxy {
 
     @GetMapping("/renewalDay")
     Integer getRenewalDay();
-
-    @GetMapping("/reservationInprogress")
-    String getReservationInprogress();
-
-    @GetMapping("/reservationCanceled")
-    String getReservationCanceled();
-
-    @GetMapping("/reservationCompleted")
-    String getReservationCompleted();
-
-
-
 }

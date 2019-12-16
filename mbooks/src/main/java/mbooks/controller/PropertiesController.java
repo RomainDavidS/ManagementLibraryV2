@@ -37,22 +37,6 @@ public class PropertiesController  {
 
     }
 
-    @GetMapping("/reservationInprogress")
-    public String getReservationInprogress(){
-        return appPropertiesConfig.getReservationInprogress();
-
-    }
-    @GetMapping("/reservationCanceled")
-    public String getReservationCanceled(){
-        return appPropertiesConfig.getReservationCanceled();
-
-    }
-    @GetMapping("/reservationCompleted")
-    public String getReservationCompleted(){
-        return appPropertiesConfig.getReservationCompleted();
-
-    }
-
 
 
 }

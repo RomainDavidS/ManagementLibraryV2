@@ -20,17 +20,5 @@ public class BooksPropertiesImpl implements IBooksPropertiesService {
    }
 
 
-   public String getReservationInprogress(){
-       return booksPropertiesProxy.getReservationInprogress();
-   }
 
-
-    public String getReservationCanceled(){
-       return booksPropertiesProxy.getReservationCanceled();
-    }
-
-
-    public String getReservationCompleted(){
-       return  booksPropertiesProxy.getReservationCompleted();
-    }
 }
