@@ -1,6 +1,7 @@
 package com.library.beans.mbooks.reservation;
 
 import com.library.beans.mbooks.book.BookBean;
+import com.library.technical.state.State;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -24,7 +25,7 @@ class ReservationBean {
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date notificationDate;
 
-    private ReservationStateBean reservationState;
+    private State state;
 
     private BookBean book;
 }

@@ -16,26 +16,43 @@ public class PropertiesController  {
     private ApplicationPropertiesConfig appPropertiesConfig;
 
     @GetMapping("/renewalNumber")
-    public Integer renewalNumber(){
+    public Integer getRenewalNumber(){
         return appPropertiesConfig.getRenewalNumber();
 
     }
 
     @GetMapping("/renewalDay")
-    public Integer renewalDay(){
+    public Integer getRenewalDay(){
         return appPropertiesConfig.getRenewalDay();
 
     }
     @GetMapping("/reservationCancellationDay")
-    public Integer reservationCancellationDay(){
+    public Integer getReservationCancellationDay(){
         return appPropertiesConfig.getReservationCancellationDay();
 
     }
     @GetMapping("/numberReservationPossible")
-    public Integer numberReservationPossible(){
+    public Integer getNumberReservationPossible(){
         return appPropertiesConfig.getNumberReservationPossible();
 
     }
+
+    @GetMapping("/reservationInprogress")
+    public String getReservationInprogress(){
+        return appPropertiesConfig.getReservationInprogress();
+
+    }
+    @GetMapping("/reservationCanceled")
+    public String getReservationCanceled(){
+        return appPropertiesConfig.getReservationCanceled();
+
+    }
+    @GetMapping("/reservationCompleted")
+    public String getReservationCompleted(){
+        return appPropertiesConfig.getReservationCompleted();
+
+    }
+
 
 
 }

@@ -1,6 +1,7 @@
 package com.library.beans.mbooks.reservation;
 
 import com.library.beans.mbooks.book.BookBean;
+import com.library.technical.state.State;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,7 +14,7 @@ public  @Data class ReservationCreateBean {
 
     private Long idUserUpdate;
 
-    private ReservationStateBean reservationState;
+    private State state;
 
     private BookBean book;
 }
