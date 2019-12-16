@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import mbooks.model.Books;
-import mbooks.model.ReservationState;
+import mbooks.technical.state.State;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -30,7 +30,7 @@ public class ReservationUpdateDto {
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date notificationDate;
 
-    private ReservationState reservationState;
+    private State state;
 
     private Books book;
 }

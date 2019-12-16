@@ -48,6 +48,13 @@ INSERT INTO "lending"(
 	(4, '2019-12-29 14:00:00', 1, 1, null , '2019-12-01 14:00:00', 5),
 	(5, '2019-12-29 14:00:00', 1, 0, null , '2019-12-01 14:00:00', 7);
 
+INSERT INTO "reservation"(
+	id, id_user_create, id_user_reservation, id_user_update, notification_date, reservation_date, state, id_books)
+	VALUES
+	(1, 1, 1, 1, null, '2019-12-16 09:00:00', 'En cours', 1),
+	(2, 2, 2, 2, null, '2019-12-16 10:00:00', 'En cours', 2),
+	(3, 3, 3, 3, null, '2019-12-16 11:00:00', 'En cours', 1),
+	(4, 1, 1, 1, null, '2019-12-16 12:00:00', 'En cours', 2);
 
 INSERT INTO "email" (id, name,subject,content)
 VALUES

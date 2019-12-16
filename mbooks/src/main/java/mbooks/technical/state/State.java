@@ -7,7 +7,7 @@ import mbooks.config.ApplicationPropertiesConfig;
 public enum State {
 
     INPROGRESS(new ApplicationPropertiesConfig().getReservationInprogress() ),
-    CANCELED(new ApplicationPropertiesConfig().getReservationCanceled()),
+    CANCELED(new ApplicationPropertiesConfig().getReservationCanceled() ),
     COMPLETED(new ApplicationPropertiesConfig().getReservationCompleted());
 
     private String code;

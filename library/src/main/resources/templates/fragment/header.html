@@ -27,19 +27,32 @@
                     <li class="nav-item active">
                         <a class="nav-link" th:href="@{/book/all}">Liste des livres disponibles</a>
                     </li>
-                    <li class="nav-item active" sec:authorize="isAuthenticated()">
-                        <a class="nav-link" th:href="@{/lending/user}">Mes emprunts</a>
-                        <a class="nav-link" th:href="@{/reservation/user}">Mes réservations</a>
+                    <li sec:authorize="isAuthenticated()" class="nav-item dropdown active">
+                        <a class="nav-link dropdown-toggle" id="dropdown2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Mon profil
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="dropdown2">
+                            <li><a class="dropdown-item" th:href="@{/registration/info}" >Mes infos</a> </li>
+                            <li><a class="dropdown-item" th:href="@{/lending/user}">Mes emprunts</a> </li>
+                            <li><a class="dropdown-item" th:href="@{/reservation/user}">Mes réservations</a> </li>
+                        </ul>
                     </li>
-                    <li class="nav-item active" sec:authorize="isAuthenticated()">
-                        <a class="nav-link" th:href="@{/lending/all}">Liste des emprunts</a>
-                        <a class="nav-link" th:href="@{/reservation/all}">Liste des réservations</a>
+
+                    <li sec:authorize="isAuthenticated()" class="nav-item dropdown active">
+                        <a class="nav-link dropdown-toggle" id="dropdown3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Gestion
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="dropdown3">
+                            <li><a class="dropdown-item" th:href="@{/lending/all}">Liste des emprunts</a> </li>
+                            <li><a class="dropdown-item" th:href="@{/reservation/all}">Liste des réservations</a> </li>
+                        </ul>
                     </li>
+
                     <li class="nav-item active">
                         <a class="nav-link" th:href="@{/apropos}">A propos</a>
                     </li>
                 </ul>
-                <a sec:authorize="isAuthenticated()" class="nav-link text-muted w-25" th:text="${'Bienvenue ' + currentUser + ','}" >Bievenue </a>
+                <a sec:authorize="isAuthenticated()" class="nav-link text-muted w-25" th:text="${'Bienvenue ' + currentUser + ','}" >Bienvenue </a>
                 <form class="form-inline mt-2 mt-md-0">
                     <a sec:authorize="isAnonymous()" class="btn btn-sm btn-outline-secondary ml-1" th:href="@{/login}">Connexion</a>
                     <a sec:authorize="isAuthenticated()" class="btn btn-sm btn-outline-secondary ml-1" th:href="@{/logout}">Déconnexion</a>

@@ -21,6 +21,11 @@ public class StateConverter implements AttributeConverter<State,String> {
                 return null;
             }
 
+        for (State value: State.values()) {
+            System.out.println(value.getCode());
+            System.out.println(value.name());
+
+        }
             return Stream.of(State.values())
                     .filter(c -> c.getCode().equals( code ))
                     .findFirst()

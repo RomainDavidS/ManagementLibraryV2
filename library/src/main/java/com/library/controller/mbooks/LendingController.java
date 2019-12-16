@@ -48,7 +48,7 @@ public class LendingController  {
 
     @ModelAttribute("renewalNumber")
     public Integer getRenewalNumber(){
-        return booksPropertiesProxy.renewalNumber();
+        return booksPropertiesProxy.getRenewalNumber();
     }
 
     @GetMapping("/user")
@@ -108,7 +108,7 @@ public class LendingController  {
 
         model.addAttribute( lendingBeanList );
 
-        model.addAttribute("title","Liste de tous les prêts.");
+        model.addAttribute("title","Liste de tous les prêts");
         return "books/lending/list-lending";
     }
 

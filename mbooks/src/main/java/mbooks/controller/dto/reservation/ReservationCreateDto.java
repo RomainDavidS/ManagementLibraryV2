@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import mbooks.model.Books;
-import mbooks.model.ReservationState;
+import mbooks.technical.state.State;
 
 import javax.validation.constraints.NotNull;
 
@@ -22,7 +22,7 @@ public class ReservationCreateDto {
     private Long idUserUpdate;
 
     @NotNull
-    private ReservationState reservationState;
+    private State state;
 
     @NotNull
     private Books book;
