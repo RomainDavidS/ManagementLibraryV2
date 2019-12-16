@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import mbooks.technical.state.State;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -33,15 +34,11 @@ public @Data class Reservation {
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date reservationDate;
 
-
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date notificationDate;
 
-    @ManyToOne
-    @JoinColumn(name="id_reservation_state", referencedColumnName="id")
-    @NonNull
-    private ReservationState reservationState;
+    private State state;
 
     @ManyToOne
     @JoinColumn(name="id_books", referencedColumnName="id")

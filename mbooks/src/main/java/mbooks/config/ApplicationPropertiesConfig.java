@@ -18,8 +18,8 @@ public class ApplicationPropertiesConfig {
     private Integer renewalDay;
     private Integer reservationCancellationDay;
     private Integer numberReservationPossible;
-    private Long reservationInprogress;
-    private Long reservationCanceled;
-    private Long reservationCompleted;
-    private String cron;
+    private String reservationInprogress;
+    private String reservationCanceled;
+    private String reservationCompleted;
+
 }

@@ -1,12 +1,11 @@
 package mbooks.service.reservation;
 
 
-import mbooks.config.ApplicationPropertiesConfig;
 import mbooks.model.Books;
 import mbooks.model.Reservation;
-import mbooks.model.ReservationState;
 import mbooks.repository.IReservationRepository;
 import mbooks.service.BooksServiceImpl;
+import mbooks.technical.state.State;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -18,13 +17,6 @@ public class ReservationServiceImpl implements IReservationService {
 
     @Autowired
     private IReservationRepository reservationRepository;
-
-
-    @Autowired
-    private ApplicationPropertiesConfig appProperties;
-
-    @Autowired
-    private ReservationStateServiceImpl reservationStateService;
 
     @Autowired
     private BooksServiceImpl booksService;
@@ -47,8 +39,8 @@ public class ReservationServiceImpl implements IReservationService {
     }
 
     public List<Reservation> listInProgress(Books books){
-        ReservationState reservationState = reservationStateService.find( appProperties.getReservationInprogress() );
-        return reservationRepository.findAllByBookAndReservationStateOrderByReservationDateDesc(books, reservationState);
+
+        return reservationRepository.findAllByBookAndReservationStateOrderByReservationDateDesc(books, State.INPROGRESS);
     }
 
     public Integer positionUser(Long idBook , Long idUserReservation){
