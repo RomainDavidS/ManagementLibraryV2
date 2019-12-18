@@ -30,7 +30,7 @@ public @Data class BooksReservation {
 
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    private Date nextAvailabilityDate;
+    private Date nextReturnDate;
 
 
 

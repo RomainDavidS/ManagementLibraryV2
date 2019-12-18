@@ -60,6 +60,11 @@ public class BookController  {
         return  usersService.getCurrentUserFirstName();
     }
 
+    @ModelAttribute("currentUserId")
+    public Long getCurrentUserId(){
+        return  usersService.getCurrentUserId();
+    }
+
     @ModelAttribute
     public List<AuthorBean> authorBeanList(){
         return authorService.list();

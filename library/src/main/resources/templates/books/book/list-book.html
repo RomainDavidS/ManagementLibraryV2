@@ -9,7 +9,7 @@
     <title>Liste des livres</title>
 </head>
 <body>
-<main role="main" class="container" layout:fragment="content" th:with="fn = ${@booksFunction}"  >
+<main role="main" class="container" layout:fragment="content" th:with="fn = ${@booksFunction},enum=${T(com.library.technical.state.books.BooksState)}"  >
 
 
 
@@ -43,18 +43,21 @@
                     <div class="row">
                         <!-- Debut de div#album > .container > .row > .col-md-4 -------------------------------------------->
 
-                        <div class="col-md-6 bookList" th:each="b : ${list}" th:attrappend="id=${b.isbn}" >
+                        <div class="col-md-6 bookList" th:each="b : ${list}" th:attrappend="id=${b.isbn}"
+                             th:with="getBookState = ${ fn.getBooksState(b.id, currentUserId)  }">
 
                             <!-- Debut de div#album > .container > .row > .col-md-4 > .card -------------------------------------------->
-                            <div class="card mb-1 box-shadow"  >
-                                <p class="card-text mt-2 ml-2">
-
-                                    <span class="badge badge-pill badge-success" th:if="${ fn.isAvailability( b ) }" th:text="${'Disponible ('+  b.availability +')'}">Disponible</span>
-                                    <span class="badge badge-pill badge-danger" th:if="${ !fn.isAvailability( b ) }">Indisponible</span>
-                                    <span class="badge badge-pill badge-success" th:if="${ !fn.isAvailability( b ) }">Réservation possible</span>
-                                    <span class="badge badge-pill badge-danger" th:if="${ !fn.isAvailability( b ) }">Réservation impossible</span>
-
+                            <div class="card mb-1 box-shadow" >
+                                <p class="card-text mt-2 ml-2" th:switch="${getBookState}">
+                                    <span class="badge badge-pill badge-success" th:case="${ enum.AVAILABLE }" th:text="${ enum.AVAILABLE.code +' ('+  b.availability +')'}"></span>
+                                    <span class="badge badge-pill badge-danger" th:case="${ enum.RESERVATION_POSSIBLE }" th:text="${'Indisponible'}"></span>
+                                    <span class="badge badge-pill badge-success" th:case="${ enum.RESERVATION_POSSIBLE }" th:text="${ enum.RESERVATION_POSSIBLE.code }"></span>
+                                    <span class="badge badge-pill badge-danger" th:case="${ enum.ALREADY_BOOKED  }" th:text="${ enum.ALREADY_BOOKED.code }"></span>
+                                    <span class="badge badge-pill badge-danger" th:case="${ enum.ALREADY_BORROWED  }" th:text="${ enum.ALREADY_BORROWED.code }"></span>
+                                    <span class="badge badge-pill badge-danger" th:case="${ enum.MAX_RESERVATIONS_REACHED  }" th:text="${ enum.MAX_RESERVATIONS_REACHED.code }"></span>
                                 </p>
+
+
                                 <div class="d-flex justify-content-between align-items-center flex-wrap mb-1">
                                     <div class="col-md-6">
                                         <img class="card-img-top" th:src="${ getCoverPath + b.idCover}"  th:alt="${'Image du livre '+ b.title}" /> <!-- -->
@@ -69,12 +72,13 @@
                                 </div>
                                 <!-- Debut de div#album > .container > .row > .col-md-4 > .card > .card-body -------------------------------------------->
                                 <div class="card-body mt-1 pt-1">
-                                    <p class="card-text" th:utext="${'<strong>Resume</strong></br> ' + b.summary }"> </p>
+                                    <p class="card-text" th:utext="${'<strong>Resumé</strong></br> ' + b.summary }"> </p>
                                     <p class="card-text" th:utext="${'<strong>Stock</strong> ' +  b.review}"> </p>
-                                    <p class="card-text" th:utext="${'<strong>Disponible le</strong> ' }"> </p>
+                                    <p class="card-text"  th:utext="${'<strong>Réservation en cours </strong> ' +  fn.getNumber( b.id )}"> </p>
+                                    <p class="card-text" th:if="${getBookState == enum.RESERVATION_POSSIBLE || getBookState == enum.ALREADY_BOOKED || getBookState == enum.MAX_RESERVATIONS_REACHED }" th:utext="${'<strong>Disponible</strong> ' + fn.getNextReturnDate( b.id ) }"> </p>
                                     <!---------------------------------------------- Fin des  p.card-text -->
 
-                                    <div class="d-flex justify-content-between align-items-center flex-wrap" th:if="${ fn.isReservationPossible( b ) }" >
+                                    <div sec:authorize="isAuthenticated()" class="d-flex justify-content-between align-items-center flex-wrap" th:if="${ getBookState == enum.RESERVATION_POSSIBLE }" >
                                         <a class="btn btn-sm btn-outline-secondary mt-1" role="button" th:href="@{/reservation/add/{id}(id=${b.id})}"  > Réserver</a>
                                     </div>
                                 </div>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      layout:decorate="model/layout">
+
+<head>
+    <title>Liste des prêts</title>
+</head>
+<body>
+<main role="main" class="container" layout:fragment="content" th:with="fn = ${@booksFunction}" >
+    <!-- pour mémo en mode static
+    main role="main" class="container" layout:fragment="content" th:with="fn = ${T(com.library.technical.books.BooksFunction)}" -->
+
+    <div class="row">
+        <th:block th:insert="~{fragment/commons :: titles( ${ title } ) }"></th:block>
+    </div>
+
+    <!-- Debut de th:fragment="listContent" -------------------------------------------->
+    <div class="container p-1" th:with="list = ${ lendingBeanList }" >
+
+        <!-- Debut de div.container p-1 > row : album -------------------------------------------->
+        <div class="row"  >
+            <div th:if="${list.size() == 0}" class="alert alert-primary text-center" role="alert">
+                Aucun prêt à afficher
+            </div>
+
+            <!-- Debut de div#album -------------------------------------------->
+            <div id="album" class="album p-3 bg-light" th:if="${list.size() > 0}">
+
+                <!-- Debut de div#album > .container -------------------------------------------->
+                <div class="container">
+
+                    <!-- Debut de div#album > .container > .row -------------------------------------------->
+                    <div class="row">
+                        <!-- Debut de div#album > .container > .row > .col-md-4 -------------------------------------------->
+
+                        <div class="col-md-6" th:each="l : ${list}" >
+
+                            <!-- Debut de div#album > .container > .row > .col-md-4 > .card -------------------------------------------->
+                            <div class="card mb-1 box-shadow" th:with="b = ${l.book }" >
+                                <p class="card-text mt-2 ml-2">
+                                    <span class="badge badge-pill badge-success" th:if="${ fn.isInProgress( l ) }">Prêt en cours</span>
+                                    <span class="badge badge-pill badge-danger" th:if="${ fn.isOutOfTime( l ) }">Prêt hors délai</span>
+                                    <span class="badge badge-pill badge-info" th:if="${ fn.isReturn( l ) }">Livre rendu</span>
+                                </p>
+                                <div class="d-flex justify-content-between align-items-center flex-wrap mb-1">
+                                    <div class="col-md-6">
+                                        <img class="card-img-top" th:src="${ getCoverPath + b.idCover}"  th:alt="${'Image du livre '+ b.title}" /> <!---->
+
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p class="card-text" th:utext="${'<strong>Titre : </strong>' + b.title }"> </p>
+                                        <p class="card-text" th:utext="${'<strong>Auteur : </strong>' + fn.getFullAuthorName( b.author )  }"> </p>
+                                        <p class="card-text" th:utext="${'<strong>Isbn : </strong>' + b.isbn }"> </p>
+                                        <p class="card-text" th:utext="${'<strong>Editeur : </strong>' + b.edition.name }"> </p>
+                                    </div>
+                                </div>
+                                <!-- Debut de div#album > .container > .row > .col-md-4 > .card > .card-body -------------------------------------------->
+                                <div class="card-body mt-1 pt-1">
+
+
+                                    <!-- Debut des p.card-text  -------------------------------------------->
+
+                                    <p class="card-text" th:utext="${'<strong>Resume :</strong></br> ' + b.summary }"> </p>
+
+                                    <p class="card-text" th:utext="${'Emprunté ' + fn.getDate( l.startDate )  }"> </p>
+                                    <p class="card-text" th:utext="${'A retourner avant '  + fn.getDate( l.endDate )  }"> </p>
+                                    <p class="card-text" th:if="${l.returnDate}" th:utext="${'Retour '  + fn.getDate( l.returnDate )  }"> </p>
+
+                                    <!---------------------------------------------- Fin des  p.card-text -->
+                                    <!-- Debut de div : button - Infos & Longueurs -------------------------------------------->
+
+                                    <div class="d-flex justify-content-between align-items-center flex-wrap" th:if="${ fn.isRenewable( l ) }" >
+                                        <a class="btn btn-sm btn-outline-secondary mt-1" role="button" th:href="@{/lending/renewal/{id}(id=${l.id})}"  >Renouvellement</a>
+                                    </div>
+
+                                    <!---------------------------------------------- Fin de  div : button - Infos & Longueurs -->
+                                </div>
+                                <!---------------------------------------------- Fin de  div#album .container > .row > col-md-4 > .card > .card-body -->
+                            </div>
+                            <!---------------------------------------------- Fin de  div#album .container > .row > col-md-4 > .card-->
+                        </div>
+                        <!---------------------------------------------- Fin de  div#album .container > .row > col-md-4-->
+                    </div>
+                    <!---------------------------------------------- Fin de  div#album .container > .row -->
+                </div>
+                <!---------------------------------------------- Fin de  div#album .container -->
+            </div>
+            <!---------------------------------------------- Fin de  div#album  -->
+        </div>
+        <!---------------------------------------------- Fin de  div.container p-1 > row  -->
+    </div>
+    <!---------------------------------------------- Fin de th:fragment="listContent" -->
+</main>
+
+</body>
+</html>

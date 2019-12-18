@@ -41,4 +41,5 @@ public interface ILendingProxy {
     @GetMapping("/isRenewable/{id}")
     boolean  isRenewable(@PathVariable("id") Long id);
 
+
 }

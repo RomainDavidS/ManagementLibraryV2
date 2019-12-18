@@ -10,6 +10,9 @@
 </head>
 <body>
 <main role="main" class="container" layout:fragment="content" th:with="fn = ${@reservationFunction}" >
+    <div class="row">
+        <th:block th:insert="~{fragment/commons :: titles( ${ title } ) }"></th:block>
+    </div>
 
         <div class="alert alert-primary text-center" role="alert" th:if="${reservationBeanList.size() == 0}">
             Aucune réservation à afficher
@@ -27,37 +30,39 @@
                                data-pagination="true">
                             <thead>
                             <tr>
-                                <th scope="col" data-field="reservationPosition" data-sortable="true">Position</th>
                                 <th scope="col" data-field="reservationUsage" data-sortable="true">Nom de l'usager</th>
                                 <th scope="col" data-field="reservationLivre" data-sortable="true">Nom du livre</th>
                                 <th scope="col" data-field="reservationDisponible" data-sortable="true">Disponible</th>
                                 <th scope="col" data-field="reservationDate" data-sortable="true">Réservation</th>
                                 <th scope="col" data-field="reservationNotification" data-sortable="true">Notification</th>
                                 <th scope="col" data-field="secteurEtat" data-sortable="true">Etat</th>
-                                <th scope="col" data-field="secteurAction" data-sortable="true">Action</th>
+                                <th scope="col" data-field="secteurAnnuler" >&nbsp;</th>
+                                <th scope="col" data-field="secteurValid" sec:authorize="hasAnyRole('ADMIN','ACTUATOR')" >&nbsp;</th>
 
                             </tr>
                             </thead>
                             <!-- pour mémo : td th:text="${#dates.format(c.dateUpdate, 'dd MMM yyyy à HH:mm')}" th:width="190">&nbsp;</td-->
                             <tbody>
 
-                            <tr th:each="r : ${reservationBeanList}" >
+                            <tr th:each="r : ${reservationBeanList}" th:with="positionUser = ${fn.positionUser( r ) }" >
+                                <td  >
+                                    <a role="button" data-toggle="popover" data-placement="top" data-trigger="hover" title="Position dans la réservation"
+                                            th:attrappend="data-content=${'Vous avez la position n° '+ positionUser }" th:text="${fn.getUser(r.idUserReservation)}" >
+                                        </a>
 
-                                <td>
-                                    <span th:text="${fn.positionUser( r ) }"  class="text-muted text-center"></span>
-                                    &nbsp;
                                 </td>
-                                <td th:text="${fn.getUserReservation(r.idUserReservation)}"></td>
                                 <td th:text="${r.book.title}"></td>
                                 <td class="text-muted text-center">[Date de disponibilite]</td>
-                                <td class="text-muted text-center">[Date de réservation]</td>
-                                <td class="text-muted text-center" >[Date de Notification]</td>
-                                <td th:text="${r.reservationState.name}" class="text-muted text-center"></td>
-                                <td>
+                                <td class="text-muted text-center"><span th:text="${fn.getDate(r.reservationDate ) }"  class="text-muted text-center"></span></td>
+                                <td class="text-muted text-center" ><span th:text="${fn.getDate(r.notificationDate ) }"  class="text-muted text-center"></span></td>
+                                <td th:text="${r.state.code}" class="text-muted text-center"></td>
+                                <td class="text-muted text-center">
                                     <a th:href="@{/reservation/update/{id}(id=${r.id})}"class="btn btn-sm btn-outline-danger">
-                                        <i class="fas fa-comment mx-2"></i>A annuler</a>
-                                    <a th:href="@{/reservation/update/{id}(id=${r.id})}"class="btn btn-sm btn-outline-success">
-                                        <i class="fas fa-comment mx-2"></i>Valider l'enprunt</a>
+                                        Annuler</a>
+                                </td>
+                                <td class="text-muted text-center" sec:authorize="hasAnyRole('ADMIN','ACTUATOR')">
+                                    <a th:href="@{/reservation/update/{id}(id=${r.id})}"class="btn btn-sm btn-outline-success" th:if="${ positionUser == 1}">
+                                        Emprunter</a>
                                 </td>
 
                             </tr>

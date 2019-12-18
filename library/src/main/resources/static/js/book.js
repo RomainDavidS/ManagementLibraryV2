@@ -2,6 +2,10 @@
 
 $(document).ready(function () {
 
+        $(function () {
+            $('[data-toggle="popover"]').popover()
+        });
+
         $( "#bookSearch" ).autocomplete({
             minLength: 0,
             source: function( request, response ) {

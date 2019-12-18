@@ -1,24 +1,23 @@
-package mbooks.controller.dto.books;
+package com.library.beans.mbooks.book;
 
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @NoArgsConstructor
-@Getter
-@Setter
-public class BooksReservationUpdateDto {
+public @Data class BooksReservationBean {
 
     @Id
     private Long id;
 
-    @NonNull
+    private  BookBean bookBean;
+
     private Integer number ;
+
+    private Integer possible;
 
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date nextReturnDate;

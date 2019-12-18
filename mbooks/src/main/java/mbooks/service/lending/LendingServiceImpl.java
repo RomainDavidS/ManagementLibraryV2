@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import java.math.BigInteger;
 import java.util.*;
 
 @Service
@@ -184,6 +185,18 @@ public class LendingServiceImpl implements ILendingService {
 
         List<EmailWrapper> emailList = new ArrayList<>(emails);
         emailService.sendRevival(emailList);
+    }
+
+    public boolean isLendingCurrentUser(Books books,Long idUser){
+        if (idUser == 0)
+            return false;
+
+        Lending lending= lendingRepository.findByReturnDateIsNullAndBookAndIdUser( books, idUser );
+
+        if( lending != null)
+            return true;
+        else
+            return  false;
     }
 
 

@@ -5,7 +5,7 @@ import mbooks.model.Books;
 import mbooks.model.Reservation;
 import mbooks.repository.IReservationRepository;
 import mbooks.service.BooksServiceImpl;
-import mbooks.technical.state.State;
+import mbooks.technical.state.reservation.State;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -31,16 +31,16 @@ public class ReservationServiceImpl implements IReservationService {
     }
 
     public List<Reservation> list( Long idUserReservation){
-        return reservationRepository.findAllByIdUserReservationOrderByReservationDateDesc( idUserReservation );
+        return reservationRepository.findAllByIdUserReservationOrderByReservationDateAsc( idUserReservation );
     }
 
     public List<Reservation> list(Books books){
-        return reservationRepository.findAllByBookOrderByReservationDateDesc( books);
+        return reservationRepository.findAllByBookOrderByReservationDateAsc( books);
     }
 
     public List<Reservation> listInProgress(Books books){
 
-        return reservationRepository.findAllByBookAndStateOrderByReservationDateDesc(books, State.INPROGRESS);
+        return reservationRepository.findAllByBookAndStateOrderByReservationDateAsc(books, State.INPROGRESS);
     }
 
     public Integer positionUser(Long idBook , Long idUserReservation){
@@ -77,6 +77,22 @@ public class ReservationServiceImpl implements IReservationService {
             return false;
         }
     }
+
+
+    public boolean isReservationCurrentUser( Books books, Long idUser ){
+
+        if(idUser == 0 )
+            return false;
+
+        Reservation reservation = reservationRepository.findByBookAndAndIdUserReservationAndState(
+                books,idUser,State.INPROGRESS);
+
+        if ( reservation != null)
+            return true;
+        else
+            return false;
+    }
+
 
 
 

@@ -14,5 +14,5 @@ public interface IUsersService extends UserDetailsService {
     String getCurrentUserEmail();
     String getCurrentUserPhone();
     Long getCurrentUserId();
-    String getUserReservation(Long id);
+    String getUser(Long id);
 }

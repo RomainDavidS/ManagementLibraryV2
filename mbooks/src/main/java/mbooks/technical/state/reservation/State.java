@@ -1,4 +1,4 @@
-package mbooks.technical.state;
+package mbooks.technical.state.reservation;
 
 import lombok.Getter;
 

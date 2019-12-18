@@ -8,6 +8,7 @@ import mbooks.model.Books;
 import mbooks.service.IBooksReservationService;
 import mbooks.service.IBooksService;
 import mbooks.technical.dto.DTO;
+import mbooks.technical.state.books.BooksState;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.health.Health;
 import org.springframework.boot.actuate.health.HealthIndicator;
@@ -49,6 +50,11 @@ public class BooksController implements HealthIndicator {
         return booksService.isAvailability( id );
     }
 
+    @GetMapping("/state/{idBooks}/{idUser}")
+    public BooksState getBooksState(@PathVariable Long idBooks, @PathVariable Long idUser){
+        return booksService.getBooksState( idBooks, idUser);
+
+    }
 
 
     @PostMapping("/save")

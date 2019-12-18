@@ -1,7 +1,7 @@
 package com.library.beans.mbooks.reservation;
 
 import com.library.beans.mbooks.book.BookBean;
-import com.library.technical.state.State;
+import com.library.technical.state.reservation.State;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

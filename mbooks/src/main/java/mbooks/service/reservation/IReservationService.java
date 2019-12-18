@@ -24,4 +24,6 @@ public interface IReservationService {
     Reservation save(Reservation reservation);
 
     boolean delete(Long id);
+
+    boolean isReservationCurrentUser( Books books, Long idUser );
 }

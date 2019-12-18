@@ -1,6 +1,5 @@
-package com.library.technical.state;
+package com.library.technical.state.reservation;
 
-import com.library.service.mbooks.BooksPropertiesImpl;
 import lombok.Getter;
 
 @Getter

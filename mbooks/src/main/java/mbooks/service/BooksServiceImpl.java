@@ -4,6 +4,9 @@ package mbooks.service;
 import mbooks.exceptions.ResourceNotFoundException;
 import mbooks.model.Books;
 import mbooks.repository.IBooksRepository;
+import mbooks.service.lending.ILendingService;
+import mbooks.service.reservation.IReservationService;
+import mbooks.technical.state.books.BooksState;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -15,6 +18,15 @@ public class BooksServiceImpl implements IBooksService {
 
     @Autowired
     private IBooksRepository bookRepository;
+
+    @Autowired
+    private IReservationService reservationService;
+
+    @Autowired
+    private ILendingService lendingService;
+
+    @Autowired
+    private IBooksReservationService booksReservationService;
 
     /**
      * Permet la recherche d'un livre
@@ -64,8 +76,29 @@ public class BooksServiceImpl implements IBooksService {
     }
 
     public boolean isAvailability(Long id){
-        Books books = bookRepository.getOne( id );
-        return books.getAvailability() <= 0;
+        return bookRepository.getOne( id ).getAvailability() > 0;
+    }
+
+    private boolean isAvailability(Books books){
+        return books.getAvailability() > 0;
+    }
+
+    public BooksState getBooksState(Long idBooks,Long idUser){
+        Books books = bookRepository.getOne( idBooks );
+        if( isAvailability( books ) )
+            return BooksState.AVAILABLE;
+
+        if ( reservationService.isReservationCurrentUser( books,idUser ) )
+            return BooksState.ALREADY_BOOKED;
+
+        if ( lendingService.isLendingCurrentUser( books,idUser ) )
+            return BooksState.ALREADY_BORROWED;
+
+        if ( booksReservationService.isMaxReservation( books ) )
+            return BooksState.MAX_RESERVATIONS_REACHED;
+
+        return BooksState.RESERVATION_POSSIBLE;
+
     }
 }
 

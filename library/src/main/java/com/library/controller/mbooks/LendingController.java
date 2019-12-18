@@ -62,7 +62,7 @@ public class LendingController  {
         }
 
         model.addAttribute( lendingBeanList );
-        return "books/lending/list-lending";
+        return "books/lending/user-list-lending";
     }
 
     @GetMapping("/renewal/{id}")
@@ -98,7 +98,7 @@ public class LendingController  {
 
 
     @GetMapping("/all")
-    public String allList(Model model){
+    public String all(Model model){
 
         List<LendingBean> lendingBeanList = lendingService.list();
         if ( lendingBeanList == null) {
@@ -125,7 +125,7 @@ public class LendingController  {
             return "error/not-found";
         }
         model.addAttribute( lendingBeanList );
-        return "books/lending/list-lending";
+        return "user-list-lending";
     }
 
 
@@ -182,6 +182,6 @@ public class LendingController  {
         else
             model.addAttribute("delete","err");
 
-        return "books/lending/list-lending";
+        return "user-list-lending";
     }
 }

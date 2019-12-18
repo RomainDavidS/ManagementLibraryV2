@@ -4,6 +4,7 @@ package com.library.proxies;
 
 import com.library.beans.mbooks.book.BookBean;
 import com.library.beans.mbooks.book.BookCreateBean;
+import com.library.technical.state.books.BooksState;
 import org.springframework.cloud.netflix.ribbon.RibbonClient;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
@@ -36,6 +37,8 @@ public interface IBooksProxy {
     @GetMapping("/availability/{id}")
     boolean isAvailable(@PathVariable("id") Long id);
 
+    @GetMapping("/state/{idBooks}/{idUser}")
+    BooksState getBooksState(@PathVariable("idBooks") Long idBooks, @PathVariable("idUser") Long idUser);
 
 
 

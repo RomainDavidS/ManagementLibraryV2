@@ -1,11 +1,9 @@
 package mbooks.controller;
 
-import mbooks.controller.dto.books.BooksCreateDto;
-import mbooks.controller.dto.books.BooksUpdateDto;
+
 import mbooks.controller.dto.reservation.ReservationCreateDto;
 import mbooks.controller.dto.reservation.ReservationUpdateDto;
 import mbooks.exceptions.ResourceNotFoundException;
-import mbooks.model.Books;
 import mbooks.model.Reservation;
 import mbooks.service.IBooksReservationService;
 import mbooks.service.IBooksService;
@@ -65,13 +63,10 @@ public class ReservationController {
         return reservationList;
     }
 
-    @GetMapping("/position/{idBook/{idUser}")
+    @GetMapping("/position/{idBook}/{idUser}")
     public Integer positionUser( @PathVariable Long idBook, @PathVariable Long idUser){
         return reservationService.positionUser( idBook,idUser );
     }
-
-
-
 
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.OK)

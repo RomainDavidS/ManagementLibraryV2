@@ -5,6 +5,7 @@ import com.library.beans.mbooks.book.author.AuthorBean;
 import com.library.beans.mbooks.lending.LendingBean;
 import com.library.config.ApplicationPropertiesConfig;
 import com.library.service.mbooks.BooksServiceImpl;
+import com.library.service.mbooks.IBooksReservationService;
 import com.library.service.mbooks.IBooksService;
 import com.library.service.mbooks.author.AuthorServiceImpl;
 import com.library.service.mbooks.author.IAuthorService;
@@ -12,6 +13,7 @@ import com.library.service.mbooks.lending.ILendingService;
 import com.library.service.mbooks.lending.LendingServiceImpl;
 import com.library.service.mbooks.reservation.IReservationService;
 import com.library.technical.date.SimpleDate;
+import com.library.technical.state.books.BooksState;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -36,6 +38,9 @@ public class BooksFunction {
     private SimpleDate simpleDate;
 
 
+    @Autowired
+    private IBooksReservationService booksReservationService;
+
     public String getFullAuthorName(AuthorBean author){ return  authorService.fullAuthorName( author );}
 
     public boolean isAvailability(BookBean book) {return booksService.isAvailability( book ) ;}
@@ -52,8 +57,16 @@ public class BooksFunction {
         return  lendingService.isRenewable( lending );
     }
 
-    public boolean isReservationPossible(BookBean book){
-        return reservationService.isReservationPossible( book );
+    public String getNextReturnDate( Long idBook ){
+        return getDate( booksReservationService.getNextReturnDate( idBook ) );
+    }
+    public Integer getNumber(Long idBook ){
+        return booksReservationService.getNumber( idBook );
+    }
+
+
+    public BooksState getBooksState(Long idBooks, Long idUser){
+        return booksService.getBooksState( idBooks,idUser );
     }
 
 

@@ -1,4 +1,4 @@
-package com.library.technical.state;
+package mbooks.technical.state.reservation;
 
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;

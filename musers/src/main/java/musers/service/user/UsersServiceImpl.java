@@ -87,7 +87,7 @@ public class UsersServiceImpl implements IUsersService {
         usersRepository.save( user );
     }
 
-    public String getUserNameReservation(Long id){
+    public String getUserName(Long id){
         Users users =  findUser( id) ;
 
         return  users.getFirstName()+ " "+ users.getLastName();

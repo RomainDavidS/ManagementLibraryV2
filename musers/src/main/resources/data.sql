@@ -12,20 +12,20 @@ INSERT INTO "users"
 (id,email,active,last_name,password,first_name,phone)
 VALUES
 (1,'romaindavid.sergeant@gmail.com',
-true,'ADMIN','$2a$10$mVLweGs6HLxItvuYt5W21e9sr7sgkqeuk6q.3pke4HEHJZry4fWSO',
+true,'USER','$2a$10$mVLweGs6HLxItvuYt5W21e9sr7sgkqeuk6q.3pke4HEHJZry4fWSO',
 'Romain-David' ,'0768000001'),
 (2,'actuator@gmail.com',
 true,'ACTUATOR','$2a$10$mVLweGs6HLxItvuYt5W21e9sr7sgkqeuk6q.3pke4HEHJZry4fWSO',
 'Romain-David' ,'0768000002'),
-(3,'user@gmail.com',
-true,'USER','$2a$10$mVLweGs6HLxItvuYt5W21e9sr7sgkqeuk6q.3pke4HEHJZry4fWSO',
+(3,'romaind.sergeant@gmail.com',
+true,'ADMIN','$2a$10$mVLweGs6HLxItvuYt5W21e9sr7sgkqeuk6q.3pke4HEHJZry4fWSO',
 'Romain-David' ,'0768000003');
 
 /*  Insert role_user */
 insert into "users_role" (id_user,id_role)
 VALUES
-(1,1),
+(1,3),
 (2,2),
-(3,3);
+(3,1);
 
 

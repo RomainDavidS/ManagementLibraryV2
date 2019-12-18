@@ -5,6 +5,7 @@ import com.library.beans.mbooks.book.BookCreateBean;
 import com.library.beans.mbooks.book.author.AuthorBean;
 import com.library.exception.ResourceNotFoundException;
 import com.library.proxies.*;
+import com.library.technical.state.books.BooksState;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -112,6 +113,12 @@ public class BooksServiceImpl implements IBooksService {
         return booksProxy.isAvailable( book.getId() );
     }
 
+    public BooksState getBooksState(Long idBooks, Long idUser){
+        if( idUser == null)
+            idUser = Long.valueOf( 0);
+
+        return  booksProxy.getBooksState( idBooks, idUser );
+    }
 
 
 

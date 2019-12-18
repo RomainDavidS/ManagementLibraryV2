@@ -24,7 +24,7 @@ public interface IReservationProxy {
     @GetMapping("/book/{id}")
     List<ReservationBean> listBook( @PathVariable("id") Long id);
 
-    @GetMapping("/position/{idBook/{idUser}")
+    @GetMapping("/position/{idBook}/{idUser}")
     Integer positionUser( @PathVariable("idBook") Long idBook, @PathVariable("idUser") Long idUser);
 
     @PostMapping("/save")
@@ -36,7 +36,8 @@ public interface IReservationProxy {
     @DeleteMapping("/{id}")
     boolean delete(@PathVariable("id") Long id);
 
-
     @GetMapping("/possible/{id}")
     boolean isReservationPossible( @PathVariable("id") Long id );
+
+
 }

@@ -1,6 +1,5 @@
 package com.library.controller.mbooks;
 
-import com.library.beans.mbooks.lending.LendingBean;
 import com.library.beans.mbooks.reservation.ReservationBean;
 import com.library.service.mbooks.reservation.IReservationService;
 import com.library.service.users.IUsersService;
@@ -22,6 +21,11 @@ public class ReservationController {
 
     @Autowired
     private IUsersService usersService;
+
+    @ModelAttribute("currentUser")
+    public String getCurrentUserFirstName(){
+        return  usersService.getCurrentUserFirstName();
+    }
 
     @GetMapping("/all")
     public String all(Model model){

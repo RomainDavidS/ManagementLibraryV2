@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import mbooks.model.Books;
-import mbooks.technical.state.State;
+import mbooks.technical.state.reservation.State;
 
 import javax.validation.constraints.NotNull;
 
