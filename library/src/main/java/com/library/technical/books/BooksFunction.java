@@ -3,14 +3,10 @@ package com.library.technical.books;
 import com.library.beans.mbooks.book.BookBean;
 import com.library.beans.mbooks.book.author.AuthorBean;
 import com.library.beans.mbooks.lending.LendingBean;
-import com.library.config.ApplicationPropertiesConfig;
-import com.library.service.mbooks.BooksServiceImpl;
 import com.library.service.mbooks.IBooksReservationService;
 import com.library.service.mbooks.IBooksService;
-import com.library.service.mbooks.author.AuthorServiceImpl;
 import com.library.service.mbooks.author.IAuthorService;
 import com.library.service.mbooks.lending.ILendingService;
-import com.library.service.mbooks.lending.LendingServiceImpl;
 import com.library.service.mbooks.reservation.IReservationService;
 import com.library.technical.date.SimpleDate;
 import com.library.technical.state.books.BooksState;
@@ -32,9 +28,6 @@ public class BooksFunction {
     private ILendingService lendingService;
 
     @Autowired
-    private IReservationService reservationService;
-
-    @Autowired
     private SimpleDate simpleDate;
 
 
@@ -42,8 +35,6 @@ public class BooksFunction {
     private IBooksReservationService booksReservationService;
 
     public String getFullAuthorName(AuthorBean author){ return  authorService.fullAuthorName( author );}
-
-    public boolean isAvailability(BookBean book) {return booksService.isAvailability( book ) ;}
 
     public boolean isInProgress(LendingBean lending){return lendingService.isInProgress( lending ); }
 
@@ -56,14 +47,6 @@ public class BooksFunction {
     public boolean isRenewable(LendingBean lending){
         return  lendingService.isRenewable( lending );
     }
-
-    public String getNextReturnDate( Long idBook ){
-        return getDate( booksReservationService.getNextReturnDate( idBook ) );
-    }
-    public Integer getNumber(Long idBook ){
-        return booksReservationService.getNumber( idBook );
-    }
-
 
     public BooksState getBooksState(Long idBooks, Long idUser){
         return booksService.getBooksState( idBooks,idUser );

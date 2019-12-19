@@ -16,13 +16,11 @@ public class BooksReservationServiceImpl implements IBooksReservationService {
     @Autowired
     private IBooksReservationRepository booksReservationRepository;
 
+    @Autowired
+    private IBooksService booksService;
 
 
-    public BooksReservation find(Long id){
-        return booksReservationRepository.getOne( id );
-    }
-
-    public BooksReservation find(Books books){return  booksReservationRepository.findAllByBooks( books );}
+    public BooksReservation find(Long id){return  booksReservationRepository.getOne( id );}
 
     public List<BooksReservation> list(){
         return booksReservationRepository.findAll();
@@ -41,25 +39,9 @@ public class BooksReservationServiceImpl implements IBooksReservationService {
         }
     }
 
-    public boolean isReservationPossible(Books books){
 
-        return !isMaxReservation( books) && books.getAvailability() <= 0;
-    }
 
-    public boolean isMaxReservation(Books books){
-        BooksReservation booksReservation = find( books );
-        return booksReservation.getNumber() >= booksReservation.getPossible();
-    }
 
-    public Date getNextReturnDate(Long idBook){
-        BooksReservation booksReservation = find( idBook );
-        return booksReservation.getNextReturnDate();
-    }
-
-    public Integer getNumber(Long idBook ){
-        BooksReservation booksReservation = find( idBook );
-        return booksReservation.getNumber();
-    }
 
 
 }

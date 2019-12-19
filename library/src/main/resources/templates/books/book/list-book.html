@@ -74,12 +74,12 @@
                                 <div class="card-body mt-1 pt-1">
                                     <p class="card-text" th:utext="${'<strong>Resumé</strong></br> ' + b.summary }"> </p>
                                     <p class="card-text" th:utext="${'<strong>Stock</strong> ' +  b.review}"> </p>
-                                    <p class="card-text"  th:utext="${'<strong>Réservation en cours </strong> ' +  fn.getNumber( b.id )}"> </p>
-                                    <p class="card-text" th:if="${getBookState == enum.RESERVATION_POSSIBLE || getBookState == enum.ALREADY_BOOKED || getBookState == enum.MAX_RESERVATIONS_REACHED }" th:utext="${'<strong>Disponible</strong> ' + fn.getNextReturnDate( b.id ) }"> </p>
+                                    <p class="card-text"  th:utext="${'<strong>Réservation en cours </strong> ' +  b.booksReservation.number}"> </p>
+                                    <p class="card-text" th:if="${getBookState == enum.RESERVATION_POSSIBLE || getBookState == enum.ALREADY_BOOKED || getBookState == enum.MAX_RESERVATIONS_REACHED }" th:utext="${'<strong>Disponible</strong> ' + fn.getDate( b.booksReservation.nextReturnDate ) }"> </p>
                                     <!---------------------------------------------- Fin des  p.card-text -->
 
                                     <div sec:authorize="isAuthenticated()" class="d-flex justify-content-between align-items-center flex-wrap" th:if="${ getBookState == enum.RESERVATION_POSSIBLE }" >
-                                        <a class="btn btn-sm btn-outline-secondary mt-1" role="button" th:href="@{/reservation/add/{id}(id=${b.id})}"  > Réserver</a>
+                                        <a class="btn btn-sm btn-outline-secondary mt-1" role="button" th:href="@{/reservation/add/{id}/{title}(id=${b.id},title=${b.title})}"  > Réserver</a>
                                     </div>
                                 </div>
                                 <!---------------------------------------------- Fin de  div#album .container > .row > col-md-4 > .card > .card-body -->

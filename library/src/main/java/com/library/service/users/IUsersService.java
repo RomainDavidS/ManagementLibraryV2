@@ -15,4 +15,5 @@ public interface IUsersService extends UserDetailsService {
     String getCurrentUserPhone();
     Long getCurrentUserId();
     String getUser(Long id);
+    boolean isAdmin();
 }

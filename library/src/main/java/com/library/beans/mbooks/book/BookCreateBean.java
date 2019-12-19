@@ -44,4 +44,7 @@ public @Data class BookCreateBean {
 
     @NotNull(message = "Le choix de l''éditeur est obligatoire.")
     private EditionBean edition;
+
+    @NotNull
+    private BooksReservationBean booksReservation;
 }

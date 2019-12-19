@@ -16,10 +16,10 @@ import java.util.List;
 public interface IBooksProxy {
 
 
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     BookBean find(@PathVariable("id") Long id);
 
-    @GetMapping("/{isbn}")
+    @GetMapping("/isbn/{isbn}")
     BookBean find(@PathVariable("isbn") String isbn);
 
     @GetMapping("/all")

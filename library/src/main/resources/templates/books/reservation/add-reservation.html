@@ -10,7 +10,13 @@
 </head>
 <body>
 <main role="main" class="container" layout:fragment="content"  >
-
+    <div class="alert alert-info text-center offset-3 col-md-6" role="alert" >
+        Voulez-vous confirmer la réservation du livre <span th:text="${title}"></span>
+    </div>
+    <div class="clearfix d-flex justify-content-center mt-4">
+        <a class="btn btn-outline-success float-right" th:href="@{/reservation/add/yes/{id}(id=${id})}"  ><i class="fas fa-plus-circle mx-2"></i> <span>Oui</span></a>
+        <a class="btn btn-outline-danger float-right ml-2" th:href="@{/book/all}"  ><i class="fas fa-minus-circle mx-2"></i> <span>Non</span></a>
+    </div>
 </main>
 
 </body>

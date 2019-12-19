@@ -22,21 +22,19 @@ public class ReservationController {
     @Autowired
     private IReservationService reservationService;
 
-    @Autowired
-    private IBooksReservationService booksReservationService;
 
     @Autowired
     private IBooksService booksService;
 
 
-    @GetMapping("/possible/{id}")
-    public boolean isReservationPossible( @PathVariable Long id ){
-        return booksReservationService.isReservationPossible( booksService.find( id ) );
-    }
 
     @GetMapping("/{id}")
     public Reservation find(@PathVariable Long id) {
-        return reservationService.find( id );
+        Reservation reservation = reservationService.find( id );
+
+        return reservation;
+
+
     }
 
     @GetMapping("/all")
@@ -71,6 +69,9 @@ public class ReservationController {
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.OK)
     public Reservation save(@DTO(ReservationCreateDto.class) @RequestBody Reservation reservation)  {
+
+
+
         return reservationService.save(reservation);
     }
 
@@ -80,7 +81,7 @@ public class ReservationController {
         return reservationService.save( reservation );
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public boolean delete(@PathVariable Long id){
         return reservationService.delete( id );
     }

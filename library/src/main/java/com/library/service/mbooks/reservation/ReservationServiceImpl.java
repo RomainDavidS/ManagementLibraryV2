@@ -4,6 +4,8 @@ import com.library.beans.mbooks.book.BookBean;
 import com.library.beans.mbooks.reservation.ReservationBean;
 import com.library.beans.mbooks.reservation.ReservationCreateBean;
 import com.library.proxies.IReservationProxy;
+import com.library.service.users.IUsersService;
+import com.library.technical.state.reservation.State;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,9 @@ public class ReservationServiceImpl implements  IReservationService {
 
     @Autowired
     private IReservationProxy reservationProxy;
+
+    @Autowired
+    private IUsersService usersService;
 
     public boolean isReservationPossible(BookBean book){
         return reservationProxy.isReservationPossible( book.getId() );
@@ -40,7 +45,6 @@ public class ReservationServiceImpl implements  IReservationService {
     }
 
     public ReservationBean save(ReservationCreateBean reservation){
-
         return  reservationProxy.save( reservation );
     }
 
@@ -49,8 +53,14 @@ public class ReservationServiceImpl implements  IReservationService {
         return  reservationProxy.update( reservation );
     }
 
-    public boolean delete(Long id){
-        return  reservationProxy.delete( id );
+    public void delete(Long id){
+        ReservationBean reservation = reservationProxy.find( id );
+        if ( reservation.getState() == State.INPROGRESS
+                && (reservation.getIdUserReservation() == usersService.getCurrentUserId() || usersService.isAdmin() ) ) {
+            reservation.setState(State.CANCELED);
+            reservation.setIdUserUpdate(usersService.getCurrentUserId());
+            reservationProxy.update(reservation);
+        }
     }
 
 

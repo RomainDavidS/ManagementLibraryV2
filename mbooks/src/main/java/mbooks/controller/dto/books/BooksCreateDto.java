@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import mbooks.model.Author;
+import mbooks.model.BooksReservation;
 import mbooks.model.Language;
 import mbooks.model.Theme;
 
@@ -45,4 +46,7 @@ public class BooksCreateDto {
 
     @NotNull(message = "Le choix du thème est obligatoire.")
     private Theme theme;
+
+    @NotNull
+    private BooksReservation booksReservation;
 }

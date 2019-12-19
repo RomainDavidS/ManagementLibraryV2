@@ -17,11 +17,6 @@ public @Data class BooksReservation {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToOne
-    @JoinColumn(name="id_book", referencedColumnName="id",unique = true)
-    @NonNull
-    private  Books books;
-
     @NonNull
     private Integer number ;
 

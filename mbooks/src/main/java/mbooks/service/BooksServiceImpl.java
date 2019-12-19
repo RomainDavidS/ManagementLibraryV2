@@ -3,6 +3,7 @@ package mbooks.service;
 
 import mbooks.exceptions.ResourceNotFoundException;
 import mbooks.model.Books;
+import mbooks.model.BooksReservation;
 import mbooks.repository.IBooksRepository;
 import mbooks.service.lending.ILendingService;
 import mbooks.service.reservation.IReservationService;
@@ -94,11 +95,15 @@ public class BooksServiceImpl implements IBooksService {
         if ( lendingService.isLendingCurrentUser( books,idUser ) )
             return BooksState.ALREADY_BORROWED;
 
-        if ( booksReservationService.isMaxReservation( books ) )
+        if ( isMaxReservation( books ) )
             return BooksState.MAX_RESERVATIONS_REACHED;
 
         return BooksState.RESERVATION_POSSIBLE;
 
+    }
+
+    private boolean isMaxReservation(Books books){
+        return books.getBooksReservation().getNumber() >= books.getBooksReservation().getPossible();
     }
 }
 

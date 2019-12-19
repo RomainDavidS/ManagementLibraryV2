@@ -9,7 +9,7 @@
     <title>Liste des réservations</title>
 </head>
 <body>
-<main role="main" class="container" layout:fragment="content" th:with="fn = ${@reservationFunction}" >
+<main role="main" class="container" layout:fragment="content" th:with="fn = ${@reservationFunction},enum=${T(com.library.technical.state.reservation.State)}" >
     <div class="row">
         <th:block th:insert="~{fragment/commons :: titles( ${ title } ) }"></th:block>
     </div>
@@ -52,12 +52,12 @@
 
                                 </td>
                                 <td th:text="${r.book.title}"></td>
-                                <td class="text-muted text-center">[Date de disponibilite]</td>
+                                <td class="text-muted text-center"><span th:text="${fn.getDate(r.book.booksReservation.nextReturnDate ) }"  class="text-muted text-center"></td>
                                 <td class="text-muted text-center"><span th:text="${fn.getDate(r.reservationDate ) }"  class="text-muted text-center"></span></td>
                                 <td class="text-muted text-center" ><span th:text="${fn.getDate(r.notificationDate ) }"  class="text-muted text-center"></span></td>
                                 <td th:text="${r.state.code}" class="text-muted text-center"></td>
                                 <td class="text-muted text-center">
-                                    <a th:href="@{/reservation/update/{id}(id=${r.id})}"class="btn btn-sm btn-outline-danger">
+                                    <a th:href="@{/reservation/delete/{id}/{title}(id=${r.id},title=${r.book.title})}"class="btn btn-sm btn-outline-danger" th:if="${r.state == enum.INPROGRESS }">
                                         Annuler</a>
                                 </td>
                                 <td class="text-muted text-center" sec:authorize="hasAnyRole('ADMIN','ACTUATOR')">

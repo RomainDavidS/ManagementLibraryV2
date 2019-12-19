@@ -63,6 +63,10 @@ public @Data class Books {
     @NonNull
     private  Edition edition;
 
+    @OneToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name="id_book_reservation", referencedColumnName="id",unique = true)
+    @NonNull
+    private  BooksReservation booksReservation;
 
 
 

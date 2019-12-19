@@ -27,7 +27,7 @@ public class ReservationFunction {
         return reservationService.positionUser( reservation.getBook().getId(), reservation.getIdUserReservation() );
     }
 
-    public String getDate(Date date){return simpleDate.getDate( date ); }
+    public String getDate(Date date){return simpleDate.getDateLow( date ); }
 
     public String getUser(Long id){return usersService.getUser( id ); }
 

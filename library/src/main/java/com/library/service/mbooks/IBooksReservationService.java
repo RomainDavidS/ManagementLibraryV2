@@ -1,9 +1,9 @@
 package com.library.service.mbooks;
 
-import java.util.Date;
+import com.library.beans.mbooks.book.BooksReservationBean;
 
 public interface IBooksReservationService {
 
-    Date getNextReturnDate(Long idBook);
-    Integer getNumber(Long idBook );
+    BooksReservationBean save (BooksReservationBean booksReservation);
+    BooksReservationBean find(Long id);
 }

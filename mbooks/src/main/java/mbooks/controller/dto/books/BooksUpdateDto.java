@@ -3,8 +3,10 @@ package mbooks.controller.dto.books;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import lombok.Setter;
 import mbooks.model.Author;
+import mbooks.model.BooksReservation;
 import mbooks.model.Language;
 import mbooks.model.Theme;
 
@@ -48,4 +50,7 @@ public class BooksUpdateDto {
 
     @NotNull(message = "Le choix du thème est obligatoire.")
     private Theme theme;
+
+    @NotNull
+    private  BooksReservation booksReservation;
 }

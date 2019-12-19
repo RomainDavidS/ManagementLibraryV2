@@ -1,12 +1,14 @@
 package mbooks.controller;
 
+import mbooks.controller.dto.books.BooksReservationUpdateDto;
+import mbooks.model.Books;
 import mbooks.model.BooksReservation;
 import mbooks.service.IBooksReservationService;
+import mbooks.service.IBooksService;
+import mbooks.technical.dto.DTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 
@@ -17,13 +19,14 @@ public class BooksReservationController {
     @Autowired
     private IBooksReservationService booksReservationService;
 
-    @GetMapping("/next/date/{id}")
-    public Date getNextReturnDate(@PathVariable Long id){
-        return booksReservationService.getNextReturnDate( id );
+    @GetMapping("/{id}")
+    public BooksReservation find(@PathVariable Long id) { return booksReservationService.find( id); }
+
+
+    @PutMapping("/update")
+    @ResponseStatus(HttpStatus.OK)
+    public BooksReservation updateNumber(@DTO(BooksReservationUpdateDto.class) @RequestBody BooksReservation booksReservation){
+        return booksReservationService.save( booksReservation );
     }
 
-    @GetMapping("/number/{id}")
-    public Integer getNumber(@PathVariable Long id ){
-        return booksReservationService.getNumber( id );
-    }
 }

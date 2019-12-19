@@ -1,5 +1,6 @@
 package com.library.service.mbooks;
 
+import com.library.beans.mbooks.book.BooksReservationBean;
 import com.library.proxies.IBooksReservationProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,13 +13,8 @@ public class BooksReservationServiceImpl implements IBooksReservationService {
     @Autowired
     private IBooksReservationProxy booksReservationProxy;
 
-    public Date getNextReturnDate(Long idBook){
-        return booksReservationProxy.getNextReturnDate( idBook );
-    }
+    public BooksReservationBean find(Long idBook){return booksReservationProxy.find( idBook );}
 
-    public Integer getNumber(Long idBook ){
-
-        return booksReservationProxy.getNumber( idBook );
-    }
+    public BooksReservationBean save (BooksReservationBean booksReservation){ return booksReservationProxy.update( booksReservation ); }
 
 }

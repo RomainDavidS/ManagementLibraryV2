@@ -7,9 +7,6 @@ import java.util.Date;
 
 public interface IBooksReservationService {
 
-    BooksReservation find(Books books);
-    boolean isReservationPossible(Books books);
-    boolean isMaxReservation(Books books);
-    Date getNextReturnDate(Long idBook );
-    Integer getNumber(Long idBook );
+    BooksReservation find(Long id);
+    BooksReservation save (BooksReservation booksReservation);
 }

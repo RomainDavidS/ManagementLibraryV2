@@ -25,7 +25,7 @@ public interface IReservationService {
 
     ReservationBean save(ReservationBean reservation);
 
-    boolean delete(Long id);
+    void delete(Long id);
 
 
 }

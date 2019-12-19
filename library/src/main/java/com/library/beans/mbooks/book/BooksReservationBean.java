@@ -13,8 +13,6 @@ public @Data class BooksReservationBean {
     @Id
     private Long id;
 
-    private  BookBean bookBean;
-
     private Integer number ;
 
     private Integer possible;

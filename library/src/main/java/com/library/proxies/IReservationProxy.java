@@ -33,7 +33,7 @@ public interface IReservationProxy {
     @PutMapping("/update")
     ReservationBean update( @RequestBody ReservationBean reservation );
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     boolean delete(@PathVariable("id") Long id);
 
     @GetMapping("/possible/{id}")

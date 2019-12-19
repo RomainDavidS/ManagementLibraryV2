@@ -1,10 +1,10 @@
 package com.library.proxies;
 
+import com.library.beans.mbooks.book.BooksReservationBean;
+import com.library.beans.mbooks.lending.LendingBean;
 import org.springframework.cloud.netflix.ribbon.RibbonClient;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 
@@ -13,9 +13,9 @@ import java.util.Date;
 @RequestMapping("/microservice-books/book/reservation")
 public interface IBooksReservationProxy {
 
-    @GetMapping("/next/date/{id}")
-    Date getNextReturnDate(@PathVariable("id") Long idBook);
+    @GetMapping("/{id}")
+    BooksReservationBean find(@PathVariable("id") Long id);
 
-    @GetMapping("/number/{id}")
-    Integer getNumber(@PathVariable("id") Long id );
+    @PutMapping("/update")
+    BooksReservationBean  update(@RequestBody BooksReservationBean booksReservation);
 }

@@ -26,12 +26,12 @@ public class BooksController implements HealthIndicator {
 
 
 
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public Books find(@PathVariable Long id) {
         return booksService.find( id );
     }
 
-    @GetMapping("/{isbn}")
+    @GetMapping("/isbn/{isbn}")
     public Books find(@PathVariable String isbn) {
         return booksService.find( isbn );
     }
@@ -60,7 +60,10 @@ public class BooksController implements HealthIndicator {
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.OK)
     public Books save(@DTO(BooksCreateDto.class) @RequestBody Books book)  {
+
+
         return booksService.save(book);
+
     }
 
     @PutMapping("/update")
