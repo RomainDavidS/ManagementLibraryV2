@@ -56,7 +56,7 @@ INSERT INTO "lending"(
 	(1, '2019-12-29 14:00:00', 1, 0, null , '2019-12-01 14:00:00', 1),
 	(2, '2019-12-30 14:00:00', 1, 0, null , '2019-12-02 14:00:00', 2),
 	(3, '2019-12-29 14:00:00', 2, 0, null , '2019-12-01 14:00:00', 3),
-	(4, '2019-12-30 14:00:00', 2, 0, null , '2019-12-02 14:00:00', 4);
+	(4, '2019-12-30 14:00:00', 2, 0, '2019-12-10 14:00:00' , '2019-12-02 14:00:00', 4);
 
 INSERT INTO "reservation"(
 	id, id_user_create, id_user_reservation, id_user_update, notification_date, reservation_date, state, id_books)
@@ -65,7 +65,8 @@ INSERT INTO "reservation"(
 	(-2, 3, 3, 3, null, '2019-12-16 10:00:00', 'En cours', 3),
 	(-3, 3, 3, 3, null, '2019-12-16 11:00:00', 'En cours', 4),
 	(-4, 1, 1, 1, null, '2019-12-16 12:00:00', 'En cours', 4),
-	(-5, 3, 3, 3, null, '2019-12-16 12:00:00', 'En cours', 6);
+	(-5, 3, 3, 3, null, '2019-12-16 12:00:00', 'En cours', 6),
+	(-6, 3, 3, 3,'2019-12-01 12:00:00', '2019-12-16 12:00:00', 'En cours', 6);
 
 INSERT INTO "email" (id, name,subject,content)
 VALUES
@@ -75,4 +76,11 @@ VALUES
 	Vous devriez rendre le livre [BOOK_TITLE] à la blibliothèque au plus tard pour [END_DATE].
 Hors nous n avons toujours pas enregistré ce retour.
 Nous vous demandons de régulariser la situation dès à présent.
+Bien cordialement.'),
+(2,'return','Information sur votre demande de réservation',
+'	Bonjour,
+
+	Nous avons le plaisir de vous annoncer que le livre [BOOK_TITLE] que vous aviez réservé est disponible depuis le [RETURN_DATE] à la bibliothèque.
+Nous vous invitons à venir le retirer au plus tard pour [END_DATE].
+Après cette date votre réservation sera annulée.
 Bien cordialement.');

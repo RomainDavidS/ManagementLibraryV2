@@ -1,5 +1,7 @@
 package com.library.technical.books;
 
+import com.library.beans.mbooks.lending.LendingBean;
+import com.library.service.mbooks.lending.ILendingService;
 import com.library.service.users.IUsersService;
 import com.library.technical.date.SimpleDate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,12 +16,22 @@ public class LendingFunction {
     private IUsersService usersService;
 
     @Autowired
+    private ILendingService lendingService;
+
+    @Autowired
     private SimpleDate simpleDate;
 
     public String getDate(Date date){return simpleDate.getDateLow( date ); }
 
     public String getUser(Long id){return usersService.getUser( id ); }
 
+    public boolean isRenewable(LendingBean lending){
+        return  lendingService.isRenewable( lending );
+    }
+
+    public boolean isReturned(Date date){
+        return date == null ;
+    }
 
 }
 

@@ -6,6 +6,7 @@ package mbooks.service.email;
 import mbooks.model.Email;
 import mbooks.model.Lending;
 import mbooks.repository.IEmailRepository;
+import mbooks.technical.email.EmailReturnWrapper;
 import mbooks.technical.email.EmailWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
@@ -104,5 +105,15 @@ public class EmailServiceImpl implements IEmailService {
             sendSimpleMessage(e.getEmail(),email.getSubject(),text);
         }
     }
+    public void sendReturn(EmailReturnWrapper pEmail){
 
+        Email email = emailRepository.findByName("return");
+            String text = email.getContent()
+                    .replace("[BOOK_TITLE]", pEmail.getTitle())
+                    .replace("[END_DATE]", pEmail.getEndDate())
+                    .replace("[RETURN_DATE]", pEmail.getReturnDate() );
+
+            sendSimpleMessage(pEmail.getEmail(),email.getSubject(),text);
+
+    }
 }

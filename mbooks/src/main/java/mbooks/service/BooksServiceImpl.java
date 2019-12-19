@@ -4,6 +4,7 @@ package mbooks.service;
 import mbooks.exceptions.ResourceNotFoundException;
 import mbooks.model.Books;
 import mbooks.model.BooksReservation;
+import mbooks.model.Reservation;
 import mbooks.repository.IBooksRepository;
 import mbooks.service.lending.ILendingService;
 import mbooks.service.reservation.IReservationService;
@@ -77,7 +78,8 @@ public class BooksServiceImpl implements IBooksService {
     }
 
     public boolean isAvailability(Long id){
-        return bookRepository.getOne( id ).getAvailability() > 0;
+        Books books = find( id );
+        return books.getAvailability() - books.getBooksReservation().getNumber() > 0;
     }
 
     private boolean isAvailability(Books books){
@@ -85,7 +87,7 @@ public class BooksServiceImpl implements IBooksService {
     }
 
     public BooksState getBooksState(Long idBooks,Long idUser){
-        Books books = bookRepository.getOne( idBooks );
+        Books books = find( idBooks );
         if( isAvailability( books ) )
             return BooksState.AVAILABLE;
 

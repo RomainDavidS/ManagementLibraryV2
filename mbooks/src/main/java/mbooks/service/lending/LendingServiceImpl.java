@@ -11,6 +11,7 @@ import mbooks.repository.ILendingRepository;
 import mbooks.service.IBooksService;
 import mbooks.service.email.EmailServiceImpl;
 import mbooks.service.email.IEmailService;
+import mbooks.service.reservation.IReservationService;
 import mbooks.technical.date.SimpleDate;
 import mbooks.technical.email.EmailWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,9 @@ public class LendingServiceImpl implements ILendingService {
     @Autowired
     private SimpleDate simpleDate ;
 
+    @Autowired
+    private IReservationService reservationService;
+
     /**
      * Permet de faire un renouvellement d'emprun
      * @param id Identifiant de l'emprunt à renouveler
@@ -57,6 +61,27 @@ public class LendingServiceImpl implements ILendingService {
             lendingRepository.save( lending );
         }
     }
+
+
+    public void returnBook(Long id){
+        Lending lending = find( id );
+        if( lending.getReturnDate() == null ){
+            Date now = new Date();
+            lending.setReturnDate( now );
+            lendingRepository.save( lending );
+            reservationService.sendReturnInfo( lending.getBook() , now );
+            updateNextDateReturn( lending.getBook() );
+        }
+    }
+
+    private void updateNextDateReturn( Books book ){
+        Lending lending = lendingRepository.findAllByBookAndReturnDateIsNullOrderByReturnDateAsc( book ).get( 0 );
+
+        lending.getBook().getBooksReservation().setNextReturnDate( lending.getBook().getBooksReservation().getNextReturnDate() );
+
+        lendingRepository.save( lending );
+    }
+
 
     /**
      * Permet la recherche d'un emprunt

@@ -5,6 +5,7 @@ import com.library.beans.mbooks.lending.LendingBean;
 import com.library.beans.mbooks.lending.LendingCreateBean;
 import org.springframework.cloud.netflix.ribbon.RibbonClient;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,6 +35,9 @@ public interface ILendingProxy {
 
     @PutMapping("/renewal")
     void renewal(@RequestBody Long id);
+
+    @PutMapping("/return")
+    void returnBook(@RequestBody Long id);
 
     @DeleteMapping("/{id}")
     boolean delete(@PathVariable("id") Long id);

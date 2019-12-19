@@ -33,6 +33,8 @@ public class LendingController  {
     @Autowired
     private IBooksPropertiesProxy booksPropertiesProxy;
 
+    @ModelAttribute
+    public LendingCreateBean lendingCreateBean(){return new  LendingCreateBean();}
 
 
     @Autowired
@@ -74,10 +76,10 @@ public class LendingController  {
         model.addAttribute("endDate",lendingService.renewalDate( lendingBean.getEndDate() ) );
 
         if( lendingService.isRenewable( lendingBean) )
-            return "books/lending/renewal-lending";
+            return "books/lending/renewal/renewal-lending";
         else {
             model.addAttribute("endDate",lendingService.getEndDate( lendingBean.getEndDate() ) );
-            return "books/lending/renewal-lending-ko";
+            return "books/lending/renewal/renewal-lending-ko";
         }
     }
 
@@ -88,13 +90,11 @@ public class LendingController  {
         LendingBean lendingBean = lendingService.find( id );
         model.addAttribute("title", lendingBean.getBook().getTitle() );
         model.addAttribute("endDate",lendingService.getEndDate( lendingBean.getEndDate() ) );
-        return "books/lending/renewal-lending-success";
+        return "books/lending/renewal/renewal-lending-success";
     }
 
 
 
-    @ModelAttribute
-    public LendingCreateBean lendingCreateBean(){return new  LendingCreateBean();}
 
 
     @GetMapping("/all")
@@ -110,6 +110,32 @@ public class LendingController  {
 
         model.addAttribute("title","Liste de tous les prêts");
         return "books/lending/list-lending";
+    }
+
+    @GetMapping("/return/{id}")
+    public String returnBook(@PathVariable("id")Long id, Model model){
+
+        LendingBean lendingBean = lendingService.find( id );
+        model.addAttribute("id",id);
+        model.addAttribute("title", lendingBean.getBook().getTitle() );
+
+        model.addAttribute("lendingUser", usersService.getUser( lendingBean.getIdUser() ) );
+
+        if( lendingBean.getReturnDate() == null && usersService.isAdmin() )
+            return "books/lending/return/return-lending";
+        else {
+            model.addAttribute("endDate",lendingService.getEndDate( lendingBean.getEndDate() ) );
+            return "books/lending/return/return-lending-ko";
+        }
+    }
+
+    @GetMapping("/return/yes/{id}")
+    public String returnBookYes(@PathVariable("id")Long id, Model model){
+
+        lendingService.returnBook( id );
+        LendingBean lendingBean = lendingService.find( id );
+        model.addAttribute("title", lendingBean.getBook().getTitle() );
+        return "books/lending/return/return-lending-success";
     }
 
 

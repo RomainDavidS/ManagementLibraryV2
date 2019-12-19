@@ -128,11 +128,16 @@ public class ReservationController {
 
         ReservationBean reservation = reservationService.find( id );
 
+
+
         model.addAttribute("id",id);
 
         if ( reservation.getState() == State.INPROGRESS
                 && (reservation.getIdUserReservation() == usersService.getCurrentUserId() || usersService.isAdmin() ) ) {
             reservationService.delete( id );
+            BookBean bookBean = booksService.find( reservation.getBook().getId() );
+            bookBean.getBooksReservation().setNumber( bookBean.getBooksReservation().getNumber() - 1);
+            booksService.save( bookBean );
             return "books/reservation/delete-reservation-success";
         }
         else

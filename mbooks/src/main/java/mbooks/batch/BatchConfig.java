@@ -1,8 +1,10 @@
 package mbooks.batch;
 
+import mbooks.config.ApplicationPropertiesConfig;
 import mbooks.proxies.IMicroserviceUsersProxy;
 import mbooks.repository.IEmailRepository;
 import mbooks.repository.ILendingRepository;
+import mbooks.repository.IReservationRepository;
 import mbooks.service.lending.ILendingService;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
@@ -38,19 +40,31 @@ public class BatchConfig {
     @Autowired
     private JavaMailSender emailSender;
 
+    @Autowired
+    private ApplicationPropertiesConfig appPropertiesConfig;
+
+    @Autowired
+    private IReservationRepository reservationRepository;
+
     @Bean
     public Step stepOne() {
         return steps.get("Revival")
                 .tasklet(new MyTaskOne( lendingRepository, usersProxy,emailRepository,emailSender ) )
                 .build();
     }
-
+    @Bean
+    public Step stepTwo() {
+        return steps.get("ReservationCanceled")
+                .tasklet(new MyTaskTwo( appPropertiesConfig,reservationRepository ) )
+                .build();
+    }
 
     @Bean
     public Job demoJob(){
         return jobs.get("SendRevival")
                 .incrementer(new RunIdIncrementer())
                 .start(stepOne())
+                .next(stepTwo() )
                 .build();
     }
 

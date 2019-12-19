@@ -38,6 +38,10 @@ public class LendingServiceImpl implements ILendingService {
         lendingProxy.renewal( id );
     }
 
+    public void returnBook(Long id){
+        lendingProxy.returnBook( id );
+    }
+
     /**
      * Permet la recherche d'un emprunt
      * @param id Identifiant de l'emprunt à rechercher

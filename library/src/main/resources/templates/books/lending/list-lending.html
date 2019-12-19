@@ -52,11 +52,13 @@
                             <td class="text-muted text-center"><span th:text="${fn.getDate(l.endDate ) }"  class="text-muted text-center"></span></td>
                             <td class="text-muted text-center"><span th:text="${fn.getDate(l.returnDate ) }"  class="text-muted text-center"></span></td>
                             <td class="text-muted text-center">
-                                <a th:href="@{/lending/renewal/update/{id}(id=${l.id})}"class="btn btn-sm btn-outline-danger">
+                                <a th:href="@{/lending/renewal/{id}(id=${l.id})}"class="btn btn-sm btn-outline-danger"
+                                th:if="${fn.isRenewable( l )}" >
                                     Renouveler</a>
                             </td>
                             <td class="text-muted text-center" >
-                                <a th:href="@{/lending/return/{id}(id=${l.id})}"class="btn btn-sm btn-outline-success" >
+                                <a th:href="@{/lending/return/{id}(id=${l.id})}"class="btn btn-sm btn-outline-success"
+                                th:if="${fn.isReturned( l.returnDate )}" >
                                 Retourner</a>
                             </td>
 

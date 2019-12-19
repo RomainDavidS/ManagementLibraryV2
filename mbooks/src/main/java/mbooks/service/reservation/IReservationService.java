@@ -3,6 +3,7 @@ package mbooks.service.reservation;
 import mbooks.model.Books;
 import mbooks.model.Reservation;
 
+import java.util.Date;
 import java.util.List;
 
 public interface IReservationService {
@@ -26,4 +27,7 @@ public interface IReservationService {
     boolean delete(Long id);
 
     boolean isReservationCurrentUser( Books books, Long idUser );
+    void sendReturnInfo(Books books, Date dateReturn );
+
+    List<Reservation> getReservationToCancel();
 }

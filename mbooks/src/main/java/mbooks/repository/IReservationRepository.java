@@ -5,6 +5,7 @@ import mbooks.model.Reservation;
 import mbooks.technical.state.reservation.State;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.Date;
 import java.util.List;
 
 public interface IReservationRepository extends JpaRepository<Reservation,Long> {
@@ -15,6 +16,10 @@ public interface IReservationRepository extends JpaRepository<Reservation,Long> 
    List<Reservation> findAllByIdUserReservationOrderByReservationDateAsc( Long idUserReservation );
 
    Reservation findByBookAndAndIdUserReservationAndState(Books books,Long idUserReservation, State state);
+
+   List<Reservation> findAllByBookAndStateAndNotificationDateIsNullOrderByReservationDateAsc(Books books, State state);
+
+   List<Reservation> findAllByStateAndNotificationDateIsNotNullAndNotificationDateBefore(State state, Date date);
 
 
 

@@ -8,6 +8,7 @@ import java.util.List;
 public interface ILendingService {
 
     void renewal(Long id);
+    void returnBook(Long id);
     Lending find(Long id);
     List<Lending> list();
     List<Lending> list(String isbn);

@@ -9,6 +9,7 @@ import java.util.List;
 public interface ILendingService {
 
     void renewal(Long id);
+    void returnBook(Long id);
 
     LendingBean find(Long id);
 

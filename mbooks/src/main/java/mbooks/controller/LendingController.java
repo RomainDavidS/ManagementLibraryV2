@@ -80,6 +80,10 @@ public class LendingController   {
         lendingService.renewal(id );
     }
 
+    @PutMapping("/return")
+    @ResponseStatus(HttpStatus.OK)
+    public void returnBook(@RequestBody Long id){ lendingService.returnBook(id ); }
+
     @DeleteMapping("/{id}")
     public boolean delete(@PathVariable Long id){
         return lendingService.delete( id );
