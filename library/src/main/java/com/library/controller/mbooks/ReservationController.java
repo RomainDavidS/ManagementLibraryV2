@@ -131,8 +131,10 @@ public class ReservationController {
         model.addAttribute("id",id);
 
         if ( reservation.getState() == State.INPROGRESS
-                && (reservation.getIdUserReservation() == usersService.getCurrentUserId() || usersService.isAdmin() ) )
+                && (reservation.getIdUserReservation() == usersService.getCurrentUserId() || usersService.isAdmin() ) ) {
+            reservationService.delete( id );
             return "books/reservation/delete-reservation-success";
+        }
         else
             return "books/reservation/delete-reservation-ko";
     }

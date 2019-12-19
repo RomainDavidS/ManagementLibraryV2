@@ -1,6 +1,7 @@
 package mbooks.service.reservation;
 
 
+import mbooks.exceptions.ResourceNotFoundException;
 import mbooks.model.Books;
 import mbooks.model.Reservation;
 import mbooks.repository.IReservationRepository;
@@ -23,7 +24,8 @@ public class ReservationServiceImpl implements IReservationService {
 
 
     public Reservation find(Long id){
-        return  reservationRepository.getOne( id );
+        return reservationRepository.findById(id) .orElseThrow(
+                () -> new ResourceNotFoundException("Réservation non trouvée avec l'id " + id ) );
     }
 
     public List<Reservation> list(){

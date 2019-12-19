@@ -5,7 +5,6 @@ import mbooks.controller.dto.reservation.ReservationCreateDto;
 import mbooks.controller.dto.reservation.ReservationUpdateDto;
 import mbooks.exceptions.ResourceNotFoundException;
 import mbooks.model.Reservation;
-import mbooks.service.IBooksReservationService;
 import mbooks.service.IBooksService;
 import mbooks.service.reservation.IReservationService;
 import mbooks.technical.dto.DTO;
@@ -26,15 +25,11 @@ public class ReservationController {
     @Autowired
     private IBooksService booksService;
 
-
-
     @GetMapping("/{id}")
     public Reservation find(@PathVariable Long id) {
         Reservation reservation = reservationService.find( id );
 
         return reservation;
-
-
     }
 
     @GetMapping("/all")
