@@ -33,11 +33,11 @@ public interface IReservationProxy {
     @PutMapping("/update")
     ReservationBean update( @RequestBody ReservationBean reservation );
 
-    @DeleteMapping("/delete/{id}")
-    boolean delete(@PathVariable("id") Long id);
-
     @GetMapping("/possible/{id}")
     boolean isReservationPossible( @PathVariable("id") Long id );
+
+    @DeleteMapping("/delete/{id}/{idUserUpdate}")
+    void delete(@PathVariable("id") Long id, @PathVariable("idUserUpdate") Long idUserUpdate);
 
 
 }

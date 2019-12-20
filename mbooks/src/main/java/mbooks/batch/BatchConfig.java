@@ -55,7 +55,7 @@ public class BatchConfig {
     @Bean
     public Step stepTwo() {
         return steps.get("ReservationCanceled")
-                .tasklet(new MyTaskTwo( appPropertiesConfig,reservationRepository ) )
+                .tasklet(new MyTaskTwo( appPropertiesConfig,reservationRepository,emailSender,usersProxy,emailRepository ) )
                 .build();
     }
 

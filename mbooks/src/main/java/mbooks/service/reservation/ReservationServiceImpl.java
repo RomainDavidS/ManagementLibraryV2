@@ -101,12 +101,18 @@ public class ReservationServiceImpl implements IReservationService {
         return  reservationRepository.save( reservation );
     }
 
-    public boolean delete(Long id){
-        try {
-            reservationRepository.deleteById( id );
-            return true;
-        }catch (DataIntegrityViolationException ee){
-            return false;
+    public void delete(Long id,Long idUserUpdate){
+        Reservation reservation = find( id );
+        if ( reservation.getState() == State.INPROGRESS
+                && reservation.getIdUserReservation() == idUserUpdate ) {
+
+            reservation.setState(State.CANCELED);
+            reservation.setIdUserUpdate( idUserUpdate );
+            save(reservation);
+
+            if( reservation.getNotificationDate() != null )
+                sendReturnInfo(reservation.getBook(), new Date() );
+
         }
     }
 

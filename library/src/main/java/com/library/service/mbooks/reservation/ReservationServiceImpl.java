@@ -56,11 +56,8 @@ public class ReservationServiceImpl implements  IReservationService {
     public void delete(Long id){
         ReservationBean reservation = reservationProxy.find( id );
         if ( reservation.getState() == State.INPROGRESS
-                && (reservation.getIdUserReservation() == usersService.getCurrentUserId() || usersService.isAdmin() ) ) {
-            reservation.setState(State.CANCELED);
-            reservation.setIdUserUpdate(usersService.getCurrentUserId());
-            reservationProxy.update(reservation);
-        }
+                && (reservation.getIdUserReservation() == usersService.getCurrentUserId() || usersService.isAdmin() ) )
+            reservationProxy.delete(id,usersService.getCurrentUserId() );
     }
 
 

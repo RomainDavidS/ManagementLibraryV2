@@ -2,15 +2,23 @@ package mbooks.batch;
 
 import mbooks.beans.musers.user.UsersBean;
 import mbooks.config.ApplicationPropertiesConfig;
+import mbooks.model.Books;
+import mbooks.model.Email;
 import mbooks.model.Lending;
 import mbooks.model.Reservation;
+import mbooks.proxies.IMicroserviceUsersProxy;
+import mbooks.repository.IEmailRepository;
+import mbooks.repository.ILendingRepository;
 import mbooks.repository.IReservationRepository;
-import mbooks.technical.email.EmailWrapper;
+import mbooks.technical.date.SimpleDate;
+import mbooks.technical.email.EmailReturnWrapper;
 import mbooks.technical.state.reservation.State;
 import org.springframework.batch.core.StepContribution;
 import org.springframework.batch.core.scope.context.ChunkContext;
 import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.repeat.RepeatStatus;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -23,11 +31,25 @@ public class MyTaskTwo implements Tasklet {
 
     private final IReservationRepository reservationRepository;
 
+    private final JavaMailSender emailSender;
+
+    private final IMicroserviceUsersProxy usersProxy;
+
+    private final IEmailRepository emailRepository;
+
+    private SimpleDate simpleDate = new SimpleDate();
+
     public MyTaskTwo(
-            final ApplicationPropertiesConfig applPropertiesConfig,
-            final IReservationRepository reservationRepository) {
-        this.appPropertiesConfig = applPropertiesConfig;
+            final ApplicationPropertiesConfig appPropertiesConfig,
+            final IReservationRepository reservationRepository,
+            final JavaMailSender emailSender,
+            final IMicroserviceUsersProxy usersProxy,
+            final IEmailRepository emailRepository) {
+        this.appPropertiesConfig = appPropertiesConfig;
         this.reservationRepository = reservationRepository;
+        this.emailSender = emailSender;
+        this.usersProxy = usersProxy;
+        this.emailRepository = emailRepository;
     }
 
     @Override
@@ -43,9 +65,53 @@ public class MyTaskTwo implements Tasklet {
             r.setState( State.CANCELED );
             r.getBook().getBooksReservation().setNumber( r.getBook().getBooksReservation().getNumber() - 1);
             reservationRepository.save( r );
+            sendReturnInfo(r.getBook(), new Date() );
         }
+
         System.out.println("Fin du traitement d'annulation de réservation.");
         return RepeatStatus.FINISHED;
+    }
+
+    public void sendReturnInfo(Books books, Date dateReturn ){
+
+        Reservation reservation =  reservationRepository.findAllByBookAndStateAndNotificationDateIsNullOrderByReservationDateAsc(books, State.INPROGRESS).get(0);
+
+        Date now = new Date();
+
+        reservation.setNotificationDate( now );
+
+        Calendar c = Calendar.getInstance();
+        c.setTime( now );
+        c.add(Calendar.DAY_OF_MONTH, appPropertiesConfig.getReservationCancellationDay() );
+
+        UsersBean usersBean = usersProxy.user(reservation.getIdUserReservation() );
+
+        EmailReturnWrapper email = new EmailReturnWrapper(
+                usersBean.getEmail(), reservation.getBook().getTitle(),
+                simpleDate.getDate(c.getTime() ),simpleDate.getDate( dateReturn ) ) ;
+
+        sendReturn( email );
+        reservationRepository.save( reservation );
+
+    }
+    public void sendReturn(EmailReturnWrapper pEmail){
+
+        Email email = emailRepository.findByName("return");
+        String text = email.getContent()
+                .replace("[BOOK_TITLE]", pEmail.getTitle())
+                .replace("[END_DATE]", pEmail.getEndDate())
+                .replace("[RETURN_DATE]", pEmail.getReturnDate() );
+
+        sendSimpleMessage(pEmail.getEmail(),email.getSubject(),text);
+
+    }
+    private void sendSimpleMessage(String to, String subject, String text) {
+
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(to);
+        message.setSubject(subject);
+        message.setText(text);
+        emailSender.send(message);
     }
 
 }

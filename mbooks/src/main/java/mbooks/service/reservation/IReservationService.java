@@ -24,7 +24,7 @@ public interface IReservationService {
 
     Reservation save(Reservation reservation);
 
-    boolean delete(Long id);
+    void delete(Long id,Long idUserUpdate);
 
     boolean isReservationCurrentUser( Books books, Long idUser );
     void sendReturnInfo(Books books, Date dateReturn );

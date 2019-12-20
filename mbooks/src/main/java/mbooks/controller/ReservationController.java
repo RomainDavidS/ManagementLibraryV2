@@ -76,8 +76,8 @@ public class ReservationController {
         return reservationService.save( reservation );
     }
 
-    @DeleteMapping("/delete/{id}")
-    public boolean delete(@PathVariable Long id){
-        return reservationService.delete( id );
+    @DeleteMapping("/delete/{id}/{idUserUpdate}")
+    public void delete(@PathVariable Long id, @PathVariable Long idUserUpdate){
+        reservationService.delete( id, idUserUpdate );
     }
 }
