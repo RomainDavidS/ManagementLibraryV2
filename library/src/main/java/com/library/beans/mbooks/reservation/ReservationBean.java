@@ -15,10 +15,6 @@ class ReservationBean {
 
     private Long idUserReservation;
 
-    private Long idUserCreate;
-
-    private Long idUserUpdate;
-
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date reservationDate;
 

@@ -21,12 +21,6 @@ public class ReservationUpdateDto {
     @NotNull
     private Long idUserReservation;
 
-    @NotNull
-    private Long idUserCreate;
-
-    @NotNull
-    private Long idUserUpdate;
-
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date notificationDate;
 

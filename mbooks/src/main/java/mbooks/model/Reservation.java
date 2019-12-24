@@ -23,12 +23,6 @@ public @Data class Reservation {
     @NonNull
     private Long idUserReservation;
 
-    @NonNull
-    private Long idUserCreate;
-
-    @NonNull
-    private Long idUserUpdate;
-
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")

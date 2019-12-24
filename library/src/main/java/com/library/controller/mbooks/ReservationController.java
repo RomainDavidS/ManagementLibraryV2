@@ -84,8 +84,6 @@ public class ReservationController {
         reservationService.save(
                 new ReservationCreateBean(
                         usersService.getCurrentUserId(),
-                        usersService.getCurrentUserId(),
-                        usersService.getCurrentUserId(),
                         State.INPROGRESS,
                         bookBean
                 ) );
@@ -127,7 +125,6 @@ public class ReservationController {
     public String deleteYes(@PathVariable Long id, Model model){
 
         ReservationBean reservation = reservationService.find( id );
-
 
 
         model.addAttribute("id",id);

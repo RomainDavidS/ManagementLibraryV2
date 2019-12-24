@@ -16,12 +16,6 @@ public class ReservationCreateDto {
     private Long idUserReservation;
 
     @NotNull
-    private Long idUserCreate;
-
-    @NotNull
-    private Long idUserUpdate;
-
-    @NotNull
     private State state;
 
     @NotNull

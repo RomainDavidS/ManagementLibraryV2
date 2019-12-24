@@ -14,21 +14,13 @@ public  class ReservationCreateBean {
     private Long idUserReservation;
 
     @NotNull
-    private Long idUserCreate;
-
-    @NotNull
-    private Long idUserUpdate;
-
-    @NotNull
     private State state;
 
     @NotNull
     private BookBean book;
 
-    public ReservationCreateBean(@NotNull Long idUserReservation, @NotNull Long idUserCreate, @NotNull Long idUserUpdate, @NotNull State state, @NotNull BookBean book) {
+    public ReservationCreateBean(@NotNull Long idUserReservation, @NotNull State state, @NotNull BookBean book) {
         this.idUserReservation = idUserReservation;
-        this.idUserCreate = idUserCreate;
-        this.idUserUpdate = idUserUpdate;
         this.state = state;
         this.book = book;
     }

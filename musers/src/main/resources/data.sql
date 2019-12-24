@@ -14,12 +14,12 @@ VALUES
 (1,'romaindavid.sergeant@gmail.com',
 true,'USER','$2a$10$mVLweGs6HLxItvuYt5W21e9sr7sgkqeuk6q.3pke4HEHJZry4fWSO',
 'Romain-David' ,'0768000001'),
-(2,'actuator@gmail.com',
+(2,'romaind.sergeant@gmail.com',
 true,'ACTUATOR','$2a$10$mVLweGs6HLxItvuYt5W21e9sr7sgkqeuk6q.3pke4HEHJZry4fWSO',
-'Romain-David' ,'0768000002'),
-(3,'romaind.sergeant@gmail.com',
+'RomainD' ,'0768000002'),
+(3,'romaind.ocrlibrary@gmail.com',
 true,'ADMIN','$2a$10$mVLweGs6HLxItvuYt5W21e9sr7sgkqeuk6q.3pke4HEHJZry4fWSO',
-'Romain-David' ,'0768000003');
+'Library Admin' ,'0768000003');
 
 /*  Insert role_user */
 insert into "users_role" (id_user,id_role)

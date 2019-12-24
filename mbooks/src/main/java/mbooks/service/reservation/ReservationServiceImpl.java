@@ -107,7 +107,6 @@ public class ReservationServiceImpl implements IReservationService {
                 && reservation.getIdUserReservation() == idUserUpdate ) {
 
             reservation.setState(State.CANCELED);
-            reservation.setIdUserUpdate( idUserUpdate );
             save(reservation);
 
             if( reservation.getNotificationDate() != null )

@@ -29,12 +29,12 @@ VALUES
 INSERT INTO "books_reservation"(
 	id, next_return_date, "number", possible)
 	VALUES
-	(1, '2019-12-29 14:00:00',0, 60),
-	(2,'2019-12-30 14:00:00', 0, 60),
+	(1, null ,0, 60),
+	(2,null , 0, 60),
 	(3, '2019-12-29 14:00:00', 2, 60),
 	(4, '2019-12-30 14:00:00', 2, 60),
 	(5, '2019-12-30 14:00:00', 60, 60),
-	(6, '2019-12-30 14:00:00' , 1, 60),
+	(6, '2019-12-30 14:00:00' , 3, 60),
 	(7, null , 0, 60);
 
 INSERT INTO "books"(
@@ -54,19 +54,22 @@ INSERT INTO "lending"(
 	id, end_date, id_user, renewal, return_date, start_date, id_books)
 	VALUES
 	(1, '2019-12-29 14:00:00', 1, 0, null , '2019-12-01 14:00:00', 1),
-	(2, '2019-12-30 14:00:00', 1, 0, null , '2019-12-02 14:00:00', 2),
-	(3, '2019-12-29 14:00:00', 2, 0, null , '2019-12-01 14:00:00', 3),
-	(4, '2019-12-30 14:00:00', 2, 0, '2019-12-10 14:00:00' , '2019-12-02 14:00:00', 4);
+	(2, '2019-12-30 14:00:00', 1, 0, null , '2019-12-02 14:00:00', 2);
 
 INSERT INTO "reservation"(
-	id, id_user_create, id_user_reservation, id_user_update, notification_date, reservation_date, state, id_books)
+	id, id_user_reservation, notification_date, reservation_date, state, id_books)
 	VALUES
-	(-1, 1, 1, 1, null, '2019-12-16 09:00:00', 'En cours', 3),
-	(-2, 3, 3, 3, null, '2019-12-16 10:00:00', 'En cours', 3),
-	(-3, 3, 3, 3, null, '2019-12-16 11:00:00', 'En cours', 4),
-	(-4, 1, 1, 1, null, '2019-12-16 12:00:00', 'En cours', 4),
-	(-5, 3, 3, 3, null, '2019-12-16 12:00:00', 'En cours', 6),
-	(-6, 3, 3, 3,'2019-12-01 12:00:00', '2019-12-16 12:00:00', 'En cours', 6);
+	(-1, 2,  null, '2019-12-16 09:00:00', 'En cours', 1),
+	(-2, 3,  null, '2019-12-16 10:00:00', 'En cours', 1),
+	(-3, 3,  null, '2019-12-16 11:00:00', 'En cours', 2),
+	(-4, 2,  null, '2019-12-16 12:00:00', 'En cours', 2),
+	(-4, 1,  null, '2019-12-15 12:00:00', 'En cours', 3),
+	(-4, 2,  null, '2019-12-16 12:00:00', 'En cours', 3),
+	(-4, 2,  null, '2019-12-15 12:00:00', 'En cours', 4),
+	(-4, 1,  null, '2019-12-16 12:00:00', 'En cours', 4),
+	(-5, 1, '2019-12-05 12:00:00', '2019-12-09 12:00:00', 'En cours', 6),
+	(-6, 2, null, '2019-12-10 12:00:00', 'En cours', 6);
+	(-6, 3, null, '2019-12-11 12:00:00', 'En cours', 6);
 
 INSERT INTO "email" (id, name,subject,content)
 VALUES
@@ -82,5 +85,5 @@ Bien cordialement.'),
 
 	Nous avons le plaisir de vous annoncer que le livre [BOOK_TITLE] que vous aviez réservé est disponible depuis le [RETURN_DATE] à la bibliothèque.
 Nous vous invitons à venir le retirer au plus tard pour [END_DATE].
-Après cette date votre réservation sera annulée.
+Après cette date votre réservation sera automatiquement annulée.
 Bien cordialement.');
