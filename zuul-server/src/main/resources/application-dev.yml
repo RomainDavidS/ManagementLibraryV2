@@ -5,16 +5,19 @@ zuul:
     eager-load:
       enabled: true
 
+
+ribbon:
+  ConnectTimeout: 30000
+  ReadTimeout: 15000
+  MaxAutoRetries: 1
+  MaxAutoRetriesNextServer: 1
+  eureka:
+    enabled: true
+
 hystrix:
   command:
     default:
       execution:
         isolation:
           thread:
-            timeoutInMilliseconds: 11000
-        timeout:
-          enabled: false
-
-ribbon:
-  ConnectTimeout: 10000
-  ReadTimeout: 10000
+            timeoutInMilliseconds: 200000 # Fuse service request timeout

@@ -17,33 +17,21 @@ public class AppConfig {
     @Bean
     public SimpleDate simpleDate(){ return  new SimpleDate(); }
 
-    @Autowired
-    private MailConfig mailConfig;
-
-    @Autowired
-    private SmtpConfig smtpConfig;
-
-    @Autowired
-    private StartTlsConfig startTlsConfig;
-
-    @Autowired
-    private TransportConfig transportConfig;
-
 
     @Bean
     public JavaMailSender getJavaMailSender() {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-        mailSender.setHost( mailConfig.getHost() );
-        mailSender.setPort( mailConfig.getPort() );
+        mailSender.setHost( "smtp.gmail.com" );
+        mailSender.setPort( 587 );
 
-        mailSender.setUsername( mailConfig.getUsername() );
-        mailSender.setPassword( mailConfig.getPassword() );
+        mailSender.setUsername( "romaind.ocrlibrary@gmail.com" );
+        mailSender.setPassword( "spboadwzvswdbejw" );
 
         Properties props = mailSender.getJavaMailProperties();
-        props.put("mail.transport.protocol", transportConfig.getProtocol() );
-        props.put("mail.smtp.auth", smtpConfig.isAuth() );
-        props.put("mail.smtp.starttls.enable", startTlsConfig.isEnable() );
-        props.put("mail.debug", mailConfig.isDebug() );
+        props.put("mail.transport.protocol", "smtp" );
+        props.put("mail.smtp.auth", true );
+        props.put("mail.smtp.starttls.enable", true );
+        props.put("mail.debug", true );
 
         return mailSender;
     }

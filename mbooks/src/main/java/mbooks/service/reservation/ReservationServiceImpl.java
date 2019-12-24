@@ -145,7 +145,7 @@ public class ReservationServiceImpl implements IReservationService {
         c.setTime( now );
         c.add(Calendar.DAY_OF_MONTH, appPropertiesConfig.getReservationCancellationDay() );
 
-        UsersBean usersBean = usersProxy.user(reservation.getIdUserReservation() );
+       UsersBean usersBean = usersProxy.user(reservation.getIdUserReservation() );
 
         EmailReturnWrapper email = new EmailReturnWrapper(
                 usersBean.getEmail(), reservation.getBook().getTitle(),
