@@ -25,3 +25,6 @@ zuul:
     socket-timeout-millis: 60000
   semaphore:
     max-semaphores: 500
+  ribbon:
+    eager-load:
+      enabled: true
