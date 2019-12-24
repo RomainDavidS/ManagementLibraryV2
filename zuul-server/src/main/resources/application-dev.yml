@@ -4,3 +4,17 @@ zuul:
   ribbon:
     eager-load:
       enabled: true
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 11000
+        timeout:
+          enabled: false
+
+ribbon:
+  ConnectTimeout: 10000
+  ReadTimeout: 10000
