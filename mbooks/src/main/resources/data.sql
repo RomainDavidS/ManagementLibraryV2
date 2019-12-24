@@ -83,7 +83,7 @@ Bien cordialement.'),
 (2,'return','Information sur votre demande de réservation',
 '	Bonjour,
 
-	Nous avons le plaisir de vous annoncer que le livre [BOOK_TITLE] que vous aviez réservé est disponible depuis le [RETURN_DATE] à la bibliothèque.
+	Nous avons le plaisir de vous annoncer que le livre [BOOK_TITLE] que vous aviez réservé est disponible depuis [RETURN_DATE] à la bibliothèque.
 Nous vous invitons à venir le retirer au plus tard pour [END_DATE].
 Après cette date votre réservation sera automatiquement annulée.
 Bien cordialement.');

@@ -17,6 +17,7 @@ import mbooks.technical.email.EmailWrapper;
 import mbooks.technical.state.reservation.State;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -41,6 +42,9 @@ public class ReservationServiceImpl implements IReservationService {
 
     @Autowired
     private IEmailService emailService;
+
+    @Autowired
+    public JavaMailSender emailSender;
 
     @Autowired
     private IMicroserviceUsersProxy usersProxy;
@@ -151,10 +155,13 @@ public class ReservationServiceImpl implements IReservationService {
                 usersBean.getEmail(), reservation.getBook().getTitle(),
                 simpleDate.getDate(c.getTime() ),simpleDate.getDate( dateReturn ) ) ;
 
-        emailService.sendReturn( email );
         reservationRepository.save( reservation );
 
+
+        emailService.sendReturn( email );
+
     }
+
 
     public List<Reservation> getReservationToCancel(){
         Calendar c = Calendar.getInstance();

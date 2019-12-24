@@ -6,6 +6,7 @@ import com.library.beans.mbooks.reservation.ReservationCreateBean;
 import com.library.proxies.IReservationProxy;
 import com.library.service.users.IUsersService;
 import com.library.technical.state.reservation.State;
+import feign.RetryableException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -54,10 +55,15 @@ public class ReservationServiceImpl implements  IReservationService {
     }
 
     public void delete(Long id){
-        ReservationBean reservation = reservationProxy.find( id );
-        if ( reservation.getState() == State.INPROGRESS
-                && (reservation.getIdUserReservation() == usersService.getCurrentUserId() || usersService.isAdmin() ) )
-            reservationProxy.delete(id,usersService.getCurrentUserId() );
+        try {
+            ReservationBean reservation = reservationProxy.find( id );
+            if ( reservation.getState() == State.INPROGRESS
+                    && (reservation.getIdUserReservation() == usersService.getCurrentUserId() || usersService.isAdmin() ) )
+                reservationProxy.delete(id,usersService.getCurrentUserId() );
+        }catch (RetryableException e){
+            System.out.println( e.getMessage() );
+        }
+
     }
 
 

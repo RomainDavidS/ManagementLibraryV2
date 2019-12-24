@@ -61,6 +61,7 @@ public class EmailServiceImpl implements IEmailService {
         message.setTo(to);
         message.setSubject(subject);
         message.setText(text);
+
         emailSender.send(message);
     }
 
@@ -114,6 +115,7 @@ public class EmailServiceImpl implements IEmailService {
                     .replace("[RETURN_DATE]", pEmail.getReturnDate() );
 
             sendSimpleMessage(pEmail.getEmail(),email.getSubject(),text);
+
 
     }
 }

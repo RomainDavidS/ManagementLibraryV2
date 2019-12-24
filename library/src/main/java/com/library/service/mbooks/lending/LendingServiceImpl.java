@@ -6,6 +6,7 @@ import com.library.exception.ResourceNotFoundException;
 import com.library.proxies.IBooksPropertiesProxy;
 import com.library.proxies.ILendingProxy;
 import com.library.technical.date.SimpleDate;
+import feign.RetryableException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,7 +40,11 @@ public class LendingServiceImpl implements ILendingService {
     }
 
     public void returnBook(Long id){
-        lendingProxy.returnBook( id );
+        try {
+            lendingProxy.returnBook( id );
+        }catch ( RetryableException e){
+            System.out.println( e.getMessage() );
+        }
     }
 
     /**
