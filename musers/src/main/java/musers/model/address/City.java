@@ -18,6 +18,7 @@ public @Data class City {
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
+    @NonNull
     private String insee;
 
     @NonNull

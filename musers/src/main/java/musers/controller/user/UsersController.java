@@ -5,7 +5,7 @@ import musers.controller.dto.user.UserCreateDto;
 import musers.controller.dto.user.UserUpdateDto;
 import musers.exceptions.ResourceNotFoundException;
 import musers.model.user.Users;
-import musers.service.user.IUsersService;
+import musers.service.city.IUsersService;
 import musers.technical.dto.DTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.health.Health;

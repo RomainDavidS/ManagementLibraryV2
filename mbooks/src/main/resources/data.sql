@@ -1,9 +1,9 @@
-INSERT INTO "language" (id, value)
+INSERT INTO language (id, value)
 VALUES
 (1, 'Français'),
 (2,'Anglais');
 
-INSERT INTO "author" (id,last_name,first_name)
+INSERT INTO author (id,last_name,first_name)
 VALUES
 (1,'Banon','Martiel'),
 (2,'Van der Heyde','Fien'),
@@ -14,7 +14,7 @@ VALUES
 (7,'Sobréro','Aurélie');
 
 
-INSERT INTO "edition" (id,name)
+INSERT INTO edition (id,name)
 VALUES
 (1,'ENI'),
 (2,'Hachette'),
@@ -26,7 +26,7 @@ VALUES
 (2,'Cuisine'),
 (3,'Informatique');
 
-INSERT INTO "books_reservation"(
+INSERT INTO books_reservation(
 	id, next_return_date, "number", possible)
 	VALUES
 	(1, null ,0, 60),
@@ -37,7 +37,7 @@ INSERT INTO "books_reservation"(
 	(6, '2019-12-30 14:00:00' , 3, 60),
 	(7, null , 0, 60);
 
-INSERT INTO "books"(
+INSERT INTO books(
 	id_book_reservation,id, availability, id_cover, isbn, review, summary, title, id_author,id_coauthor, id_edition, id_language, id_theme)
 	VALUES
 	(1,1, 0, 'a0841cf1-1fe9-4bc0-8c9c-377b70bcc848', '9782409001000', 30, 'Initiation, exemples et exercices corrigés', 'UML 2.5', 3,2, 1, 1, 3),
@@ -50,13 +50,13 @@ INSERT INTO "books"(
 
 
 
-INSERT INTO "lending"(
+INSERT INTO lending(
 	id, end_date, id_user, renewal, return_date, start_date, id_books)
 	VALUES
 	(1, '2019-12-29 14:00:00', 1, 0, null , '2019-12-01 14:00:00', 1),
 	(2, '2019-12-30 14:00:00', 1, 0, null , '2019-12-02 14:00:00', 2);
 
-INSERT INTO "reservation"(
+INSERT INTO reservation(
 	id, id_user_reservation, notification_date, reservation_date, state, id_books)
 	VALUES
 	(-1, 2,  null, '2019-12-16 09:00:00', 'En cours', 1),
@@ -71,7 +71,7 @@ INSERT INTO "reservation"(
 	(-10, 2, null, '2019-12-10 12:00:00', 'En cours', 6),
 	(-11, 3, null, '2019-12-11 12:00:00', 'En cours', 6);
 
-INSERT INTO "email" (id, name,subject,content)
+INSERT INTO email (id, name,subject,content)
 VALUES
 (1,'relance','Relance pour livre non rendu',
 '	Bonjour,

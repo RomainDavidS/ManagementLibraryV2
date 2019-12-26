@@ -51,7 +51,7 @@ public @Data class Address {
     @NonNull
     private List<City> cityList;
 
-    @OneToMany(mappedBy = "address")
+    @OneToMany
     private List<Users> usersList;
 
 
