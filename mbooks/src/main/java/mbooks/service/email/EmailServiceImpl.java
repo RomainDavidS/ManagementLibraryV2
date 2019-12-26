@@ -37,6 +37,10 @@ public class EmailServiceImpl implements IEmailService {
         return emailRepository.findAll();
     }
 
+    public Email find(String name){
+        return emailRepository.findByName( name );
+    }
+
     /**
      * Permet la création ou la modification d'un mmodèle de mail
      * @param email Entity email à créer ou à modifier
@@ -97,7 +101,7 @@ public class EmailServiceImpl implements IEmailService {
      */
     public void sendRevival(List<EmailWrapper> emailList){
 
-       Email email = emailRepository.findByName("relance");
+       Email email = find("relance");
 
         for (EmailWrapper e: emailList) {
             String text = email.getContent()
@@ -108,7 +112,7 @@ public class EmailServiceImpl implements IEmailService {
     }
     public void sendReturn(EmailReturnWrapper pEmail){
 
-        Email email = emailRepository.findByName("return");
+        Email email = find("return");
             String text = email.getContent()
                     .replace("[BOOK_TITLE]", pEmail.getTitle())
                     .replace("[END_DATE]", pEmail.getEndDate())

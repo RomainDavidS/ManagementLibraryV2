@@ -125,7 +125,7 @@
 		</plugins>
 		<testResources>
 			<testResource>
-				<directory>src/test/resources</directory>
+				<directory>src/test-mfile/resources</directory>
 			</testResource>
 		</testResources>
 	</build>

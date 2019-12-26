@@ -146,6 +146,9 @@
 			<testResource>
 				<directory>src/test/resources</directory>
 			</testResource>
+			<testResource>
+				<directory>src/test-mbooks/resources</directory>
+			</testResource>
 		</testResources>
 	</build>
 	<repositories>

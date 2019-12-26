@@ -150,14 +150,7 @@ public class LendingServiceImpl implements ILendingService {
         return isStartDateBeforeEndDate(  lending);
     }
 
-    /**
-     * Permet de vérifier si l'emprunt est hors délais
-     * @param lending Emprunt à vérifier
-     * @return true si l'emprunt est hors délai sinon false
-     */
-    private boolean isOutOfTime( Lending lending ){
-        return !isStartDateBeforeEndDate(  lending);
-    }
+
 
     /**
      * Permet de vérifier si le livre emprunté a été rendu

@@ -127,7 +127,7 @@
 		</plugins>
 		<testResources>
 			<testResource>
-				<directory>src/test/resources</directory>
+				<directory>src/test-musers/resources</directory>
 			</testResource>
 		</testResources>
 	</build>
