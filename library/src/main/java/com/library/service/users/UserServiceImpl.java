@@ -2,7 +2,7 @@ package com.library.service.users;
 
 import com.library.beans.musers.user.RoleBean;
 import com.library.beans.musers.user.UsersBean;
-import com.library.proxies.IMicroserviceUsersProxy;
+import com.library.proxies.IUsersProxy;
 import com.library.technical.authentificationfacade.IAuthenticationFacade;
 import com.library.technical.rolechecker.IRoleChecker;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements IUsersService {
 
     @Autowired
-    private IMicroserviceUsersProxy mUsersProxy;
+    private IUsersProxy mUsersProxy;
 
     @Autowired
     private IAuthenticationFacade authenticationFacade;

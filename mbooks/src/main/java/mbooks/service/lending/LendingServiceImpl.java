@@ -6,10 +6,9 @@ import mbooks.config.ApplicationPropertiesConfig;
 import mbooks.exceptions.ResourceNotFoundException;
 import mbooks.model.Books;
 import mbooks.model.Lending;
-import mbooks.proxies.IMicroserviceUsersProxy;
+import mbooks.proxies.IUsersProxy;
 import mbooks.repository.ILendingRepository;
 import mbooks.service.IBooksService;
-import mbooks.service.email.EmailServiceImpl;
 import mbooks.service.email.IEmailService;
 import mbooks.service.reservation.IReservationService;
 import mbooks.technical.date.SimpleDate;
@@ -18,7 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
-import java.math.BigInteger;
 import java.util.*;
 
 @Service
@@ -34,7 +32,7 @@ public class LendingServiceImpl implements ILendingService {
     private ApplicationPropertiesConfig appPropertiesConfig;
 
     @Autowired
-    private IMicroserviceUsersProxy usersProxy;
+    private IUsersProxy usersProxy;
 
     @Autowired
     private IEmailService emailService;

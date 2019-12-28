@@ -4,26 +4,6 @@ VALUES
 (-2,'ROLE_ACTUATOR','Membre'),
 (-3,'ROLE_USER','Utilisateur');
 
-INSERT INTO city(
-	insee, name, postal_code)
-	VALUES
-	('69381', 'LYON 1ER ARRONDISSEMENT', '69001');
-INSERT INTO address(
-	id, complement_street, complement_street_number, lattitude, longitude, street, street_number, street_type)
-	VALUES
-	(1, '', '', '45.773788358','4.826584669', 'DE LA CROIX ROUSSE', 100, 'BD'),
-	(2, '', '', '45.773788358','4.826584669', 'DE LA CROIX ROUSSE', 102, 'BD'),
-	(3, '', '', '45.773788358','4.826584669', 'DE LA CROIX ROUSSE', 104, 'BD'),
-	(4, '', '', '45.773788358','4.826584669', 'DE LA CROIX ROUSSE', 106, 'BD');
-
-
-
-INSERT INTO address_city(
-	id_address, insee_city)
-	VALUES (1, '69381'),
-	(2, '69381'),
-	(3, '69381'),
-	(4, '69381');
 
 /*  Insert USERS */
 INSERT INTO users

@@ -1,10 +1,10 @@
-package musers.repository.user;
+package musers.repository;
 
 
 
 
 
-import musers.model.user.Users;
+import musers.model.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -16,6 +16,5 @@ import org.springframework.stereotype.Repository;
 public interface IUsersRepository extends JpaRepository<Users,Long > {
 
 Users findByEmailAndActiveTrue(String email);
-Users findByIdAndActiveTrue(Long id);
 
 }

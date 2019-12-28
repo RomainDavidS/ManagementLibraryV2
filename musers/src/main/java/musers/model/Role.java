@@ -1,4 +1,4 @@
-package musers.model.user;
+package musers.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

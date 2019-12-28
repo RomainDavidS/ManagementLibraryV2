@@ -1,7 +1,7 @@
-package musers.repository.user;
+package musers.repository;
 
 
-import musers.model.user.Role;
+import musers.model.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -12,6 +12,4 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface IRoleRepository extends JpaRepository<Role, Long > {
 
-    Role findRoleById(Long id);
-    Role findRoleByName(String name);
 }

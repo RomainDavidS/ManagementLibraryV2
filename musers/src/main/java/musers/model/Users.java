@@ -1,11 +1,10 @@
-package musers.model.user;
+package musers.model;
 
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import musers.model.address.Address;
 
 import javax.persistence.*;
 import java.util.List;
@@ -45,10 +44,7 @@ public @Data class Users {
     )
     @NonNull private  List<Role>  roleList;
 
-    @ManyToOne
-    @JoinColumn(name="id_address", referencedColumnName="id")
-    @NonNull
-    private Address address;
+
 
 
 

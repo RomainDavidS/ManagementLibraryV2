@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @FeignClient(name = "zuul-server",contextId = "usersProxy")
 @RibbonClient(name = "microservice-users")
 @RequestMapping("/microservice-users/user")
-public interface IMicroserviceUsersProxy {
+public interface IUsersProxy {
 
 
     @GetMapping(value = "/byId/{id}")

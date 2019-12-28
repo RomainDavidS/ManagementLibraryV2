@@ -5,22 +5,18 @@ import mbooks.beans.musers.user.UsersBean;
 import mbooks.config.ApplicationPropertiesConfig;
 import mbooks.exceptions.ResourceNotFoundException;
 import mbooks.model.Books;
-import mbooks.model.Lending;
 import mbooks.model.Reservation;
-import mbooks.proxies.IMicroserviceUsersProxy;
+import mbooks.proxies.IUsersProxy;
 import mbooks.repository.IReservationRepository;
 import mbooks.service.BooksServiceImpl;
 import mbooks.service.email.IEmailService;
 import mbooks.technical.date.SimpleDate;
 import mbooks.technical.email.EmailReturnWrapper;
-import mbooks.technical.email.EmailWrapper;
 import mbooks.technical.state.reservation.State;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -47,7 +43,7 @@ public class ReservationServiceImpl implements IReservationService {
     public JavaMailSender emailSender;
 
     @Autowired
-    private IMicroserviceUsersProxy usersProxy;
+    private IUsersProxy usersProxy;
 
 
     public Reservation find(Long id){

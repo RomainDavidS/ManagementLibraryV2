@@ -4,7 +4,7 @@ package mbooks.batch;
 import mbooks.beans.musers.user.UsersBean;
 import mbooks.model.Email;
 import mbooks.model.Lending;
-import mbooks.proxies.IMicroserviceUsersProxy;
+import mbooks.proxies.IUsersProxy;
 import mbooks.repository.IEmailRepository;
 import mbooks.repository.ILendingRepository;
 import mbooks.technical.date.SimpleDate;
@@ -32,13 +32,13 @@ public class MyTaskOne implements Tasklet  {
 
     private final ILendingRepository lendingRepository;
 
-    private final IMicroserviceUsersProxy usersProxy;
+    private final IUsersProxy usersProxy;
 
     private final IEmailRepository emailRepository;
 
 
     public MyTaskOne(final ILendingRepository lendingRepository,
-                     final IMicroserviceUsersProxy usersProxy,
+                     final IUsersProxy usersProxy,
                      final IEmailRepository emailRepository,
                      final JavaMailSender emailSender) {
         this.lendingRepository = lendingRepository;

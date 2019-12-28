@@ -4,11 +4,9 @@ import mbooks.beans.musers.user.UsersBean;
 import mbooks.config.ApplicationPropertiesConfig;
 import mbooks.model.Books;
 import mbooks.model.Email;
-import mbooks.model.Lending;
 import mbooks.model.Reservation;
-import mbooks.proxies.IMicroserviceUsersProxy;
+import mbooks.proxies.IUsersProxy;
 import mbooks.repository.IEmailRepository;
-import mbooks.repository.ILendingRepository;
 import mbooks.repository.IReservationRepository;
 import mbooks.technical.date.SimpleDate;
 import mbooks.technical.email.EmailReturnWrapper;
@@ -31,7 +29,7 @@ public class MyTaskTwo implements Tasklet {
 
     private final JavaMailSender emailSender;
 
-    private final IMicroserviceUsersProxy usersProxy;
+    private final IUsersProxy usersProxy;
 
     private final IEmailRepository emailRepository;
 
@@ -41,7 +39,7 @@ public class MyTaskTwo implements Tasklet {
             final ApplicationPropertiesConfig appPropertiesConfig,
             final IReservationRepository reservationRepository,
             final JavaMailSender emailSender,
-            final IMicroserviceUsersProxy usersProxy,
+            final IUsersProxy usersProxy,
             final IEmailRepository emailRepository) {
         this.appPropertiesConfig = appPropertiesConfig;
         this.reservationRepository = reservationRepository;

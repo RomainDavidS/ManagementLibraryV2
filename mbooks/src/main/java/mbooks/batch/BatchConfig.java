@@ -1,11 +1,10 @@
 package mbooks.batch;
 
 import mbooks.config.ApplicationPropertiesConfig;
-import mbooks.proxies.IMicroserviceUsersProxy;
+import mbooks.proxies.IUsersProxy;
 import mbooks.repository.IEmailRepository;
 import mbooks.repository.ILendingRepository;
 import mbooks.repository.IReservationRepository;
-import mbooks.service.lending.ILendingService;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
@@ -32,7 +31,7 @@ public class BatchConfig {
     private  ILendingRepository lendingRepository;
 
     @Autowired
-    private  IMicroserviceUsersProxy usersProxy;
+    private IUsersProxy usersProxy;
 
     @Autowired
     private IEmailRepository emailRepository;
