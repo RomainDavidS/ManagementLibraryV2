@@ -1,0 +1,173 @@
+{
+	"info": {
+		"_postman_id": "28fe48d1-e7c7-4233-b375-db67255a17ad",
+		"name": "Musers",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "FindUserById",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0d869aec-c2f0-4588-b2b6-fa30f4727a7d",
+						"exec": [
+							"pm.test(\"Find UserById is OK\", function () {\r",
+							"    pm.response.to.be.ok;\r",
+							"    pm.response.to.be.json\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.firstName).to.eql(\"Romain-David\");\r",
+							"    \r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "mdp",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "utilisateur",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:9205/user/byId/-1",
+					"host": [
+						"localhost"
+					],
+					"port": "9205",
+					"path": [
+						"user",
+						"byId",
+						"-1"
+					]
+				},
+				"description": "Recherche d'un utilisateur en fonction de son id "
+			},
+			"response": []
+		},
+		{
+			"name": "FindUserUsername",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d74ecec8-4e08-4d4e-9c67-0f98b8e2bf7e",
+						"exec": [
+							"pm.test(\"Get Usernam UserByEmail is OK\", function () {\r",
+							"    pm.response.to.be.ok;\r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.expect(pm.response.text()).to.eql(\"Romain-David USER\");\r",
+							"    \r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "mdp",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "utilisateur",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:9205/user/name/-1",
+					"host": [
+						"localhost"
+					],
+					"port": "9205",
+					"path": [
+						"user",
+						"name",
+						"-1"
+					]
+				},
+				"description": "Recherche L username d'un utilisateur"
+			},
+			"response": []
+		},
+		{
+			"name": "FindUserByEmail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "078a3500-30b9-4eee-b7e8-32f7f2777fc0",
+						"exec": [
+							"pm.test(\"Find UserByEmail is OK\", function () {\r",
+							"    pm.response.to.be.ok;\r",
+							"    pm.response.to.be.json\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.firstName).to.eql(\"Romain-David\");\r",
+							"    \r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "mdp",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "utilisateur",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:9205/user/byEmail/romaindavid.sergeant@gmail.com",
+					"host": [
+						"localhost"
+					],
+					"port": "9205",
+					"path": [
+						"user",
+						"byEmail",
+						"romaindavid.sergeant@gmail.com"
+					]
+				},
+				"description": "Recherche d'un utilisateur en fonction de son email"
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
