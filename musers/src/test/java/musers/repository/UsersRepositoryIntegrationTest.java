@@ -2,6 +2,8 @@ package musers.repository;
 
 import musers.model.Role;
 import musers.model.Users;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,21 +25,20 @@ public class UsersRepositoryIntegrationTest {
     @Autowired
     private IUsersRepository usersRepository;
 
+    @Before
+    public void setUp(){
+        usersRepository.deleteAll();
+    }
+
+    @After
+    public void erase(){
+        usersRepository.deleteAll();
+    }
 
     @Test
     public void whenFindByEmailAndActiveTrue_thenReturnUsers() {
+        Users users = createTestUsers("Romain-David");
 
-        Role role = new Role();
-        role.setId(-1L);
-        role.setName("ROLE_USER");
-        role.setWording("Utilisateur");
-        // given
-        Users users = new Users(
-                "Romain-David",
-                "Sergeant",
-                "romaind.@gmail.com",
-                "xxx",
-                "060000000",true, Arrays.asList(role)  );
         entityManager.persist(users);
         entityManager.flush();
 
@@ -59,17 +60,7 @@ public class UsersRepositoryIntegrationTest {
     @Test
     public void whenFindById_thenReturnEmployee() {
 
-        Role role = new Role();
-        role.setId( -1L );
-        role.setName("ROLE_USER");
-        role.setWording("Utilisateur");
-        // given
-        Users users = new Users(
-                "Romain-David",
-                "Sergeant",
-                "romaind.@gmail.com",
-                "xxx",
-                "060000000",true, Arrays.asList(role) );
+        Users users = createTestUsers("Romain-David");
 
         entityManager.persistAndFlush(users);
 
@@ -86,29 +77,9 @@ public class UsersRepositoryIntegrationTest {
     @Test
     public void givenSetOfUsers_whenFindAll_thenReturnAllUsers() {
 
-        Role role = new Role();
-        role.setId(-1L);
-        role.setName("ROLE_USER");
-        role.setWording("Utilisateur");
-        // given
-        Users users1 = new Users(
-                "Romain-David",
-                "Sergeant",
-                "romaind1@gmail.com",
-                "xxx",
-                "060000000",true, Arrays.asList(role)  );
-        Users users2 = new Users(
-                "Romain-David",
-                "Sergeant",
-                "romaind2@gmail.com",
-                "xxx",
-                "060000000",true, Arrays.asList(role)  );
-        Users users3 = new Users(
-                "Romain-David",
-                "Sergeant",
-                "romaind3@gmail.com",
-                "xxx",
-                "060000000",true, Arrays.asList(role));
+        Users users1 = createTestUsers("users1");
+        Users users2 = createTestUsers("users2");
+        Users users3 = createTestUsers("users3");
 
 
         entityManager.persist(users1);
@@ -118,12 +89,22 @@ public class UsersRepositoryIntegrationTest {
 
         List<Users> allUsers = usersRepository.findAll();
 
-        assertThat(allUsers).hasSize(6).extracting(Users::getEmail).containsOnly(
-                users1.getEmail(), users2.getEmail(), users3.getEmail(),
-                "romaind.ocrlibrary@gmail.com",
-                "romaind.sergeant@gmail.com",
-                "romaindavid.sergeant@gmail.com");
+        assertThat(allUsers).hasSize(3).extracting(Users::getEmail).containsOnly(
+                users1.getEmail(), users2.getEmail(), users3.getEmail());
     }
 
+    private Users createTestUsers(String name) {
+        Role role = new Role();
+        role.setId( -1L );
+        role.setName("ROLE_USER");
+        role.setWording("Utilisateur");
+        // given
+        return new Users(
+                name,
+                "Sergeant",
+                name + "@gmail.com",
+                "xxx",
+                "060000000",true, Arrays.asList(role) );
+    }
 
 }
