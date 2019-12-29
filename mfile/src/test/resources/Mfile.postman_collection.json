@@ -1,0 +1,63 @@
+{
+	"info": {
+		"_postman_id": "b2e373a6-fd47-4515-a94e-899a7cdea5e2",
+		"name": "Mfile",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "FindCoverById",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "31a3c48b-c548-45bf-9dd9-c223849b5f9b",
+						"exec": [
+							"pm.test(\"Find CoverById is OK\", function () {\r",
+							"    pm.response.to.be.ok;\r",
+							"    pm.response.to.be.json\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.fileName).to.eql(\"9782409001000.png\");\r",
+							"    \r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "mdp",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "utilisateur",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:9203/cover/a0841cf1-1fe9-4bc0-8c9c-377b70bcc848",
+					"host": [
+						"localhost"
+					],
+					"port": "9203",
+					"path": [
+						"cover",
+						"a0841cf1-1fe9-4bc0-8c9c-377b70bcc848"
+					]
+				},
+				"description": "Recherche de la couverture d'un livre en fonction de son ID"
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
