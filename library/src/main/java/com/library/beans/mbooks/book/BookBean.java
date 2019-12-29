@@ -1,17 +1,11 @@
 package com.library.beans.mbooks.book;
 
-import com.library.beans.mbooks.book.author.AuthorBean;
-import com.library.beans.mbooks.book.edition.EditionBean;
-import com.library.beans.mbooks.book.language.LanguageBean;
-import com.library.beans.mbooks.book.theme.ThemeBean;
-import com.library.beans.mbooks.lending.LendingBean;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.util.List;
 
 @NoArgsConstructor
 public  @Data class BookBean {

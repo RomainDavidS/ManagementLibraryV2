@@ -1,9 +1,7 @@
 package com.library.service.mbooks.lending;
 import com.library.beans.mbooks.lending.LendingBean;
 import com.library.beans.mbooks.lending.LendingCreateBean;
-import com.library.config.ApplicationPropertiesConfig;
 import com.library.exception.ResourceNotFoundException;
-import com.library.proxies.IBooksPropertiesProxy;
 import com.library.proxies.ILendingProxy;
 import com.library.technical.date.SimpleDate;
 import feign.RetryableException;
@@ -25,8 +23,6 @@ public class LendingServiceImpl implements ILendingService {
     private SimpleDate simpleDate;
 
 
-    @Autowired
-    private IBooksPropertiesProxy booksPropertiesProxy;
 
 
 
@@ -195,7 +191,7 @@ public class LendingServiceImpl implements ILendingService {
     public String renewalDate(Date date){
         Calendar c = Calendar.getInstance();
         c.setTime( date );
-        c.add(Calendar.DAY_OF_MONTH, booksPropertiesProxy.getRenewalDay() );
+      //  c.add(Calendar.DAY_OF_MONTH, booksPropertiesProxy.getRenewalDay() );
         return simpleDate.getDateLow( c.getTime() );
     }
 

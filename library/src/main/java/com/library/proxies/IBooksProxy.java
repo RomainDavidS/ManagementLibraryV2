@@ -3,7 +3,6 @@ package com.library.proxies;
 
 
 import com.library.beans.mbooks.book.BookBean;
-import com.library.beans.mbooks.book.BookCreateBean;
 import com.library.technical.state.books.BooksState;
 import org.springframework.cloud.netflix.ribbon.RibbonClient;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -24,9 +23,6 @@ public interface IBooksProxy {
 
     @GetMapping("/all")
     List<BookBean> list();
-
-    @PostMapping("/save")
-    BookBean save( @RequestBody BookCreateBean book);
 
     @PutMapping("/update")
     BookBean update( @RequestBody BookBean book);

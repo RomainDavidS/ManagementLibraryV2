@@ -1,11 +1,9 @@
 package mbooks.controller;
 
 
-import mbooks.controller.dto.books.BooksCreateDto;
 import mbooks.controller.dto.books.BooksUpdateDto;
 import mbooks.exceptions.ResourceNotFoundException;
 import mbooks.model.Books;
-import mbooks.service.IBooksReservationService;
 import mbooks.service.IBooksService;
 import mbooks.technical.dto.DTO;
 import mbooks.technical.state.books.BooksState;
@@ -57,14 +55,6 @@ public class BooksController implements HealthIndicator {
     }
 
 
-    @PostMapping("/save")
-    @ResponseStatus(HttpStatus.OK)
-    public Books save(@DTO(BooksCreateDto.class) @RequestBody Books book)  {
-
-
-        return booksService.save(book);
-
-    }
 
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.OK)
