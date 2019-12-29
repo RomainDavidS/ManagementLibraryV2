@@ -1,10 +1,10 @@
-package com.mfile.repository;
+package mfile.repository;
 
 
 
 
 
-import com.mfile.model.Cover;
+import mfile.model.Cover;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

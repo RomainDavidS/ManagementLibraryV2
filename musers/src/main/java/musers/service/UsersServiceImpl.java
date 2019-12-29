@@ -1,7 +1,5 @@
 package musers.service;
 
-
-import musers.exceptions.ResourceNotFoundException;
 import musers.model.Users;
 import musers.repository.IUsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;

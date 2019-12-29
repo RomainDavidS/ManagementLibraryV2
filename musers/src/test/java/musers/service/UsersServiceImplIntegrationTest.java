@@ -40,32 +40,11 @@ public class UsersServiceImplIntegrationTest {
 
     @Before
     public void setUp() {
-
-        Role role = new Role();
-        role.setId(-1L);
-        role.setName("ROLE_USER");
-        role.setWording("Utilisateur");
         // given
-        Users john = new Users(
-                "john",
-                "Sergeant",
-                "john@gmail.com",
-                "xxx",
-                "060000000",true, Arrays.asList(role)  );
+        Users john = createTestUsers("john" );
         john.setId(11L);
-
-        Users bob = new Users(
-                "bob",
-                "Sergeant",
-                "bob@gmail.com",
-                "xxx",
-                "060000000",true, Arrays.asList(role)  );
-        Users alex = new Users(
-                "alex",
-                "Sergeant",
-                "alex@gmail.com",
-                "xxx",
-                "060000000",true, Arrays.asList(role) );
+        Users bob = createTestUsers("bob" );
+        Users alex = createTestUsers("alex" );
 
 
 
@@ -121,30 +100,9 @@ public class UsersServiceImplIntegrationTest {
     @Test
     public void given3users_whenGetAll_thenReturn3Records() {
 
-        Role role = new Role();
-        role.setId(Long.valueOf(-1 ));
-        role.setName("ROLE_USER");
-        role.setWording("Utilisateur");
-        // given
-        Users john = new Users(
-                "john",
-                "Sergeant",
-                "john@gmail.com",
-                "xxx",
-                "060000000",true, Arrays.asList(role)  );
-
-        Users bob = new Users(
-                "bob",
-                "Sergeant",
-                "bob@gmail.com",
-                "xxx",
-                "060000000",true, Arrays.asList(role)  );
-        Users alex = new Users(
-                "alex",
-                "Sergeant",
-                "alex@gmail.com",
-                "xxx",
-                "060000000",true, Arrays.asList(role)  );
+        Users john = createTestUsers("john" );
+        Users bob = createTestUsers("bob" );
+        Users alex = createTestUsers("alex" );
 
         List<Users> allUsers = usersService.findAll();
         verifyFindAllUsersIsCalledOnce();
@@ -166,5 +124,19 @@ public class UsersServiceImplIntegrationTest {
     private void verifyFindAllUsersIsCalledOnce() {
         Mockito.verify(usersRepository, VerificationModeFactory.times(1)).findAll();
         Mockito.reset(usersRepository);
+    }
+
+    private Users createTestUsers(String name) {
+        Role role = new Role();
+        role.setId( -1L );
+        role.setName("ROLE_USER");
+        role.setWording("Utilisateur");
+        // given
+        return new Users(
+                name,
+                "Sergeant",
+                name + "@gmail.com",
+                "xxx",
+                "060000000",true, Arrays.asList(role) );
     }
 }

@@ -29,7 +29,7 @@ import org.springframework.test.web.servlet.MockMvc;
         classes = MusersApplication.class)
 @AutoConfigureMockMvc
 @AutoConfigureTestDatabase
-public class UsersRestControllerIntegrationTest {
+public class UsersControllerIntegrationTest {
 
     @Autowired
     private MockMvc mvc;

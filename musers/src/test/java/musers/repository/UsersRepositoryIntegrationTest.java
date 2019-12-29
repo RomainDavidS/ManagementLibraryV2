@@ -58,7 +58,7 @@ public class UsersRepositoryIntegrationTest {
 
 
     @Test
-    public void whenFindById_thenReturnEmployee() {
+    public void whenFindById_thenReturnUsers() {
 
         Users users = createTestUsers("Romain-David");
 

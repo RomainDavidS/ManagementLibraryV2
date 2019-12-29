@@ -1,4 +1,4 @@
-package com.mfile;
+package mfile;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

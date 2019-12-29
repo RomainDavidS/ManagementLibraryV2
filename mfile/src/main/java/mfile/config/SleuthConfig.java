@@ -1,4 +1,4 @@
-package com.mfile.config;
+package mfile.config;
 
 import brave.sampler.Sampler;
 import org.springframework.context.annotation.Configuration;

@@ -1,4 +1,4 @@
-package com.mfile.model;
+package mfile.model;
 
 
 import lombok.Data;
