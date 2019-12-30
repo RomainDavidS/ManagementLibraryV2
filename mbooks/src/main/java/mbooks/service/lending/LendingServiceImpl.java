@@ -120,7 +120,7 @@ public class LendingServiceImpl implements ILendingService {
     public Lending addFromReservation(Lending lending){
 
         Books books = booksService.find( lending.getBook().getId() );
-        if( isLendingPossible(  lending ) ){
+        if( isLendingPossible(  books,lending.getIdUser() ) ){
             Lending newLending = addLending( lending );
             updateBooks( books );
             updateReservation( books, lending );
@@ -152,16 +152,13 @@ public class LendingServiceImpl implements ILendingService {
     }
 
     private boolean isLendingPossible(Books books, Long idUser){
-        return books.getAvailability() > 0 && reservationService.positionUser( books.getId(), idUser ) == 1 && !isLendingCurrentUser( books, idUser);
+        return books.getAvailability() > 0 && reservationService.positionUser( books.getId(), idUser ) == 1 && ! isLendingCurrentUser( books, idUser);
     }
 
-    private boolean isLendingPossible( Lending lending ){
-        return isLendingPossible(lending.getBook(), lending.getIdUser() );
-    }
-
-    public boolean isLendingPossible(Long idBooks, Long idUser){
+    public boolean isLendingPossible( Long idBooks, Long idUser){
         return isLendingPossible( booksService.find( idBooks ),  idUser) ;
     }
+
 
     /**
      * Permet la création oou la modification d'un emprunt
@@ -252,7 +249,7 @@ public class LendingServiceImpl implements ILendingService {
         if (idUser == 0)
             return false;
 
-        Lending lending= lendingRepository.findByReturnDateIsNullAndBookAndIdUser( books, idUser );
+        Lending lending = lendingRepository.findByReturnDateIsNullAndBookAndIdUser( books, idUser );
 
         if( lending != null)
             return true;
