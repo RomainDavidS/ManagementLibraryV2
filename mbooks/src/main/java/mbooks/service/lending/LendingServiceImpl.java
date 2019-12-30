@@ -132,7 +132,7 @@ public class LendingServiceImpl implements ILendingService {
 
     private Lending addLending( Lending lending ){
         Calendar c = Calendar.getInstance();
-        c.setTime( lending.getEndDate() );
+        c.setTime( new Date() );
         c.add(Calendar.DAY_OF_MONTH, appPropertiesConfig.getLendingDay() );
         lending.setEndDate( c.getTime() );
         lending.setRenewal( 0 );
@@ -152,7 +152,7 @@ public class LendingServiceImpl implements ILendingService {
     }
 
     private boolean isLendingPossible(Books books, Long idUser){
-        return books.getAvailability() > 0 && reservationService.positionUser( books.getId(), idUser ) == 1 ;
+        return books.getAvailability() > 0 && reservationService.positionUser( books.getId(), idUser ) == 1 && !isLendingCurrentUser( books, idUser);
     }
 
     private boolean isLendingPossible( Lending lending ){

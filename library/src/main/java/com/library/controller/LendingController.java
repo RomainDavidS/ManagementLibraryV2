@@ -2,20 +2,15 @@ package com.library.controller;
 
 
 import com.library.beans.mbooks.lending.LendingBean;
-import com.library.beans.mbooks.lending.LendingCreateBean;
-import com.library.beans.mbooks.reservation.ReservationBean;
 import com.library.config.ApplicationPropertiesConfig;
 import com.library.service.mbooks.books.IBooksService;
 import com.library.service.mbooks.lending.ILendingService;
-import com.library.service.mbooks.reservation.IReservationService;
 import com.library.service.users.IUsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -147,21 +142,23 @@ public class LendingController  {
     }
 
 
-    @GetMapping("/info/{id}")
-    public String info(@PathVariable("id") long id, Model model){
-        model.addAttribute( "idLending", id);
-        return "books/lending/info-lending";
+
+    @GetMapping("/add/fromReservation/{id}/{title}")
+    public String addFromReservation(@PathVariable long id, @PathVariable String title,Model model){
+            model.addAttribute("id",id );
+            model.addAttribute("title",title );
+           return "/books/lending/add/add-lending";
     }
 
-    @GetMapping("/add/fromReservation/{id}")
-    public String addFromReservation(@PathVariable("id") long id,Model model){
-       if( lendingService.saveFromReservation( id )!=null && usersService.isAdmin() )
-           return  "redirect:/lending/all";
-       else
-           return "/books/lending/add-lending-ko";
+    @GetMapping("/add/fromReservation/yes/{id}/{title}")
+    public String addFromReservationYes(@PathVariable long id, @PathVariable String title,Model model){
+        model.addAttribute("title",title );
+
+        if( lendingService.saveFromReservation( id )!=null && usersService.isAdmin() )
+            return  "/books/lending/add/add-lending-success";
+        else
+            return "/books/lending/add/add-lending-ko";
     }
-
-
 
 
     @GetMapping("/delete/{id}")

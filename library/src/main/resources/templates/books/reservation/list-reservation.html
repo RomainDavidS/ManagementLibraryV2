@@ -61,7 +61,7 @@
                                         Annuler</a>
                                 </td>
                                 <td class="text-muted text-center" sec:authorize="hasAnyRole('ADMIN','ACTUATOR')">
-                                    <a th:href="@{/lending/add/{id}(id=${r.id})}"class="btn btn-sm btn-outline-success" th:if="${ fn.isLendingPossible(r.book.id,r.idUserReservation ) }">
+                                    <a th:href="@{/lending/add/fromReservation/{id}/{title}(id=${r.id},title=${r.book.title})}"class="btn btn-sm btn-outline-success" th:if="${ fn.isLendingPossible(r.book.id,r.idUserReservation ) }">
                                         Emprunter</a>
                                 </td>
 

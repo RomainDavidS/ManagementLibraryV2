@@ -30,7 +30,7 @@ INSERT INTO books_reservation(
 	id, next_return_date, "number", possible)
 	VALUES
 	(1, null ,0, 60),
-	(2,null , 0, 60),
+	(2,'2019-12-29 14:00:00' , 2, 60),
 	(3, '2019-12-29 14:00:00', 2, 60),
 	(4, '2019-12-30 14:00:00', 2, 60),
 	(5, '2019-12-30 14:00:00', 60, 60),
@@ -41,7 +41,7 @@ INSERT INTO books(
 	id_book_reservation,id, availability, id_cover, isbn, review, summary, title, id_author,id_coauthor, id_edition, id_language, id_theme)
 	VALUES
 	(1,1, 0, 'a0841cf1-1fe9-4bc0-8c9c-377b70bcc848', '9782409001000', 30, 'Initiation, exemples et exercices corrigés', 'UML 2.5', 3,2, 1, 1, 3),
-	(2,2, 0, '4a66b149-2b77-49e2-a49c-2250c4275890', '9782409005824', 30, 'Apprenez le mapping objet-relationnel (ORM) avec Java', 'JPA et Java Hibernate', 1,null, 1, 1, 3),
+	(2,2, 3, '4a66b149-2b77-49e2-a49c-2250c4275890', '9782409005824', 30, 'Apprenez le mapping objet-relationnel (ORM) avec Java', 'JPA et Java Hibernate', 1,null, 1, 1, 3),
 	(3,3, 0, '1cb6e756-f073-4cb8-a37e-aa462845b670', '9782409013843', 30, 'Le socle technique des applications Java EE', 'Java Spring', 5,null, 1, 1, 3),
 	(4,4, 0, 'be863f03-d00e-443b-aab2-b625dc2ef5d0', '9782409014499', 30, 'Construisez vos applications réactives avec une architecture micro-services en environnement Java EE', 'Java Spring', 5,null, 1, 1, 3),
 	(5,5, 0, 'b1d08817-1122-483c-a8fc-8a524a665f36', '9782746065093', 30, 'Maîtrisez l infrastructure d un projet Java EE  ', 'Apache Maven', 6,null, 1, 1, 3),
@@ -53,8 +53,8 @@ INSERT INTO books(
 INSERT INTO lending(
 	id, end_date, id_user, renewal, return_date, start_date, id_books)
 	VALUES
-	(1, '2019-12-29 14:00:00', -1, 0, null , '2019-12-01 14:00:00', 1),
-	(2, '2019-12-30 14:00:00', -1, 0, null , '2019-12-02 14:00:00', 2);
+	(-1, '2019-12-29 14:00:00', -1, 0, null , '2019-12-01 14:00:00', 1),
+	(-2, '2019-12-30 14:00:00', -1, 0, null , '2019-12-02 14:00:00', 2);
 
 INSERT INTO reservation(
 	id, id_user_reservation, notification_date, reservation_date, state, id_books)
