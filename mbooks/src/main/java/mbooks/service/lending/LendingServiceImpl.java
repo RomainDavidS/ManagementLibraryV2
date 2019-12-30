@@ -6,6 +6,7 @@ import mbooks.config.ApplicationPropertiesConfig;
 import mbooks.exceptions.ResourceNotFoundException;
 import mbooks.model.Books;
 import mbooks.model.Lending;
+import mbooks.model.Reservation;
 import mbooks.proxies.IUsersProxy;
 import mbooks.repository.ILendingRepository;
 import mbooks.service.IBooksService;
@@ -13,6 +14,7 @@ import mbooks.service.email.IEmailService;
 import mbooks.service.reservation.IReservationService;
 import mbooks.technical.date.SimpleDate;
 import mbooks.technical.email.EmailWrapper;
+import mbooks.technical.state.reservation.State;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -68,18 +70,15 @@ public class LendingServiceImpl implements ILendingService {
             lending.setReturnDate( now );
             lendingRepository.save( lending );
             reservationService.sendReturnInfo( lending.getBook() , now );
-            updateNextDateReturn( lending.getBook() );
+            booksService.updateNextDateReturn( lending.getBook(), getNextReturnDate( lending.getBook() ) );
+
         }
     }
 
-    private void updateNextDateReturn( Books book ){
+    private Date getNextReturnDate( Books book ){
         Lending lending = lendingRepository.findAllByBookAndReturnDateIsNullOrderByReturnDateAsc( book ).get( 0 );
-
-        lending.getBook().getBooksReservation().setNextReturnDate( lending.getBook().getBooksReservation().getNextReturnDate() );
-
-        lendingRepository.save( lending );
+        return lending.getBook().getBooksReservation().getNextReturnDate();
     }
-
 
     /**
      * Permet la recherche d'un emprunt
@@ -118,12 +117,58 @@ public class LendingServiceImpl implements ILendingService {
         return lendingRepository.findAllByIdUser( idUser );
     }
 
+    public Lending addFromReservation(Lending lending){
+
+        Books books = booksService.find( lending.getBook().getId() );
+        if( isLendingPossible(  lending ) ){
+            Lending newLending = addLending( lending );
+            updateBooks( books );
+            updateReservation( books, lending );
+            return newLending;
+        }
+
+        return null;
+    }
+
+    private Lending addLending( Lending lending ){
+        Calendar c = Calendar.getInstance();
+        c.setTime( lending.getEndDate() );
+        c.add(Calendar.DAY_OF_MONTH, appPropertiesConfig.getLendingDay() );
+        lending.setEndDate( c.getTime() );
+        lending.setRenewal( 0 );
+        return save( lending );
+    }
+
+    private void updateBooks( Books books){
+        books.setAvailability( books.getAvailability() - 1);
+        books.getBooksReservation().setNumber(books.getBooksReservation().getNumber() - 1 );
+        booksService.updateNextDateReturn( books, getNextReturnDate( books ) );
+    }
+
+    private void updateReservation(Books books,Lending lending ){
+        Reservation reservation = reservationService.find( books,lending.getIdUser() );
+        reservation.setState( State.COMPLETED );
+        reservationService.save( reservation );
+    }
+
+    private boolean isLendingPossible(Books books, Long idUser){
+        return books.getAvailability() > 0 && reservationService.positionUser( books.getId(), idUser ) == 1 ;
+    }
+
+    private boolean isLendingPossible( Lending lending ){
+        return isLendingPossible(lending.getBook(), lending.getIdUser() );
+    }
+
+    public boolean isLendingPossible(Long idBooks, Long idUser){
+        return isLendingPossible( booksService.find( idBooks ),  idUser) ;
+    }
+
     /**
      * Permet la création oou la modification d'un emprunt
      * @param lending Entity de l'enmrpunt à créer ou à modifier
      * @return Entity lending
      */
-    public Lending  save(Lending lending){ return lendingRepository.save( lending ); }
+    public Lending save(Lending lending){ return lendingRepository.save( lending ); }
 
     /**
      * Permet l'effacement d'un emprunt
@@ -213,6 +258,10 @@ public class LendingServiceImpl implements ILendingService {
             return true;
         else
             return  false;
+    }
+
+    public Integer getRenewalDay(){
+        return appPropertiesConfig.getRenewalDay();
     }
 
 

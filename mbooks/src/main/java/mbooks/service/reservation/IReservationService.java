@@ -11,6 +11,7 @@ public interface IReservationService {
 
 
     Reservation find(Long id);
+    Reservation find(Books books, Long idUser);
 
     List<Reservation> list();
 

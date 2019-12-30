@@ -9,11 +9,9 @@ public interface IBooksService {
     BookBean find(Long id );
     String getTitle(String id);
     List<BookBean> list();
-    BookBean save(BookBean book);
-    boolean delete(Long id);
 
-    boolean isAvailability(BookBean book);
     BooksState getBooksState(Long idBooks, Long idUser);
+    BookBean save(BookBean book);
 
 
 

@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -27,8 +28,7 @@ public class BooksServiceImpl implements IBooksService {
     @Autowired
     private ILendingService lendingService;
 
-    @Autowired
-    private IBooksReservationService booksReservationService;
+
 
     /**
      * Permet la recherche d'un livre
@@ -61,30 +61,7 @@ public class BooksServiceImpl implements IBooksService {
      * @param book Entity books à créer ou à modifier
      * @return Entity books
      */
-    public Books  save(Books book){ return bookRepository.save( book ); }
-
-    /**
-     * Permet l'effacement d'un livre
-     * @param id Idenitifiant du livre à effacer
-     * @return true si l'effacement a pu se réaliser sinon false
-     */
-    public boolean delete(Long id){
-        try {
-            bookRepository.deleteById( id );
-            return true;
-        }catch (DataIntegrityViolationException ee){
-            return false;
-        }
-    }
-
-    public boolean isAvailability(Long id){
-        Books books = find( id );
-        return books.getAvailability() - books.getBooksReservation().getNumber() > 0;
-    }
-
-    private boolean isAvailability(Books books){
-        return books.getAvailability() > 0;
-    }
+    public Books save(Books book){ return bookRepository.save( book ); }
 
     public BooksState getBooksState(Long idBooks,Long idUser){
         Books books = find( idBooks );
@@ -104,8 +81,17 @@ public class BooksServiceImpl implements IBooksService {
 
     }
 
+    public void updateNextDateReturn(Books book, Date nextReturnDate ){
+        book.getBooksReservation().setNextReturnDate( nextReturnDate  );
+        save( book );
+    }
+
     private boolean isMaxReservation(Books books){
         return books.getBooksReservation().getNumber() >= books.getBooksReservation().getPossible();
+    }
+
+    private boolean isAvailability(Books books){
+        return books.getAvailability() - books.getBooksReservation().getNumber() > 0;
     }
 }
 

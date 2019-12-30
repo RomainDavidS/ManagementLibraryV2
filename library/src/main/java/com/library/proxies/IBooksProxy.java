@@ -3,6 +3,7 @@ package com.library.proxies;
 
 
 import com.library.beans.mbooks.book.BookBean;
+import com.library.beans.mbooks.lending.LendingBean;
 import com.library.technical.state.books.BooksState;
 import org.springframework.cloud.netflix.ribbon.RibbonClient;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -25,13 +26,8 @@ public interface IBooksProxy {
     List<BookBean> list();
 
     @PutMapping("/update")
-    BookBean update( @RequestBody BookBean book);
+    BookBean update(@RequestBody BookBean book);
 
-    @DeleteMapping("/{id}")
-    boolean delete(@PathVariable("id") Long id);
-
-    @GetMapping("/availability/{id}")
-    boolean isAvailable(@PathVariable("id") Long id);
 
     @GetMapping("/state/{idBooks}/{idUser}")
     BooksState getBooksState(@PathVariable("idBooks") Long idBooks, @PathVariable("idUser") Long idUser);

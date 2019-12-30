@@ -1,5 +1,6 @@
 package com.library.technical.function;
 
+import com.library.beans.mbooks.book.AuthorBean;
 import com.library.beans.mbooks.lending.LendingBean;
 import com.library.service.mbooks.lending.ILendingService;
 import com.library.service.users.IUsersService;
@@ -20,6 +21,11 @@ public class LendingFunction {
 
     @Autowired
     private SimpleDate simpleDate;
+
+    public String getAuthorFullName(AuthorBean author){
+        return author.getFirstName() + " " + author .getLastName() ;
+
+    }
 
     public String getDate(Date date){return simpleDate.getDateLow( date ); }
 

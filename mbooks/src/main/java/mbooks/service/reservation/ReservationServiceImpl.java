@@ -47,8 +47,12 @@ public class ReservationServiceImpl implements IReservationService {
 
 
     public Reservation find(Long id){
-        return reservationRepository.findById(id) .orElseThrow(
-                () -> new ResourceNotFoundException("Réservation non trouvée avec l'id " + id ) );
+        return reservationRepository.findById(id) .orElse(null);
+    }
+
+    public Reservation find(Books books, Long idUser){
+        return reservationRepository.findByBookAndAndIdUserReservationAndState(
+                books,idUser,State.INPROGRESS);
     }
 
     public List<Reservation> list(){
@@ -121,10 +125,7 @@ public class ReservationServiceImpl implements IReservationService {
         if(idUser == 0 )
             return false;
 
-        Reservation reservation = reservationRepository.findByBookAndAndIdUserReservationAndState(
-                books,idUser,State.INPROGRESS);
-
-        if ( reservation != null)
+        if ( find( books, idUser) != null)
             return true;
         else
             return false;
@@ -137,12 +138,10 @@ public class ReservationServiceImpl implements IReservationService {
 
         Reservation reservation = firstReservation( books );
 
-        Date now = new Date();
-
-        reservation.setNotificationDate( now );
+        reservation.setNotificationDate(new Date() );
 
         Calendar c = Calendar.getInstance();
-        c.setTime( now );
+        c.setTime( new Date() );
         c.add(Calendar.DAY_OF_MONTH, appPropertiesConfig.getReservationCancellationDay() );
 
        UsersBean usersBean = usersProxy.user(reservation.getIdUserReservation() );

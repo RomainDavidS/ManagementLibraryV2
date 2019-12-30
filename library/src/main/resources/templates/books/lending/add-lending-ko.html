@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      layout:decorate="model/layout">
+
+<head>
+    <title>Ajout d'un emprunt</title>
+</head>
+<body>
+<main role="main" class="container" layout:fragment="content"  >
+
+    <div class="alert alert-info text-center offset-3 col-md-6" role="alert" >
+        L'emprunt ne peut pas être réalisé car le livre n'est plus disponible ou vous n'êtes pas autorisé à enrgistrer cet emprunt.
+    </div>
+    <div class="clearfix d-flex justify-content-center mt-4">
+        <a class="btn btn-outline-info float-right" th:href="@{/lending/all}"  > <span>Retour à la liste des emprunts</span> </a>
+    </div>
+</main>
+
+</body>
+</html>

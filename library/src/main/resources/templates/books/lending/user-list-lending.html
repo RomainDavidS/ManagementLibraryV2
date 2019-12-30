@@ -52,7 +52,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <p class="card-text" th:utext="${'<strong>Titre : </strong>' + b.title }"> </p>
-                                        <p class="card-text" th:utext="${'<strong>Auteur : </strong>' + fn.getFullAuthorName( b.author )  }"> </p>
+                                        <p class="card-text" th:utext="${'<strong>Auteur : </strong>' + fn.getAuthorFullName( b.author )  }"> </p>
                                         <p class="card-text" th:utext="${'<strong>Isbn : </strong>' + b.isbn }"> </p>
                                         <p class="card-text" th:utext="${'<strong>Editeur : </strong>' + b.edition.name }"> </p>
                                     </div>

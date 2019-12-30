@@ -27,11 +27,8 @@ public interface ILendingProxy {
     @GetMapping("/book/{id}")
     List<LendingBean> list(@PathVariable("id") String id);
 
-    @PostMapping("/save")
-    LendingBean save( @RequestBody LendingCreateBean lending);
-
-    @PutMapping("/update")
-    LendingBean update( @RequestBody LendingBean lending);
+    @PostMapping("/save/fromReservation")
+    LendingBean saveFromReservation( @RequestBody LendingCreateBean lending);
 
     @PutMapping("/renewal")
     void renewal(@RequestBody Long id);
@@ -45,5 +42,10 @@ public interface ILendingProxy {
     @GetMapping("/isRenewable/{id}")
     boolean  isRenewable(@PathVariable("id") Long id);
 
+    @GetMapping("/isLendingPossible/{idBooks}/{idUser}")
+    boolean isLendingPossible(@PathVariable("idBooks") Long idBooks, @PathVariable("idUser") Long idUser);
+
+    @GetMapping("/getRenewalDay")
+    Integer getRenewalDay();
 
 }

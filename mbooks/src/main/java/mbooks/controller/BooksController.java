@@ -43,18 +43,11 @@ public class BooksController implements HealthIndicator {
         return booksList;
     }
 
-    @GetMapping("/availability/{id}")
-    public boolean isAvailability( @PathVariable Long id ){
-        return booksService.isAvailability( id );
-    }
 
     @GetMapping("/state/{idBooks}/{idUser}")
     public BooksState getBooksState(@PathVariable Long idBooks, @PathVariable Long idUser){
         return booksService.getBooksState( idBooks, idUser);
-
     }
-
-
 
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.OK)
@@ -62,10 +55,6 @@ public class BooksController implements HealthIndicator {
         return booksService.save( book );
     }
 
-    @DeleteMapping("/{id}")
-    public boolean delete(@PathVariable Long id){
-        return booksService.delete( id );
-    }
 
     @Override
     public Health health() {

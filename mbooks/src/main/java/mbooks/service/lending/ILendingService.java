@@ -3,6 +3,7 @@ package mbooks.service.lending;
 import mbooks.model.Books;
 import mbooks.model.Lending;
 
+import java.util.Date;
 import java.util.List;
 
 public interface ILendingService {
@@ -13,10 +14,16 @@ public interface ILendingService {
     List<Lending> list();
     List<Lending> list(String isbn);
     List<Lending> list(Long idUser);
+    Lending addFromReservation(Lending lending);
     Lending save(Lending lending);
     boolean delete(Long id);
 
     void sendLendingRevival();
     boolean isRenewable(Lending lending);
     boolean isLendingCurrentUser(Books books,Long idUser);
+
+    boolean isLendingPossible(Long idBooks, Long idUser);
+
+    Integer getRenewalDay();
+
 }

@@ -53,23 +53,22 @@ INSERT INTO books(
 INSERT INTO lending(
 	id, end_date, id_user, renewal, return_date, start_date, id_books)
 	VALUES
-	(1, '2019-12-29 14:00:00', 1, 0, null , '2019-12-01 14:00:00', 1),
-	(2, '2019-12-30 14:00:00', 1, 0, null , '2019-12-02 14:00:00', 2);
+	(1, '2019-12-29 14:00:00', -1, 0, null , '2019-12-01 14:00:00', 1),
+	(2, '2019-12-30 14:00:00', -1, 0, null , '2019-12-02 14:00:00', 2);
 
 INSERT INTO reservation(
 	id, id_user_reservation, notification_date, reservation_date, state, id_books)
 	VALUES
-	(-1, 2,  null, '2019-12-16 09:00:00', 'En cours', 1),
-	(-2, 3,  null, '2019-12-16 10:00:00', 'En cours', 1),
-	(-3, 3,  null, '2019-12-16 11:00:00', 'En cours', 2),
-	(-4, 2,  null, '2019-12-16 12:00:00', 'En cours', 2),
-	(-5, 1,  null, '2019-12-15 12:00:00', 'En cours', 3),
-	(-6, 2,  null, '2019-12-16 12:00:00', 'En cours', 3),
-	(-7, 2,  null, '2019-12-15 12:00:00', 'En cours', 4),
-	(-8, 1,  null, '2019-12-16 12:00:00', 'En cours', 4),
-	(-9, 1, '2019-12-05 12:00:00', '2019-12-09 12:00:00', 'En cours', 6),
-	(-10, 2, null, '2019-12-10 12:00:00', 'En cours', 6),
-	(-11, 3, null, '2019-12-11 12:00:00', 'En cours', 6);
+	(-1, -2,  null, '2019-12-16 09:00:00', 'En cours', 1),
+	(-2, -3,  null, '2019-12-16 10:00:00', 'En cours', 1),
+	(-3, -3,  null, '2019-12-16 11:00:00', 'En cours', 2),
+	(-4, -2,  null, '2019-12-16 12:00:00', 'En cours', 2),
+	(-5, -1,  null, '2019-12-15 12:00:00', 'En cours', 3),
+	(-6, -2,  null, '2019-12-16 12:00:00', 'En cours', 3),
+	(-7, -2,  null, '2019-12-15 12:00:00', 'En cours', 4),
+	(-9, -1, '2019-12-05 12:00:00', '2019-12-09 12:00:00', 'En cours', 6),
+	(-10, -2, null, '2019-12-10 12:00:00', 'En cours', 6),
+	(-11, -3, null, '2019-12-11 12:00:00', 'En cours', 6);
 
 INSERT INTO email (id, name,subject,content)
 VALUES

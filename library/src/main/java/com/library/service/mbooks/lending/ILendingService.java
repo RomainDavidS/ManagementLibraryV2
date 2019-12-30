@@ -17,8 +17,8 @@ public interface ILendingService {
     List<LendingBean> list(String isbn);
     List<LendingBean> list(Long idUser);
 
-    LendingBean save(LendingCreateBean lending);
-    LendingBean save(LendingBean lending);
+    LendingBean saveFromReservation(Long idReservation);
+
 
     boolean delete(Long id);
 
@@ -29,6 +29,7 @@ public interface ILendingService {
     boolean isReturn( LendingBean lending );
 
     boolean isRenewable(LendingBean lending);
+    boolean isLendingPossible( Long idBooks,  Long idUser);
     String renewalDate(Date date);
     String getEndDate(Date date);
 

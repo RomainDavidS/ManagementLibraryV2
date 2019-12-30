@@ -3,9 +3,11 @@ package com.library.controller;
 
 import com.library.beans.mbooks.lending.LendingBean;
 import com.library.beans.mbooks.lending.LendingCreateBean;
+import com.library.beans.mbooks.reservation.ReservationBean;
 import com.library.config.ApplicationPropertiesConfig;
 import com.library.service.mbooks.books.IBooksService;
 import com.library.service.mbooks.lending.ILendingService;
+import com.library.service.mbooks.reservation.IReservationService;
 import com.library.service.users.IUsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,8 +30,6 @@ public class LendingController  {
 
     @Autowired
     private IUsersService usersService;
-    @ModelAttribute
-    public LendingCreateBean lendingCreateBean(){return new  LendingCreateBean();}
 
 
     @Autowired
@@ -143,54 +143,26 @@ public class LendingController  {
             return "error/not-found";
         }
         model.addAttribute( lendingBeanList );
-        return "user-list-lending";
+        return "books/lending/user-list-lending";
     }
 
 
     @GetMapping("/info/{id}")
     public String info(@PathVariable("id") long id, Model model){
         model.addAttribute( "idLending", id);
-
-
-
         return "books/lending/info-lending";
     }
 
-    @GetMapping("/add")
-    public String add(Model model){return "books/lending/add-lending";}
-
-    @PostMapping("/save")
-    public String save(@ModelAttribute @Valid LendingCreateBean lendingCreateBean, BindingResult result, Model model){
-
-
-
-        if ( result.hasErrors() )
-            return "books/lending/add-lending";
-
-
-        return "redirect:/lending/info/" + lendingService.save( lendingCreateBean ).getId();
-
+    @GetMapping("/add/fromReservation/{id}")
+    public String addFromReservation(@PathVariable("id") long id,Model model){
+       if( lendingService.saveFromReservation( id )!=null && usersService.isAdmin() )
+           return  "redirect:/lending/all";
+       else
+           return "/books/lending/add-lending-ko";
     }
 
-    @GetMapping("/edit/{id}")
-    public String edit(@PathVariable("id") Long id, Model model){
 
-        LendingBean lendingBean = lendingService.find( id );
 
-        model.addAttribute( lendingBean);
-
-        return "/books/lending/update-lending";
-
-    }
-
-    @PostMapping("/update/{id}")
-    public String update(@PathVariable("id") Long id, @Valid LendingBean lendingBean, BindingResult result){
-        if ( result.hasErrors() )
-            return "/books/lending/lending-book";
-
-        return "redirect:/book/info/" + lendingService.save( lendingBean ).getId();
-
-    }
 
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable("id") long id,Model model)  {
@@ -200,6 +172,6 @@ public class LendingController  {
         else
             model.addAttribute("delete","err");
 
-        return "user-list-lending";
+        return "/books/lending/user-list-lending";
     }
 }

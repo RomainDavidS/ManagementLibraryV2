@@ -17,6 +17,10 @@ public class BooksServiceImpl implements IBooksService {
 
 
 
+    public BookBean save(BookBean book){
+       return booksProxy.update( book );
+    }
+
     /**
      * Permet la recherche d'un livre
      * @param id Identifiant du livre à rechercher
@@ -58,36 +62,10 @@ public class BooksServiceImpl implements IBooksService {
     }
 
 
-    /**
-     * Permet la modification d'un livre
-     * @param book Entity à modifier
-     * @return Entity bookbean
-     */
-    public BookBean save(BookBean book){
-        return booksProxy.update( book );
-    }
-
-    /**
-     * Permet l'effacement d'un livre
-     * @param id Identifiant du livre à effacer
-     * @return true si l'effacement à pu se réaliser sinon false
-     */
-    public boolean delete(Long id){
-        return booksProxy.delete( id );
-    }
-
-    /**
-     * Vérification de l disponibilité d'un livre
-     * @param book Livre à vérifier
-     * @return true si le livre est encore disponible sinon false
-     */
-    public boolean isAvailability(BookBean book){
-        return booksProxy.isAvailable( book.getId() );
-    }
 
     public BooksState getBooksState(Long idBooks, Long idUser){
         if( idUser == null)
-            idUser = Long.valueOf( 0);
+            idUser = 0L;
 
         return  booksProxy.getBooksState( idBooks, idUser );
     }

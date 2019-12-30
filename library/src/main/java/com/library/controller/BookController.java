@@ -57,8 +57,6 @@ public class BookController  {
 
 
 
-
-
     @PostMapping("/update/{id}")
     public String update(@PathVariable("id") Long id, @Valid BookBean bookBean, BindingResult result){
         if ( result.hasErrors() )

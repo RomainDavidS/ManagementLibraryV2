@@ -1,12 +1,15 @@
 package com.library.service.mbooks.lending;
 import com.library.beans.mbooks.lending.LendingBean;
 import com.library.beans.mbooks.lending.LendingCreateBean;
+import com.library.beans.mbooks.reservation.ReservationBean;
 import com.library.exception.ResourceNotFoundException;
 import com.library.proxies.ILendingProxy;
+import com.library.service.mbooks.reservation.IReservationService;
 import com.library.technical.date.SimpleDate;
 import feign.RetryableException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -20,11 +23,10 @@ public class LendingServiceImpl implements ILendingService {
     private ILendingProxy lendingProxy;
 
     @Autowired
+    private IReservationService reservationService;
+
+    @Autowired
     private SimpleDate simpleDate;
-
-
-
-
 
     /**
      * Permet de faire le renouvellement de l'emprunt
@@ -97,22 +99,19 @@ public class LendingServiceImpl implements ILendingService {
 
     }
 
-    /**
-     * Permet la création d'un emprunt
-     * @param lending Entity à créer
-     * @return Entity lendingbean
-     */
-    public LendingBean save(LendingCreateBean lending){
-        return lendingProxy.save( lending );
+    public LendingBean saveFromReservation(Long idReservation){
+        return lendingProxy.saveFromReservation(setCreateLending( idReservation) );
+    }
+    private LendingCreateBean setCreateLending(Long idReservation){
+        ReservationBean reservation = reservationService.find( idReservation );
+        LendingCreateBean lending = new LendingCreateBean( );
+        lending.setIdUser( reservation.getIdUserReservation() );
+        lending.setBook( reservation.getBook() );
+        return  lending ;
     }
 
-    /**
-     * Permet la modification d'un emprunt
-     * @param lending Entity à modifier
-     * @return Entity lendingbean
-     */
-    public LendingBean save(LendingBean lending){
-        return lendingProxy.update( lending );
+    public boolean isLendingPossible( Long idBooks,  Long idUser){
+        return lendingProxy.isLendingPossible( idBooks,idUser );
     }
 
     /**
@@ -191,7 +190,7 @@ public class LendingServiceImpl implements ILendingService {
     public String renewalDate(Date date){
         Calendar c = Calendar.getInstance();
         c.setTime( date );
-      //  c.add(Calendar.DAY_OF_MONTH, booksPropertiesProxy.getRenewalDay() );
+        c.add(Calendar.DAY_OF_MONTH, lendingProxy.getRenewalDay() );
         return simpleDate.getDateLow( c.getTime() );
     }
 
