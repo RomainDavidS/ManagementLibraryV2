@@ -20,8 +20,6 @@ public interface ILendingService {
     LendingBean saveFromReservation(Long idReservation);
 
 
-    boolean delete(Long id);
-
     String getDate(Date date);
 
     boolean isInProgress( LendingBean lending );

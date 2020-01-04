@@ -106,7 +106,7 @@ public class BooksRepositoryIntegrationTest {
 
     private Books createTestBooks(String isbn) {
 
-        Language language =languageRepository.getOne(1L);
+        Language language = languageRepository.getOne(1L);
         Author author = authorRepository.getOne(1L);
         Theme theme = themeRepository.getOne(1L);
         Edition edition = editionRepository.getOne(1L);

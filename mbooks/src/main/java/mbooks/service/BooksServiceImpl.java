@@ -36,8 +36,7 @@ public class BooksServiceImpl implements IBooksService {
      * @return Entity books
      */
     public Books find(Long id){
-        return bookRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Livre non trouvé avec l'id " + id ) );
+        return bookRepository.findById(id).orElse(null);
     }
     /**
      * Permet la recherche d'un livre

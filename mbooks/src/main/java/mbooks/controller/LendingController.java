@@ -93,10 +93,6 @@ public class LendingController   {
     @ResponseStatus(HttpStatus.OK)
     public void returnBook(@RequestBody Long id){ lendingService.returnBook(id ); }
 
-    @DeleteMapping("/{id}")
-    public boolean delete(@PathVariable Long id){
-        return lendingService.delete( id );
-    }
 
     @GetMapping("/sendRevival")
     public String sendRevival() {

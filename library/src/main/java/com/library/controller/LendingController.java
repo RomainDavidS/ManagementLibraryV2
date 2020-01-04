@@ -161,14 +161,5 @@ public class LendingController  {
     }
 
 
-    @GetMapping("/delete/{id}")
-    public String delete(@PathVariable("id") long id,Model model)  {
 
-        if ( lendingService.delete( id ) )
-            model.addAttribute("delete","delete");
-        else
-            model.addAttribute("delete","err");
-
-        return "/books/lending/user-list-lending";
-    }
 }

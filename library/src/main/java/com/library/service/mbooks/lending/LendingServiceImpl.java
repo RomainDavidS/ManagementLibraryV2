@@ -114,14 +114,6 @@ public class LendingServiceImpl implements ILendingService {
         return lendingProxy.isLendingPossible( idBooks,idUser );
     }
 
-    /**
-     * Permet m'effacement d'un emprunt
-     * @param id Identifiant de l'emprunt à effacer
-     * @return true si l'effacement à pu se réaliser sinon false
-     */
-    public boolean delete(Long id){
-        return lendingProxy.delete( id );
-    }
 
     /**
      * Permet la mise en forme d'une date

@@ -36,9 +36,6 @@ public interface ILendingProxy {
     @PutMapping("/return")
     void returnBook(@RequestBody Long id);
 
-    @DeleteMapping("/{id}")
-    boolean delete(@PathVariable("id") Long id);
-
     @GetMapping("/isRenewable/{id}")
     boolean  isRenewable(@PathVariable("id") Long id);
 

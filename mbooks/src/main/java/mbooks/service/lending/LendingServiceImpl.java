@@ -3,7 +3,6 @@ package mbooks.service.lending;
 
 import mbooks.beans.musers.user.UsersBean;
 import mbooks.config.ApplicationPropertiesConfig;
-import mbooks.exceptions.ResourceNotFoundException;
 import mbooks.model.Books;
 import mbooks.model.Lending;
 import mbooks.model.Reservation;
@@ -16,7 +15,6 @@ import mbooks.technical.date.SimpleDate;
 import mbooks.technical.email.EmailWrapper;
 import mbooks.technical.state.reservation.State;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -86,8 +84,7 @@ public class LendingServiceImpl implements ILendingService {
      * @return Entity lending si existant
      */
     public Lending find(Long id){
-        return lendingRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Prêt non trouvé avec l'id " + id ) );
+        return lendingRepository.findById(id).orElse(null);
     }
 
     /**
@@ -167,19 +164,7 @@ public class LendingServiceImpl implements ILendingService {
      */
     public Lending save(Lending lending){ return lendingRepository.save( lending ); }
 
-    /**
-     * Permet l'effacement d'un emprunt
-     * @param id Identifiant del'emprunt à effacer
-     * @return true si l'effacement a pu se réaliser sinon false
-     */
-    public boolean delete(Long id){
-        try {
-            lendingRepository.deleteById( id );
-            return true;
-        }catch (DataIntegrityViolationException ee){
-            return false;
-        }
-    }
+
 
     /**
      * Permet de vérifier si l'emprunt est en cours

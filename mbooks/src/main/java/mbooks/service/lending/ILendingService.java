@@ -16,7 +16,6 @@ public interface ILendingService {
     List<Lending> list(Long idUser);
     Lending addFromReservation(Lending lending);
     Lending save(Lending lending);
-    boolean delete(Long id);
 
     void sendLendingRevival();
     boolean isRenewable(Lending lending);
