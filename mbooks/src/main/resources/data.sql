@@ -20,14 +20,14 @@ VALUES
 (2,'Hachette'),
 (3,'Les auteurs réunis');
 
-INSERT INTO "theme" (id, value)
+INSERT INTO theme (id, value)
 VALUES
 (1,'Policier'),
 (2,'Cuisine'),
 (3,'Informatique');
 
 INSERT INTO books_reservation(
-	id, next_return_date, "number", possible)
+	id, next_return_date, number, possible)
 	VALUES
 	(1, null ,0, 60),
 	(2,'2019-12-29 14:00:00' , 2, 60),
