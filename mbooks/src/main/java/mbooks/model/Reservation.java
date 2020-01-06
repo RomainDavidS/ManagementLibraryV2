@@ -32,6 +32,7 @@ public @Data class Reservation {
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date notificationDate;
 
+    @NonNull
     private State state;
 
     @ManyToOne

@@ -52,7 +52,7 @@ public class LendingRepositoryIntegrationTest {
     }
 
     @Test
-    public void whenInvalidIsbn_thenReturnNull() {
+    public void whenInvalidId_thenReturnNull() {
         Lending fromDb = lendingRepository.findById(-1L).orElse(null);
         assertThat(fromDb).isNull();
     }
@@ -179,8 +179,7 @@ public class LendingRepositoryIntegrationTest {
 
     @Test
     public void whenSaveLending_thenReturnLending() {
-        Lending lending = new Lending(1L,booksRepository.getOne(-1L ) );
-        lendingRepository.save( lending );
+        Lending lending = lendingRepository.save(new Lending(1L,booksRepository.getOne(-1L ) ) );
         Lending fromDb = lendingRepository.findById( lending.getId() ).orElse(null);
         assertThat(fromDb.getId() ).isEqualTo( lending.getId() );
     }
