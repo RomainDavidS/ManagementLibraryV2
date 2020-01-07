@@ -1,28 +1,14 @@
 package mbooks.controller;
 
-import lombok.NonNull;
+
 import mbooks.controller.dto.lending.LendingCreateDto;
-import mbooks.controller.dto.lending.LendingUpdateDto;
 import mbooks.exceptions.ResourceNotFoundException;
-import mbooks.model.Books;
 import mbooks.model.Lending;
 import mbooks.service.lending.ILendingService;
 import mbooks.technical.dto.DTO;
-import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.actuate.health.Health;
-import org.springframework.boot.actuate.health.HealthIndicator;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
-
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import java.net.SocketTimeoutException;
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -68,7 +54,6 @@ public class LendingController   {
     }
 
     @GetMapping("/book/{id}")
-    @ResponseStatus(HttpStatus.NOT_FOUND)
     public List<Lending> list(@PathVariable String id){
 
         List<Lending> lendingList = lendingService.list( id );
@@ -78,7 +63,6 @@ public class LendingController   {
     }
 
     @PostMapping("/save/fromReservation")
-    @ResponseStatus(HttpStatus.OK)
     public Lending saveFromReservation(@DTO(LendingCreateDto.class) @RequestBody Lending lending)  {
         return lendingService.addFromReservation( lending );
     }
@@ -93,13 +77,6 @@ public class LendingController   {
     @ResponseStatus(HttpStatus.OK)
     public void returnBook(@RequestBody Long id){ lendingService.returnBook(id ); }
 
-
-    @GetMapping("/sendRevival")
-    public String sendRevival() {
-            lendingService.sendLendingRevival();
-            return "Les mails ont été envoyés";
-
-    }
     @GetMapping("/getRenewalDay")
     public Integer getRenewalDay(){
         return lendingService.getRenewalDay();

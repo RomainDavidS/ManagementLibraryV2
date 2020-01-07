@@ -58,8 +58,7 @@ public class UsersControllerIntegrationTest {
         mvc.perform(get("/user/byEmail/"+ john.getEmail()).contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(
-                        content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect( content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.lastName", is("john")));
     }
 

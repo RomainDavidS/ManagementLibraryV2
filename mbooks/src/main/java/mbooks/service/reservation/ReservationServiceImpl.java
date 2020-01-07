@@ -74,9 +74,10 @@ public class ReservationServiceImpl implements IReservationService {
 
     private Reservation firstReservation(Books books){
         List<Reservation> reservationList = reservationRepository.findAllByBookAndStateAndNotificationDateIsNullOrderByReservationDateAsc(books, State.INPROGRESS);
+        if (reservationList.isEmpty() )
+            return null;
 
         return reservationList.get( 0 );
-
     }
 
     public Integer positionUser(Long idBook , Long idUserReservation){
@@ -137,23 +138,24 @@ public class ReservationServiceImpl implements IReservationService {
     public void sendReturnInfo(Books books,Date dateReturn ){
 
         Reservation reservation = firstReservation( books );
+        if( reservation !=null ) {
+            reservation.setNotificationDate(new Date());
 
-        reservation.setNotificationDate(new Date() );
+            Calendar c = Calendar.getInstance();
+            c.setTime(new Date());
+            c.add(Calendar.DAY_OF_MONTH, appPropertiesConfig.getReservationCancellationDay());
 
-        Calendar c = Calendar.getInstance();
-        c.setTime( new Date() );
-        c.add(Calendar.DAY_OF_MONTH, appPropertiesConfig.getReservationCancellationDay() );
+            UsersBean usersBean = usersProxy.user(reservation.getIdUserReservation());
 
-       UsersBean usersBean = usersProxy.user(reservation.getIdUserReservation() );
+            EmailReturnWrapper email = new EmailReturnWrapper(
+                    usersBean.getEmail(), reservation.getBook().getTitle(),
+                    simpleDate.getDate(c.getTime()), simpleDate.getDate(dateReturn));
 
-        EmailReturnWrapper email = new EmailReturnWrapper(
-                usersBean.getEmail(), reservation.getBook().getTitle(),
-                simpleDate.getDate(c.getTime() ),simpleDate.getDate( dateReturn ) ) ;
-
-        reservationRepository.save( reservation );
+            reservationRepository.save(reservation);
 
 
-        emailService.sendReturn( email );
+            emailService.sendReturn(email);
+        }
 
     }
 

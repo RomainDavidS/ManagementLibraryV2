@@ -69,8 +69,6 @@ public class LendingRepositoryIntegrationTest {
         assertThat(fromDb.getId() ).isEqualTo( lending.getId() );
     }
 
-
-
     @Test
     public void whenFindByReturnDateIsNullAndBookAndIdUserInvalid_thenReturnNull() {
         Lending fromDb = lendingRepository.findByReturnDateIsNullAndBookAndIdUser( null, 5L );

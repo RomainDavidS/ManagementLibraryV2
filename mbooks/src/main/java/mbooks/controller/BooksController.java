@@ -1,6 +1,5 @@
 package mbooks.controller;
 
-
 import mbooks.controller.dto.books.BooksUpdateDto;
 import mbooks.exceptions.ResourceNotFoundException;
 import mbooks.model.Books;
@@ -11,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.health.Health;
 import org.springframework.boot.actuate.health.HealthIndicator;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -43,8 +43,7 @@ public class BooksController implements HealthIndicator {
         return booksList;
     }
 
-
-    @GetMapping("/state/{idBooks}/{idUser}")
+    @GetMapping( "/state/{idBooks}/{idUser}")
     public BooksState getBooksState(@PathVariable Long idBooks, @PathVariable Long idUser){
         return booksService.getBooksState( idBooks, idUser);
     }

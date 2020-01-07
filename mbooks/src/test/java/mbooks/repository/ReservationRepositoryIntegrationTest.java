@@ -45,7 +45,7 @@ public class ReservationRepositoryIntegrationTest {
 
     @Test
     public void whenSaveReservation_thenReturnReservation() {
-        Reservation reservation = reservationRepository.save( createReserevationTest() );
+        Reservation reservation = reservationRepository.save( createReservationTest() );
         Reservation fromDb = reservationRepository.findById( reservation.getId() ).orElse(null);
         assertThat(fromDb.getId() ).isEqualTo( reservation.getId() );
     }
@@ -53,7 +53,7 @@ public class ReservationRepositoryIntegrationTest {
     @Test
     public void whenFindById_thenReturnReservation() {
 
-        Reservation reservation = createReserevationTest();
+        Reservation reservation = createReservationTest();
 
         entityManager.persistAndFlush(reservation);
 
@@ -69,7 +69,7 @@ public class ReservationRepositoryIntegrationTest {
 
     @Test
     public void whenFindByBookAndAndIdUserReservationAndState_thenReturnReservation() {
-        Reservation reservation = createReserevationTest();
+        Reservation reservation = createReservationTest();
         entityManager.persistAndFlush(reservation);
         Reservation fromDb = reservationRepository.findByBookAndAndIdUserReservationAndState( reservation.getBook(),reservation.getIdUserReservation(),reservation.getState() );
         assertThat(fromDb.getId() ).isEqualTo( reservation.getId() );
@@ -84,9 +84,9 @@ public class ReservationRepositoryIntegrationTest {
     @Test
     public void givenSetOfReservation_whenFindAll_thenReturnAllReservation() {
 
-        Reservation reservation1 = createReserevationTest();
-        Reservation reservation2 = createReserevationTest();
-        Reservation reservation3 = createReserevationTest();
+        Reservation reservation1 = createReservationTest();
+        Reservation reservation2 = createReservationTest();
+        Reservation reservation3 = createReservationTest();
 
         entityManager.persist(reservation1);
         entityManager.persist(reservation2);
@@ -102,9 +102,9 @@ public class ReservationRepositoryIntegrationTest {
     @Test
     public void givenSetOfReservation_whenFindAllByIdUserReservationOrderByReservationDateAsc_thenReturnAllReservation() {
 
-        Reservation reservation1 = createReserevationTest();
-        Reservation reservation2 = createReserevationTest();
-        Reservation reservation3 = createReserevationTest();
+        Reservation reservation1 = createReservationTest();
+        Reservation reservation2 = createReservationTest();
+        Reservation reservation3 = createReservationTest();
 
         entityManager.persist(reservation1);
         entityManager.persist(reservation2);
@@ -120,9 +120,9 @@ public class ReservationRepositoryIntegrationTest {
     @Test
     public void givenSetOfReservation_whenFindAllByBookAndStateOrderByReservationDateAsc_thenReturnAllReservation() {
 
-        Reservation reservation1 = createReserevationTest();
-        Reservation reservation2 = createReserevationTest();
-        Reservation reservation3 = createReserevationTest();
+        Reservation reservation1 = createReservationTest();
+        Reservation reservation2 = createReservationTest();
+        Reservation reservation3 = createReservationTest();
 
         entityManager.persist(reservation1);
         entityManager.persist(reservation2);
@@ -137,9 +137,9 @@ public class ReservationRepositoryIntegrationTest {
     @Test
     public void givenSetOfReservation_whenFindAllByBookOrderByReservationDateAsc_thenReturnAllReservation() {
 
-        Reservation reservation1 = createReserevationTest();
-        Reservation reservation2 = createReserevationTest();
-        Reservation reservation3 = createReserevationTest();
+        Reservation reservation1 = createReservationTest();
+        Reservation reservation2 = createReservationTest();
+        Reservation reservation3 = createReservationTest();
 
         entityManager.persist(reservation1);
         entityManager.persist(reservation2);
@@ -155,9 +155,9 @@ public class ReservationRepositoryIntegrationTest {
     @Test
     public void givenSetOfReservation_whenFindAllByBookAndStateAndNotificationDateIsNullOrderByReservationDateAsc_thenReturnAllReservation() {
 
-        Reservation reservation1 = createReserevationTest();
-        Reservation reservation2 = createReserevationTest();
-        Reservation reservation3 = createReserevationTest();
+        Reservation reservation1 = createReservationTest();
+        Reservation reservation2 = createReservationTest();
+        Reservation reservation3 = createReservationTest();
 
         entityManager.persist(reservation1);
         entityManager.persist(reservation2);
@@ -177,11 +177,11 @@ public class ReservationRepositoryIntegrationTest {
         c.setTime( new Date() );
         c.add(Calendar.DAY_OF_MONTH, -3 );
 
-        Reservation reservation1 = createReserevationTest();
+        Reservation reservation1 = createReservationTest();
         reservation1.setNotificationDate( c.getTime() );
-        Reservation reservation2 = createReserevationTest();
+        Reservation reservation2 = createReservationTest();
         reservation2.setNotificationDate( c.getTime() );
-        Reservation reservation3 = createReserevationTest();
+        Reservation reservation3 = createReservationTest();
         reservation3.setNotificationDate( c.getTime() );
 
         entityManager.persist(reservation1);
@@ -196,7 +196,7 @@ public class ReservationRepositoryIntegrationTest {
     }
 
 
-    private Reservation createReserevationTest(){
+    private Reservation createReservationTest(){
         return new Reservation(1L, State.INPROGRESS,booksRepository.getOne(-1L ) );
     }
 

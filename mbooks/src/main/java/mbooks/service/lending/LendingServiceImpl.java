@@ -63,7 +63,8 @@ public class LendingServiceImpl implements ILendingService {
 
     public void returnBook(Long id){
         Lending lending = find( id );
-        if( lending.getReturnDate() == null ){
+
+        if(  lending.getReturnDate() == null ){
             Date now = new Date();
             lending.setReturnDate( now );
             lendingRepository.save( lending );
@@ -74,8 +75,13 @@ public class LendingServiceImpl implements ILendingService {
     }
 
     private Date getNextReturnDate( Books book ){
-        Lending lending = lendingRepository.findAllByBookAndReturnDateIsNullOrderByReturnDateAsc( book ).get( 0 );
-        return lending.getBook().getBooksReservation().getNextReturnDate();
+
+        List<Lending> lendingList = lendingRepository.findAllByBookAndReturnDateIsNullOrderByReturnDateAsc( book );
+
+        if (lendingList.isEmpty() )
+            return null;
+
+        return lendingList.get( 0 ).getBook().getBooksReservation().getNextReturnDate();
     }
 
     /**
@@ -149,7 +155,7 @@ public class LendingServiceImpl implements ILendingService {
     }
 
     private boolean isLendingPossible(Books books, Long idUser){
-        return books.getAvailability() > 0 && reservationService.positionUser( books.getId(), idUser ) == 1 && ! isLendingCurrentUser( books, idUser);
+        return books.getAvailability() > 0 && reservationService.positionUser( books.getId(), idUser ) == 1 &&  !isLendingCurrentUser( books, idUser);
     }
 
     public boolean isLendingPossible( Long idBooks, Long idUser){
@@ -208,6 +214,7 @@ public class LendingServiceImpl implements ILendingService {
      * @return true si le renouvellement est encore possible sinon false
      */
     public boolean isRenewable(Lending lending){
+
         return ( lending.getRenewal() < appPropertiesConfig.getRenewalNumber() && isInProgress( lending ) );
     }
 

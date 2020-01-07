@@ -57,16 +57,6 @@ public class BookController  {
 
 
 
-    @PostMapping("/update/{id}")
-    public String update(@PathVariable("id") Long id, @Valid BookBean bookBean, BindingResult result){
-        if ( result.hasErrors() )
-            return "/books/book/update-book";
-
-        return "redirect:/book/info/" + booksService.save( bookBean ).getId();
-
-    }
-
-
     @RequestMapping(value = "/bookList", method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
     public List<BookBean> bookBeanList(@RequestParam("term") String term,Model model){

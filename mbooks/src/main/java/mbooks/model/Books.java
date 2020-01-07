@@ -1,18 +1,19 @@
 package mbooks.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
 
 @NoArgsConstructor
 @RequiredArgsConstructor
 @Entity
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = "isbn"))
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public @Data class Books {
 
     @Id
