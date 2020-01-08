@@ -3,7 +3,6 @@ package mbooks.service.reservation;
 
 import mbooks.beans.musers.user.UsersBean;
 import mbooks.config.ApplicationPropertiesConfig;
-import mbooks.exceptions.ResourceNotFoundException;
 import mbooks.model.Books;
 import mbooks.model.Reservation;
 import mbooks.proxies.IUsersProxy;
@@ -14,7 +13,6 @@ import mbooks.technical.date.SimpleDate;
 import mbooks.technical.email.EmailReturnWrapper;
 import mbooks.technical.state.reservation.State;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
@@ -39,9 +37,6 @@ public class ReservationServiceImpl implements IReservationService {
 
     @Autowired
     private IEmailService emailService;
-
-    @Autowired
-    public JavaMailSender emailSender;
 
     @Autowired
     private IUsersProxy usersProxy;

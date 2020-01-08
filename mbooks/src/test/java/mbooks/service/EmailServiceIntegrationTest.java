@@ -1,7 +1,6 @@
 package mbooks.service;
 
 
-import mbooks.MbooksApplication;
 import mbooks.SmtpServerRule;
 import mbooks.model.Email;
 import mbooks.repository.IEmailRepository;
@@ -17,27 +16,21 @@ import org.mockito.Mockito;
 import org.mockito.internal.verification.VerificationModeFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.mail.*;
 import javax.mail.internet.MimeMessage;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringRunner.class)
 @TestPropertySource(locations = "classpath:application-test.properties")
@@ -88,19 +81,13 @@ public class EmailServiceIntegrationTest {
         sender.setProtocol( smtp );
         sender.setDefaultEncoding( defaultEncoding);
 
-
         Email email1 = createEmailTest( "email1" );
-        Email email2 = createEmailTest( "email2" );
-        Email email3 = createEmailTest( "email3" );
         Email relance = createEmailRevivalTest();
         Email retour = createEmailReturnTest();
-
-        List<Email> emailList = Arrays.asList(email1, email2, email3);
 
         Mockito.when(emailRepository.findByName( email1.getName() ) ).thenReturn( email1  );
         Mockito.when(emailRepository.findByName( relance.getName() ) ).thenReturn( relance  );
         Mockito.when(emailRepository.findByName( retour.getName() ) ).thenReturn( retour  );
-        Mockito.when(emailRepository.findAll()).thenReturn(emailList);
         Mockito.when(emailRepository.findByName("InvalidName")).thenReturn( null );
 
     }
@@ -139,8 +126,6 @@ public class EmailServiceIntegrationTest {
 
         assertEquals(emailReturnWrapper.getEmail(), current.getAllRecipients()[0].toString());
     }
-
-
 
     @Test
     public void whenValidName_thenEmailShouldBeFound() {

@@ -70,7 +70,9 @@ public class LendingServiceImpl implements ILendingService {
             lending.setReturnDate( now );
             lendingRepository.save( lending );
             reservationService.sendReturnInfo( lending.getBook() , now );
-            booksService.updateNextDateReturn( lending.getBook(), getNextReturnDate( lending.getBook() ) );
+
+            lending.getBook().getBooksReservation().setNextReturnDate( getNextReturnDate( lending.getBook() )  );
+            booksService.save( lending.getBook() );
 
         }
     }
@@ -146,7 +148,8 @@ public class LendingServiceImpl implements ILendingService {
     private void updateBooks( Books books){
         books.setAvailability( books.getAvailability() - 1);
         books.getBooksReservation().setNumber(books.getBooksReservation().getNumber() - 1 );
-        booksService.updateNextDateReturn( books, getNextReturnDate( books ) );
+        books.getBooksReservation().setNextReturnDate( getNextReturnDate( books )  );
+        booksService.save( books );
     }
 
     private void updateReservation(Books books,Lending lending ){

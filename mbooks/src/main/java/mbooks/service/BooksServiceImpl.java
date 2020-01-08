@@ -1,16 +1,12 @@
 package mbooks.service;
 
 
-import mbooks.exceptions.ResourceNotFoundException;
 import mbooks.model.Books;
-import mbooks.model.BooksReservation;
-import mbooks.model.Reservation;
 import mbooks.repository.IBooksRepository;
 import mbooks.service.lending.ILendingService;
 import mbooks.service.reservation.IReservationService;
 import mbooks.technical.state.books.BooksState;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -80,10 +76,7 @@ public class BooksServiceImpl implements IBooksService {
 
     }
 
-    public void updateNextDateReturn(Books book, Date nextReturnDate ){
-        book.getBooksReservation().setNextReturnDate( nextReturnDate  );
-        save( book );
-    }
+
 
     private boolean isMaxReservation(Books books){
         return books.getBooksReservation().getNumber() >= books.getBooksReservation().getPossible();

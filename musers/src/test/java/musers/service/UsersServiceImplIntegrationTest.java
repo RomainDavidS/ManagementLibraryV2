@@ -83,11 +83,12 @@ public class UsersServiceImplIntegrationTest {
     }
 
     @Test
-    public void whenInValidId_thenUsersShouldNotBeFound() {
+    public void whenInvalidId_thenUsersShouldNotBeFound() {
         Users fromDb = usersService.findUser(-99L);
         verifyFindByIdIsCalledOnce();
         assertThat(fromDb).isNull();
     }
+
     @Test
     public void givenUserName_whenGetUserName_thenReturnUserName(){
         Users fromDb = usersService.findUser(11L);
