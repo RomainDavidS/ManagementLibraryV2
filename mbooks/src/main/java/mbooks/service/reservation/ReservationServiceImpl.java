@@ -63,7 +63,7 @@ public class ReservationServiceImpl implements IReservationService {
         return reservationRepository.findAllByBookOrderByReservationDateAsc( books);
     }
 
-    public List<Reservation> listInProgress(Books books){
+    private List<Reservation> listInProgress(Books books){
 
         return reservationRepository.findAllByBookAndStateOrderByReservationDateAsc(books, State.INPROGRESS);
     }
@@ -156,12 +156,7 @@ public class ReservationServiceImpl implements IReservationService {
     }
 
 
-    public List<Reservation> getReservationToCancel(){
-        Calendar c = Calendar.getInstance();
-        c.setTime( new Date() );
-        c.add(Calendar.DAY_OF_MONTH, -appPropertiesConfig.getReservationCancellationDay() );
-        return reservationRepository.findAllByStateAndNotificationDateIsNotNullAndNotificationDateBefore(State.INPROGRESS, c.getTime() );
-    }
+
 
 
 

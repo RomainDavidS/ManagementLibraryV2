@@ -24,6 +24,6 @@ public interface ILendingService {
 
     boolean isLendingPossible(Long idBooks, Long idUser);
 
-    Integer getRenewalDay();
+
 
 }

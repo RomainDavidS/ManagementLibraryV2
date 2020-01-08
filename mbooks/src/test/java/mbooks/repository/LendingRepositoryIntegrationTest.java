@@ -182,4 +182,38 @@ public class LendingRepositoryIntegrationTest {
         assertThat(fromDb.getId() ).isEqualTo( lending.getId() );
     }
 
+    @Test
+    public void givenSetOfLending_whenFindByReturnDateIsNullAndBookAndIdUser_thenReturnTrue() {
+        Books books = booksRepository.getOne(-1L );
+        Calendar c = Calendar.getInstance();
+        c.setTime( new Date() );
+        c.add(Calendar.DAY_OF_MONTH, -1 );
+
+
+        Lending lending1 = new Lending(1L,books );
+        lending1.setEndDate( c.getTime() );
+        entityManager.persistAndFlush( lending1 );
+
+        Lending fromDb = lendingRepository.findByReturnDateIsNullAndBookAndIdUser(books,1L);
+
+        assertThat(fromDb.getId() ).isEqualTo(lending1.getId() );
+
+    }
+    @Test
+    public void givenSetOfLending_whenFindByReturnDateIsNullAndBookAndIdUser_thenReturnFalse() {
+        Books books = booksRepository.getOne(-1L );
+        Calendar c = Calendar.getInstance();
+        c.setTime( new Date() );
+        c.add(Calendar.DAY_OF_MONTH, -1 );
+
+
+        Lending lending1 = new Lending(1L,books );
+        lending1.setEndDate( c.getTime() );
+        entityManager.persistAndFlush( lending1 );
+
+        Lending fromDb = lendingRepository.findByReturnDateIsNullAndBookAndIdUser(books,2L);
+
+        assertThat( fromDb ).isNull();
+
+    }
 }

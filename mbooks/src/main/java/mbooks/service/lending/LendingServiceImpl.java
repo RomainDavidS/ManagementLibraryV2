@@ -253,9 +253,7 @@ public class LendingServiceImpl implements ILendingService {
             return  false;
     }
 
-    public Integer getRenewalDay(){
-        return appPropertiesConfig.getRenewalDay();
-    }
+
 
 
 }

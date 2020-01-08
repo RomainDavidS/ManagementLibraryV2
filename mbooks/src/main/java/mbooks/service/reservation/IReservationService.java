@@ -20,7 +20,6 @@ public interface IReservationService {
 
     List<Reservation> list(Books books);
 
-    List<Reservation> listInProgress(Books books);
 
     Integer positionUser(Long idBook , Long idUserReservation);
 
@@ -31,5 +30,5 @@ public interface IReservationService {
     boolean isReservationCurrentUser( Books books, Long idUser );
     void sendReturnInfo(Books books, Date dateReturn ) throws MessagingException;
 
-    List<Reservation> getReservationToCancel();
+
 }

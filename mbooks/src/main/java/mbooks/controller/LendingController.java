@@ -1,6 +1,7 @@
 package mbooks.controller;
 
 
+import mbooks.config.ApplicationPropertiesConfig;
 import mbooks.controller.dto.lending.LendingCreateDto;
 import mbooks.exceptions.ResourceNotFoundException;
 import mbooks.model.Lending;
@@ -18,6 +19,9 @@ import java.util.List;
 public class LendingController   {
     @Autowired
     private ILendingService lendingService;
+
+    @Autowired
+    private ApplicationPropertiesConfig appPropertiesConfig;
 
 
 
@@ -81,7 +85,7 @@ public class LendingController   {
 
     @GetMapping("/getRenewalDay")
     public Integer getRenewalDay(){
-        return lendingService.getRenewalDay();
+        return appPropertiesConfig.getRenewalDay();
     }
 
 
