@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
 import java.util.List;
 
 @RestController
@@ -75,7 +76,7 @@ public class ReservationController {
     }
 
     @DeleteMapping("/delete/{id}/{idUserUpdate}")
-    public void delete(@PathVariable Long id, @PathVariable Long idUserUpdate){
+    public void delete(@PathVariable Long id, @PathVariable Long idUserUpdate) throws MessagingException {
         reservationService.delete( id, idUserUpdate );
     }
 }

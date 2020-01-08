@@ -17,6 +17,7 @@ import mbooks.technical.state.reservation.State;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.mail.MessagingException;
 import java.util.*;
 
 @Service
@@ -61,7 +62,7 @@ public class LendingServiceImpl implements ILendingService {
     }
 
 
-    public void returnBook(Long id){
+    public void returnBook(Long id) throws MessagingException {
         Lending lending = find( id );
 
         if(  lending.getReturnDate() == null ){
@@ -221,7 +222,7 @@ public class LendingServiceImpl implements ILendingService {
     /**
      * Permet de réaliser l'envoi d'un mail de relancer des emprunts des livres non rendus
      */
-    public void sendLendingRevival(){
+    public void sendLendingRevival() throws MessagingException {
         Date now = new Date();
       List<Lending> lendingList = lendingRepository.findAllByReturnDateIsNullAndAndEndDateBefore(now);
 

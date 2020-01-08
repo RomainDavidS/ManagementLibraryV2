@@ -52,14 +52,14 @@ public class CoverServiceIntegrationTest {
     }
 
     @Test
-    public void whenValidId_thenUsersShouldBeFound() {
+    public void whenValidId_thenCoverShouldBeFound() {
         Cover fromDb = coverService.find("1234546789");
         assertThat(fromDb.getFileName()).isEqualTo("cover1.png");
         verifyFindByIdIsCalledOnce();
     }
 
     @Test
-    public void whenInValidId_thenUsersShouldNotBeFound() {
+    public void whenInValidId_thenCoverShouldNotBeFound() {
         Cover fromDb = coverService.find("InvalidId");
         verifyFindByIdIsCalledOnce();
         assertThat(fromDb).isNull();
@@ -70,7 +70,6 @@ public class CoverServiceIntegrationTest {
         Mockito.reset(coverRepository);
     }
     private Cover createTestCover(String name) {
-
         return new Cover(name + ".png","image/png",50000L, "contenu".getBytes(),"site");
     }
 }

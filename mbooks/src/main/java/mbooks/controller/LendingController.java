@@ -9,6 +9,8 @@ import mbooks.technical.dto.DTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import javax.mail.MessagingException;
 import java.util.List;
 
 @RestController
@@ -75,7 +77,7 @@ public class LendingController   {
 
     @PutMapping("/return")
     @ResponseStatus(HttpStatus.OK)
-    public void returnBook(@RequestBody Long id){ lendingService.returnBook(id ); }
+    public void returnBook(@RequestBody Long id) throws MessagingException { lendingService.returnBook(id ); }
 
     @GetMapping("/getRenewalDay")
     public Integer getRenewalDay(){

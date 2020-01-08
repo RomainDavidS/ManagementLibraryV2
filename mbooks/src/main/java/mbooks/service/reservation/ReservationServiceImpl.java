@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+import javax.mail.MessagingException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -106,7 +107,7 @@ public class ReservationServiceImpl implements IReservationService {
         return  reservationRepository.save( reservation );
     }
 
-    public void delete(Long id,Long idUserUpdate){
+    public void delete(Long id,Long idUserUpdate) throws MessagingException {
         Reservation reservation = find( id );
         if ( reservation.getState() == State.INPROGRESS
                 && reservation.getIdUserReservation() == idUserUpdate ) {
@@ -135,7 +136,7 @@ public class ReservationServiceImpl implements IReservationService {
     /**
      * Permet de réaliser l'envoi d'un mail de notification de livre rendu
      */
-    public void sendReturnInfo(Books books,Date dateReturn ){
+    public void sendReturnInfo(Books books,Date dateReturn ) throws MessagingException {
 
         Reservation reservation = firstReservation( books );
         if( reservation !=null ) {

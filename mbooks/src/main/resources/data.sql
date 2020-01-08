@@ -72,14 +72,14 @@ INSERT INTO reservation(
 
 INSERT INTO email (id, name,subject,content)
 VALUES
-(1,'relance','Relance pour livre non rendu',
+(-1,'relance','Relance pour livre non rendu',
 '	Bonjour,
 
 	Vous devriez rendre le livre [BOOK_TITLE] à la blibliothèque au plus tard pour [END_DATE].
 Hors nous n avons toujours pas enregistré ce retour.
 Nous vous demandons de régulariser la situation dès à présent.
 Bien cordialement.'),
-(2,'return','Information sur votre demande de réservation',
+(-2,'return','Information sur votre demande de réservation',
 '	Bonjour,
 
 	Nous avons le plaisir de vous annoncer que le livre [BOOK_TITLE] que vous aviez réservé est disponible depuis [RETURN_DATE] à la bibliothèque.
