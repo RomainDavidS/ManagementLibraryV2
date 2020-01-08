@@ -11,6 +11,7 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import org.junit.After;
@@ -65,22 +66,9 @@ public class LendingControllerIntegrationTest {
     @Autowired
     private IEditionRepository editionRepository;
 
-    @Before
-    public void setUp(){
-       reservationRepository.deleteAll();
-       lendingRepository.deleteAll();
-       booksRepository.deleteAll();
-
-    }
-
-    @After
-    public void erase(){
-        reservationRepository.deleteAll();
-        lendingRepository.deleteAll();
-        booksRepository.deleteAll();
-    }
-
     @Test
+    @Sql( scripts = "classpath:dataBefore.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD )
+    @Sql( scripts = "classpath:dataAfter.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD )
     public void givenLending_whenGetLendingById_thenStatus200() throws Exception {
         Books books = createTestBooks("111");
         booksRepository.saveAndFlush( books );
@@ -94,6 +82,8 @@ public class LendingControllerIntegrationTest {
                 .andExpect(jsonPath("$.idUser", is( -1 ) ) );
     }
     @Test
+    @Sql( scripts = "classpath:dataBefore.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD )
+    @Sql( scripts = "classpath:dataAfter.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD )
     public void givenLending_whenGetAllLending_thenStatus200() throws Exception {
         Books books = createTestBooks("111");
         booksRepository.saveAndFlush( books );
@@ -111,6 +101,8 @@ public class LendingControllerIntegrationTest {
                 .andExpect(jsonPath("$[1].idUser", is( -2 ) ) );
     }
     @Test
+    @Sql( scripts = "classpath:dataBefore.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD )
+    @Sql( scripts = "classpath:dataAfter.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD )
     public void givenLending_whenGetAllLendingByUser_thenStatus200() throws Exception {
         Books books = createTestBooks("111");
         booksRepository.saveAndFlush( books );
@@ -129,6 +121,8 @@ public class LendingControllerIntegrationTest {
     }
 
     @Test
+    @Sql( scripts = "classpath:dataBefore.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD )
+    @Sql( scripts = "classpath:dataAfter.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD )
     public void givenLending_whenIsRenewable_thenStatus200AndReturnTrue() throws Exception {
         Books books = createTestBooks("111");
         booksRepository.saveAndFlush( books );
@@ -143,6 +137,8 @@ public class LendingControllerIntegrationTest {
                 .andExpect(jsonPath("$", is( true ) ) );
     }
     @Test
+    @Sql( scripts = "classpath:dataBefore.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD )
+    @Sql( scripts = "classpath:dataAfter.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD )
     public void givenLending_whenIsRenewable_thenStatus200AndReturnFalse() throws Exception {
         Books books = createTestBooks("111");
         booksRepository.saveAndFlush( books );
@@ -158,6 +154,8 @@ public class LendingControllerIntegrationTest {
     }
 
     @Test
+    @Sql( scripts = "classpath:dataBefore.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD )
+    @Sql( scripts = "classpath:dataAfter.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD )
     public void givenLending_whenIsLendingPossible_thenStatus200AndReturnTrue() throws Exception {
         Books books = createTestBooks("111");
         booksRepository.saveAndFlush( books );
@@ -172,6 +170,8 @@ public class LendingControllerIntegrationTest {
     }
 
     @Test
+    @Sql( scripts = "classpath:dataBefore.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD )
+    @Sql( scripts = "classpath:dataAfter.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD )
     public void givenLending_whenIsLendingPossible_thenStatus200AndReturnFalse() throws Exception {
         Books books = createTestBooks("111");
         booksRepository.saveAndFlush( books );
@@ -189,6 +189,8 @@ public class LendingControllerIntegrationTest {
 
     @Test
     @Transactional
+    @Sql( scripts = "classpath:dataBefore.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD )
+    @Sql( scripts = "classpath:dataAfter.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD )
     public void givenLending_whenGetAllLendingByBook_thenStatus200() throws Exception {
         Books books = createTestBooks("111");
         booksRepository.saveAndFlush( books );
@@ -208,6 +210,8 @@ public class LendingControllerIntegrationTest {
 
     @Test
     @Transactional
+    @Sql( scripts = "classpath:dataBefore.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD )
+    @Sql( scripts = "classpath:dataAfter.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD )
     public void whenValidInput_thenCreateLending() throws Exception {
         Books books = createTestBooks("111");
         booksRepository.saveAndFlush( books );
@@ -222,6 +226,8 @@ public class LendingControllerIntegrationTest {
 
     @Test
     @Transactional
+    @Sql( scripts = "classpath:dataBefore.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD )
+    @Sql( scripts = "classpath:dataAfter.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD )
     public void whenValidInput_thenRenewalLending() throws Exception {
         Books books = createTestBooks("111");
         booksRepository.saveAndFlush( books );
@@ -238,6 +244,8 @@ public class LendingControllerIntegrationTest {
 
     @Test
     @Transactional
+    @Sql( scripts = "classpath:dataBefore.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD )
+    @Sql( scripts = "classpath:dataAfter.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD )
     public void whenValidInput_thenLendingReturned() throws Exception {
         Books books = createTestBooks("111");
         booksRepository.saveAndFlush( books );
@@ -252,6 +260,8 @@ public class LendingControllerIntegrationTest {
 
 
     @Test
+    @Sql( scripts = "classpath:dataBefore.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD )
+    @Sql( scripts = "classpath:dataAfter.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD )
     public void whenGetRenewalDay_thenStatus200() throws Exception {
         mvc.perform(get("/lending/getRenewalDay" ).contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())

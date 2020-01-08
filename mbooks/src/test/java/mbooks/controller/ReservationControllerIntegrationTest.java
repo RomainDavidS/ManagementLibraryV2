@@ -5,14 +5,12 @@ import mbooks.MbooksApplication;
 import mbooks.model.*;
 import mbooks.repository.*;
 import mbooks.technical.state.reservation.State;
-import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import org.junit.After;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -63,21 +61,11 @@ public class ReservationControllerIntegrationTest {
     @Autowired
     private IEditionRepository editionRepository;
 
-    @Before
-    public void setUp(){
-        reservationRepository.deleteAll();
-        lendingRepository.deleteAll();
-        booksRepository.deleteAll();
-    }
 
-    @After
-    public void erase(){
-        reservationRepository.deleteAll();
-        lendingRepository.deleteAll();
-        booksRepository.deleteAll();
-    }
 
     @Test
+    @Sql( scripts = "classpath:dataBefore.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD )
+    @Sql( scripts = "classpath:dataAfter.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD )
     public void givenReservation_whenGetReservationById_thenStatus200() throws Exception {
         Books books = createTestBooks("111");
         booksRepository.saveAndFlush( books );
@@ -92,6 +80,8 @@ public class ReservationControllerIntegrationTest {
     }
 
     @Test
+    @Sql( scripts = "classpath:dataBefore.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD )
+    @Sql( scripts = "classpath:dataAfter.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD )
     public void givenReservation_whenGetAllReservation_thenStatus200() throws Exception {
         Books books = createTestBooks("111");
         booksRepository.saveAndFlush( books );
@@ -109,6 +99,8 @@ public class ReservationControllerIntegrationTest {
                 .andExpect(jsonPath("$[1].idUserReservation", is( -2 ) ) );
     }
     @Test
+    @Sql( scripts = "classpath:dataBefore.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD )
+    @Sql( scripts = "classpath:dataAfter.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD )
     public void givenReservation_whenGetAllReservationByIdUser_thenStatus200() throws Exception {
         Books books1 = createTestBooks("111");
         booksRepository.saveAndFlush( books1 );
@@ -129,6 +121,8 @@ public class ReservationControllerIntegrationTest {
     }
 
     @Test
+    @Sql( scripts = "classpath:dataBefore.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD )
+    @Sql( scripts = "classpath:dataAfter.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD )
     public void givenReservation_whenGetAllReservationByIdBook_thenStatus200() throws Exception {
         Books books = createTestBooks("111");
         booksRepository.saveAndFlush( books );
@@ -147,6 +141,8 @@ public class ReservationControllerIntegrationTest {
     }
 
     @Test
+    @Sql( scripts = "classpath:dataBefore.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD )
+    @Sql( scripts = "classpath:dataAfter.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD )
     public void givenReservation_whenGetPositionUser_thenStatus200() throws Exception {
         Books books = createTestBooks("111");
         booksRepository.saveAndFlush( books );
@@ -170,6 +166,8 @@ public class ReservationControllerIntegrationTest {
 
     @Test
     @Transactional
+    @Sql( scripts = "classpath:dataBefore.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD )
+    @Sql( scripts = "classpath:dataAfter.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD )
     public void whenValidInput_thenCreateReservation() throws Exception {
         Books books = createTestBooks("111");
         booksRepository.saveAndFlush( books );
@@ -185,6 +183,8 @@ public class ReservationControllerIntegrationTest {
 
     @Test
     @Transactional
+    @Sql( scripts = "classpath:dataBefore.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD )
+    @Sql( scripts = "classpath:dataAfter.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD )
     public void whenValidInput_thenUpdateReservation() throws Exception {
         Books books = createTestBooks("111");
         booksRepository.saveAndFlush( books );
@@ -203,6 +203,8 @@ public class ReservationControllerIntegrationTest {
 
     @Test
     @Transactional
+    @Sql( scripts = "classpath:dataBefore.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD )
+    @Sql( scripts = "classpath:dataAfter.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD )
     public void whenValidInput_thenDeleteReservation() throws Exception {
         Books books = createTestBooks("111");
         booksRepository.saveAndFlush( books );

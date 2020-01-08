@@ -10,6 +10,7 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import org.junit.After;
@@ -62,21 +63,11 @@ public class BooksControllerIntegrationTest {
     @Autowired
     private IReservationRepository reservationRepository;
 
-    @Before
-    public void setUp(){
-        reservationRepository.deleteAll();
-        lendingRepository.deleteAll();
-        booksRepository.deleteAll();
-    }
 
-    @After
-    public void erase(){
-        reservationRepository.deleteAll();
-        lendingRepository.deleteAll();
-        booksRepository.deleteAll();
-    }
 
     @Test
+    @Sql( scripts = "classpath:dataBefore.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD )
+    @Sql( scripts = "classpath:dataAfter.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD )
     public void givenBooks_whenGetBooksById_thenStatus200() throws Exception {
         Books books = createTestBooks("111");
         booksRepository.saveAndFlush( books );
@@ -88,6 +79,8 @@ public class BooksControllerIntegrationTest {
                 .andExpect(jsonPath("$.isbn", is( books.getIsbn() ) ) );
     }
     @Test
+    @Sql( scripts = "classpath:dataBefore.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD )
+    @Sql( scripts = "classpath:dataAfter.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD )
     public void givenBooks_whenGetBooksByIsbn_thenStatus200() throws Exception {
         Books books = createTestBooks("222");
         booksRepository.saveAndFlush( books );
@@ -101,6 +94,8 @@ public class BooksControllerIntegrationTest {
     }
 
     @Test
+    @Sql( scripts = "classpath:dataBefore.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD )
+    @Sql( scripts = "classpath:dataAfter.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD )
     public void givenBooks_whenGetAllBooks_thenStatus200() throws Exception {
         Books books1 = createTestBooks("111");
         booksRepository.saveAndFlush( books1 );
@@ -117,6 +112,8 @@ public class BooksControllerIntegrationTest {
     }
 
     @Test
+    @Sql( scripts = "classpath:dataBefore.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD )
+    @Sql( scripts = "classpath:dataAfter.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD )
     public void givenBooks_whenGetStateBooks_thenStatus200() throws Exception {
         Books books = createTestBooks("111");
         booksRepository.saveAndFlush( books );
@@ -130,6 +127,8 @@ public class BooksControllerIntegrationTest {
 
     @Test
     @Transactional
+    @Sql( scripts = "classpath:dataBefore.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD )
+    @Sql( scripts = "classpath:dataAfter.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD )
     public void whenValidInput_thenUpdateBooks() throws Exception {
         Books books = createTestBooks("111");
         booksRepository.saveAndFlush( books );
