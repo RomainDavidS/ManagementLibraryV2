@@ -194,9 +194,9 @@ public class LendingServiceIntegrationTest {
         resetLendingsDependency();
     }
     private void verifyFindAllLendingByIsbnIsCalledOnce() {
-        Books books1 = createTestBooks("111");
-        books1.setId( 1L );
-        Mockito.verify( lendingRepository, VerificationModeFactory.times(1)).findAllByBook( books1 );
+        //Books books1 = createTestBooks("111");
+        //books1.setId( 1L );
+        Mockito.verify( lendingRepository, VerificationModeFactory.times(1)).findAllByBook(  any(Books.class) );
         resetLendingsDependency();
     }
 

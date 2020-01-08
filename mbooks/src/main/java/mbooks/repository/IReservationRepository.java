@@ -15,7 +15,7 @@ public interface IReservationRepository extends JpaRepository<Reservation,Long> 
 
    List<Reservation> findAllByIdUserReservationOrderByReservationDateAsc( Long idUserReservation );
 
-   Reservation findByBookAndAndIdUserReservationAndState(Books books,Long idUserReservation, State state);
+   Reservation findByBookAndIdUserReservationAndState(Books books,Long idUserReservation, State state);
 
    List<Reservation> findAllByBookAndStateAndNotificationDateIsNullOrderByReservationDateAsc(Books books, State state);
 

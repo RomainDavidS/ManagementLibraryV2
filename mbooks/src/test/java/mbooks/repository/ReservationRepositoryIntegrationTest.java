@@ -71,13 +71,13 @@ public class ReservationRepositoryIntegrationTest {
     public void whenFindByBookAndAndIdUserReservationAndState_thenReturnReservation() {
         Reservation reservation = createReservationTest();
         entityManager.persistAndFlush(reservation);
-        Reservation fromDb = reservationRepository.findByBookAndAndIdUserReservationAndState( reservation.getBook(),reservation.getIdUserReservation(),reservation.getState() );
+        Reservation fromDb = reservationRepository.findByBookAndIdUserReservationAndState( reservation.getBook(),reservation.getIdUserReservation(),reservation.getState() );
         assertThat(fromDb.getId() ).isEqualTo( reservation.getId() );
     }
 
     @Test
     public void whenInvalidFindByBookAndAndIdUserReservationAndState_thenReturnNull() {
-        Reservation fromDb = reservationRepository.findByBookAndAndIdUserReservationAndState( booksRepository.getOne(-2L ),1L,State.INPROGRESS);
+        Reservation fromDb = reservationRepository.findByBookAndIdUserReservationAndState( booksRepository.getOne(-2L ),1L,State.INPROGRESS);
         assertThat(fromDb).isNull();
     }
 

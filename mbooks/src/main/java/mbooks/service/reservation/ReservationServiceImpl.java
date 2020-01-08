@@ -47,7 +47,7 @@ public class ReservationServiceImpl implements IReservationService {
     }
 
     public Reservation find(Books books, Long idUser){
-        return reservationRepository.findByBookAndAndIdUserReservationAndState(
+        return reservationRepository.findByBookAndIdUserReservationAndState(
                 books,idUser,State.INPROGRESS);
     }
 
@@ -62,6 +62,7 @@ public class ReservationServiceImpl implements IReservationService {
     public List<Reservation> list(Books books){
         return reservationRepository.findAllByBookOrderByReservationDateAsc( books);
     }
+
 
     private List<Reservation> listInProgress(Books books){
 
