@@ -1,0 +1,791 @@
+{
+	"info": {
+		"_postman_id": "0d1ecfb1-e001-4bbf-a692-3d9202a0d8d2",
+		"name": "Mbooks",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Books",
+			"item": [
+				{
+					"name": "FindBookAll",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ceab5439-1528-45fd-9df3-c23373f83e8c",
+								"exec": [
+									"pm.test(\"Find BookAll is OK\", function () {\r",
+									"    pm.response.to.be.ok;\r",
+									"    pm.response.to.be.json\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData[0].isbn).to.eql(\"9782409001000\");\r",
+									"    \r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "mdp",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "utilisateur",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9201/book/all",
+							"host": [
+								"localhost"
+							],
+							"port": "9201",
+							"path": [
+								"book",
+								"all"
+							]
+						},
+						"description": "Recherche la liste de tous les livres"
+					},
+					"response": []
+				},
+				{
+					"name": "FindBookById",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "1523f2c7-d775-4b45-9906-512abec6706d",
+								"exec": [
+									"pm.test(\"Find BookById is OK\", function () {\r",
+									"    pm.response.to.be.ok;\r",
+									"    pm.response.to.be.json\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.isbn).to.eql(\"9782409001000\");\r",
+									"    \r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "mdp",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "utilisateur",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9201/book/id/-1",
+							"host": [
+								"localhost"
+							],
+							"port": "9201",
+							"path": [
+								"book",
+								"id",
+								"-1"
+							]
+						},
+						"description": "Recherche d'un livre par son id"
+					},
+					"response": []
+				},
+				{
+					"name": "FindBookByIsbn",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9d3a0ce4-6a53-4885-aba7-198b2c988b0e",
+								"exec": [
+									"pm.test(\"Find BookByIsbn is OK\", function () {\r",
+									"    pm.response.to.be.ok;\r",
+									"    pm.response.to.be.json\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.id).to.eql(-1);\r",
+									"    \r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "mdp",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "utilisateur",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9201/book/isbn/9782409001000",
+							"host": [
+								"localhost"
+							],
+							"port": "9201",
+							"path": [
+								"book",
+								"isbn",
+								"9782409001000"
+							]
+						},
+						"description": "Recherche d'un livre via son isbn"
+					},
+					"response": []
+				},
+				{
+					"name": "GetBooksState",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "56ba2902-766e-4f98-8010-24a8350f8e01",
+								"exec": [
+									"pm.test(\"GetBookState is OK\", function () {\r",
+									"    pm.response.to.be.ok;\r",
+									"    pm.response.to.be.json\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.eql(\"AVAILABLE\");\r",
+									"    \r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "mdp",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "utilisateur",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9201/book/state/-1/1",
+							"host": [
+								"localhost"
+							],
+							"port": "9201",
+							"path": [
+								"book",
+								"state",
+								"-1",
+								"1"
+							]
+						},
+						"description": "Affiche l'état de disponibilité d'un livre"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Lending",
+			"item": [
+				{
+					"name": "FindAllLending",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "18d92ef8-f659-4b0c-90f7-8c2a1cdaedb8",
+								"exec": [
+									"pm.test(\"Find LendingAll is OK\", function () {\r",
+									"    pm.response.to.be.ok;\r",
+									"    pm.response.to.be.json\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData[0].id).to.eql(-1);\r",
+									"    \r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "mdp",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "utilisateur",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9201/lending/all",
+							"host": [
+								"localhost"
+							],
+							"port": "9201",
+							"path": [
+								"lending",
+								"all"
+							]
+						},
+						"description": "Recherche de tous les prêts"
+					},
+					"response": []
+				},
+				{
+					"name": "FindLendingById",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4f1b8fe0-26f8-4f23-8395-814d1c4bf212",
+								"exec": [
+									"pm.test(\"Find LendingById is OK\", function () {\r",
+									"    pm.response.to.be.ok;\r",
+									"    pm.response.to.be.json\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.idUser).to.eql(-1);\r",
+									"    \r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "mdp",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "utilisateur",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9201/lending/-1",
+							"host": [
+								"localhost"
+							],
+							"port": "9201",
+							"path": [
+								"lending",
+								"-1"
+							]
+						},
+						"description": "Recherche d'un emprunt par son id"
+					},
+					"response": []
+				},
+				{
+					"name": "FindAllLendingByIdUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "025b0adc-6b3c-4d38-84fc-b7cfc31c7009",
+								"exec": [
+									"pm.test(\"Find LendingAllByUser is OK\", function () {\r",
+									"    pm.response.to.be.ok;\r",
+									"    pm.response.to.be.json\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData[1].id).to.eql(-2);\r",
+									"    \r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "mdp",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "utilisateur",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9201/lending/user/-1",
+							"host": [
+								"localhost"
+							],
+							"port": "9201",
+							"path": [
+								"lending",
+								"user",
+								"-1"
+							]
+						},
+						"description": "Recherche de la liste des emprunts d'un tulisateur via son id"
+					},
+					"response": []
+				},
+				{
+					"name": "Find isRenewable",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8f520f2e-6614-45f6-9d08-af16ebef7fdf",
+								"exec": [
+									"pm.test(\"Find Lending isRenewable is OK\", function () {\r",
+									"    pm.response.to.be.ok;\r",
+									"    pm.response.to.be.json\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.be.false;\r",
+									"    \r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9201/lending/isRenewable/-1",
+							"host": [
+								"localhost"
+							],
+							"port": "9201",
+							"path": [
+								"lending",
+								"isRenewable",
+								"-1"
+							]
+						},
+						"description": "Recherche si l'emprunt est renouvelable"
+					},
+					"response": []
+				},
+				{
+					"name": "Find isLendingPossible",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "07816480-2b56-4daa-8ba4-870806ebb15b",
+								"exec": [
+									"pm.test(\"Find Lending isRenewable is OK\", function () {\r",
+									"    pm.response.to.be.ok;\r",
+									"    pm.response.to.be.json\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.be.false;\r",
+									"    \r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "mdp",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "utilisateur",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9201/lending/isLendingPossible/-1/-1",
+							"host": [
+								"localhost"
+							],
+							"port": "9201",
+							"path": [
+								"lending",
+								"isLendingPossible",
+								"-1",
+								"-1"
+							]
+						},
+						"description": "Recherche si l'emprunt est possible"
+					},
+					"response": []
+				},
+				{
+					"name": "Find LendingByIsbn",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "dfda407e-e524-43e9-b854-0cbe363ee544",
+								"exec": [
+									"pm.test(\"Find LendingListByIsbn is OK\", function () {\r",
+									"    pm.response.to.be.ok;\r",
+									"    pm.response.to.be.json\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData[0].idUser).to.eql(-1);\r",
+									"    \r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "mdp",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "utilisateur",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9201/lending/book/9782409001000",
+							"host": [
+								"localhost"
+							],
+							"port": "9201",
+							"path": [
+								"lending",
+								"book",
+								"9782409001000"
+							]
+						},
+						"description": "Recherche des emprunts d'un livre par son isbn"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Reservation",
+			"item": [
+				{
+					"name": "FindReservationById",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3a39ba2a-2033-4f1c-adcd-9286c172a7b8",
+								"exec": [
+									"pm.test(\"Find ReservationById is OK\", function () {\r",
+									"    pm.response.to.be.ok;\r",
+									"    pm.response.to.be.json\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.idUserReservation).to.eql(-2);\r",
+									"    \r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "mdp",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "utilisateur",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9201/reservation/-1",
+							"host": [
+								"localhost"
+							],
+							"port": "9201",
+							"path": [
+								"reservation",
+								"-1"
+							]
+						},
+						"description": "Recherche d'un réservation Via son Id"
+					},
+					"response": []
+				},
+				{
+					"name": "FindAllReservation",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "663f1542-0de4-4c1c-9764-0544453ff32f",
+								"exec": [
+									"pm.test(\"Find AllReservation is OK\", function () {\r",
+									"    pm.response.to.be.ok;\r",
+									"    pm.response.to.be.json\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData[0].idUserReservation).to.eql(-2);\r",
+									"    \r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9201/reservation/all",
+							"host": [
+								"localhost"
+							],
+							"port": "9201",
+							"path": [
+								"reservation",
+								"all"
+							]
+						},
+						"description": "Recherche de tous les Réservations"
+					},
+					"response": []
+				},
+				{
+					"name": "FindAllReservationByIdUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0f7b91be-c191-49b8-b947-690067d86e9c",
+								"exec": [
+									"pm.test(\"Find AllReservationByIdUser is OK\", function () {\r",
+									"    pm.response.to.be.ok;\r",
+									"    pm.response.to.be.json\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData[0].id).to.eql(-10);\r",
+									"    \r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "mdp",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "utilisateur",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9201/reservation/user/-2",
+							"host": [
+								"localhost"
+							],
+							"port": "9201",
+							"path": [
+								"reservation",
+								"user",
+								"-2"
+							]
+						},
+						"description": "Rechercher des réservations d'un utilisateur"
+					},
+					"response": []
+				},
+				{
+					"name": "FindAllReservationByIdBook",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "09d16672-5353-4204-bacb-8b5e6054f94d",
+								"exec": [
+									"pm.test(\"Find AllReservationByIdBook is OK\", function () {\r",
+									"    pm.response.to.be.ok;\r",
+									"    pm.response.to.be.json\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData[0].id).to.eql(-3);\r",
+									"    \r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9201/reservation/book/-2",
+							"host": [
+								"localhost"
+							],
+							"port": "9201",
+							"path": [
+								"reservation",
+								"book",
+								"-2"
+							]
+						},
+						"description": "Recherche des réservation d'un utilisateur"
+					},
+					"response": []
+				},
+				{
+					"name": "FindPositionUserInReservationList",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "95f1ad72-83ce-4f4d-8278-9617cb453968",
+								"exec": [
+									"pm.test(\"Find PositionUser in ReservationList is OK\", function () {\r",
+									"    pm.response.to.be.ok;\r",
+									"    pm.response.to.be.json\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.eql(2);\r",
+									"    \r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "mdp",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "utilisateur",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9201/reservation/position/-1/-3",
+							"host": [
+								"localhost"
+							],
+							"port": "9201",
+							"path": [
+								"reservation",
+								"position",
+								"-1",
+								"-3"
+							]
+						},
+						"description": "Recherche de la position d'un ulisateur dans la liste des reservations"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
