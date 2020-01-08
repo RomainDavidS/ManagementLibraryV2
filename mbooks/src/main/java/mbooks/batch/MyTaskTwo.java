@@ -17,6 +17,8 @@ import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -27,7 +29,7 @@ public class MyTaskTwo implements Tasklet {
 
     private final IReservationRepository reservationRepository;
 
-    private final JavaMailSender emailSender;
+    private final JavaMailSenderImpl sender;
 
     private final IUsersProxy usersProxy;
 
@@ -38,12 +40,12 @@ public class MyTaskTwo implements Tasklet {
     public MyTaskTwo(
             final ApplicationPropertiesConfig appPropertiesConfig,
             final IReservationRepository reservationRepository,
-            final JavaMailSender emailSender,
+            final JavaMailSenderImpl sender,
             final IUsersProxy usersProxy,
             final IEmailRepository emailRepository) {
         this.appPropertiesConfig = appPropertiesConfig;
         this.reservationRepository = reservationRepository;
-        this.emailSender = emailSender;
+        this.sender = sender;
         this.usersProxy = usersProxy;
         this.emailRepository = emailRepository;
     }
@@ -107,7 +109,7 @@ public class MyTaskTwo implements Tasklet {
         message.setTo(to);
         message.setSubject(subject);
         message.setText(text);
-        emailSender.send(message);
+        sender.send(message);
     }
 
 }

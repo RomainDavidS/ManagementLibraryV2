@@ -62,7 +62,6 @@ public class BooksControllerIntegrationTest {
     @Autowired
     private IReservationRepository reservationRepository;
 
-
     @Before
     public void setUp(){
         reservationRepository.deleteAll();
@@ -76,6 +75,7 @@ public class BooksControllerIntegrationTest {
         lendingRepository.deleteAll();
         booksRepository.deleteAll();
     }
+
     @Test
     public void givenBooks_whenGetBooksById_thenStatus200() throws Exception {
         Books books = createTestBooks("111");

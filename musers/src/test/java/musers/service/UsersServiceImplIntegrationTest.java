@@ -47,7 +47,6 @@ public class UsersServiceImplIntegrationTest {
         Users alex = createTestUsers("alex" );
 
 
-
         List<Users> allEmployees = Arrays.asList(john, bob, alex);
         Mockito.when(usersRepository.findByEmailAndActiveTrue(john.getEmail())).thenReturn(john);
         Mockito.when(usersRepository.findByEmailAndActiveTrue(alex.getEmail())).thenReturn(alex);

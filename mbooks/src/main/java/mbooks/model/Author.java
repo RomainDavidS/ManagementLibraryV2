@@ -13,6 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @RequiredArgsConstructor
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public @Data class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

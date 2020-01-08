@@ -12,9 +12,11 @@ import org.springframework.batch.core.configuration.annotation.JobBuilderFactory
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 
 @Configuration
@@ -36,8 +38,9 @@ public class BatchConfig {
     @Autowired
     private IEmailRepository emailRepository;
 
+
     @Autowired
-    private JavaMailSender emailSender;
+    private JavaMailSenderImpl sender;
 
     @Autowired
     private ApplicationPropertiesConfig appPropertiesConfig;
@@ -48,13 +51,13 @@ public class BatchConfig {
     @Bean
     public Step stepOne() {
         return steps.get("Revival")
-                .tasklet(new MyTaskOne( lendingRepository, usersProxy,emailRepository,emailSender ) )
+                .tasklet(new MyTaskOne( lendingRepository, usersProxy,emailRepository,sender ) )
                 .build();
     }
     @Bean
     public Step stepTwo() {
         return steps.get("ReservationCanceled")
-                .tasklet(new MyTaskTwo( appPropertiesConfig,reservationRepository,emailSender,usersProxy,emailRepository ) )
+                .tasklet(new MyTaskTwo( appPropertiesConfig,reservationRepository,sender,usersProxy,emailRepository ) )
                 .build();
     }
 

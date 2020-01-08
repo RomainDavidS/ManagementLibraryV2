@@ -15,6 +15,7 @@ import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -28,7 +29,7 @@ import java.util.List;
 public class MyTaskOne implements Tasklet  {
 
 
-    private final JavaMailSender emailSender;
+    private final  JavaMailSenderImpl sender;;
 
     private final ILendingRepository lendingRepository;
 
@@ -40,11 +41,11 @@ public class MyTaskOne implements Tasklet  {
     public MyTaskOne(final ILendingRepository lendingRepository,
                      final IUsersProxy usersProxy,
                      final IEmailRepository emailRepository,
-                     final JavaMailSender emailSender) {
+                     final JavaMailSenderImpl sender) {
         this.lendingRepository = lendingRepository;
         this.usersProxy = usersProxy;
         this.emailRepository = emailRepository;
-        this.emailSender = emailSender;
+        this.sender = sender;
 
     }
 
@@ -92,6 +93,6 @@ public class MyTaskOne implements Tasklet  {
         message.setTo(to);
         message.setSubject(subject);
         message.setText(text);
-        emailSender.send(message);
+        sender.send(message);
     }
 }
