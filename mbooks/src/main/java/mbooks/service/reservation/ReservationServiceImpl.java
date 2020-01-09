@@ -3,6 +3,7 @@ package mbooks.service.reservation;
 
 import mbooks.beans.musers.user.UsersBean;
 import mbooks.config.ApplicationPropertiesConfig;
+import mbooks.exceptions.ResourceNotFoundException;
 import mbooks.model.Books;
 import mbooks.model.Reservation;
 import mbooks.proxies.IUsersProxy;
@@ -43,7 +44,8 @@ public class ReservationServiceImpl implements IReservationService {
 
 
     public Reservation find(Long id){
-        return reservationRepository.findById(id).orElse(null);
+
+        return reservationRepository.findById(id).orElse(null );
     }
 
     public Reservation find(Books books, Long idUser){
