@@ -37,6 +37,28 @@ Description :
 
 ### Etape finale
     Lancer zipkin-server
+    
+### Les fichiers
+#### Les bases de données
+    - mbooks : /src/main/resources/database.sql et  /src/main/resources/structure.sql
+    - mfile : /src/main/resources/database.sql et  /src/main/resources/structure.sql
+    - musers : /src/main/resources/database.sql et  /src/main/resources/structure.sql
+### Postman
+    - mbooks : src/test/resources/Mbooks.postman_collection.json
+    - mfile : src/test/resources/Mfile.postman_collection.json
+    - musers : src/test/resources/Musers.postman_collection.json
+#### Les tests
+    Pour effectuer les différents tests il est nécessaire de faire le déploiement avec le profile test
+    => -Dspring.profiles.active=test
+    - dans chaque api lancer la commande mvn verify pour lancer les différents tests
+    - dans Postman importer les collections mis à disposition
+
+#### Les tickets présents dans github
+    - ticket#1 : ajout d'un système de réservation
+    - ticket#2 : ajout d'une nouvelle règle de gestion indiquant quel'emprunt n'est pas renouvelable après la date de fin
+    - ticket#3 : ajouts des tests d'intégrations
+ 
+     
 
 
 
