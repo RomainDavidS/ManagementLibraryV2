@@ -8,7 +8,7 @@ Description :
     Edge service : module config-server , eureka-server, springadmin
     Gateway : module zuul-server
     - authentification basic : user = utilisateur - password = mdp
-    Properties : https://github.com/RomainDavidS/ManagementLibrary.git
+    Properties : https://github.com/RomainDavidS/ManagementLibraryV2.git
     Base de donées : postgresql pour tous les microservices
     - mfile : user = adm_file - password = root
     - mbooks : user = adm_books - password = root
