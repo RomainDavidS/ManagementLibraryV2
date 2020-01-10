@@ -29,13 +29,13 @@ VALUES
 INSERT INTO books_reservation(
 	id, next_return_date, number, possible)
 	VALUES
-	(-1, null ,0, 60),
-	(-2,'2019-12-29 14:00:00' , 2, 60),
-	(-3, '2019-12-29 14:00:00', 2, 60),
-	(-4, '2019-12-30 14:00:00', 2, 60),
-	(-5, '2019-12-30 14:00:00', 60, 60),
-	(-6, '2019-12-30 14:00:00' , 3, 60),
-	(-7, null , 0, 60);
+	(-1, '2020-01-15 14:00:00' ,0, 60),
+	(-2,'2020-01-15 14:00:00' , 2, 60),
+	(-3, '2020-01-15 14:00:00', 2, 60),
+	(-4, '2020-01-15 14:00:00', 2, 60),
+	(-5, '2020-01-15 14:00:00', 60, 60),
+	(-6, '2020-01-15 14:00:00' , 3, 60),
+	(-7, '2020-01-15 14:00:00' , 0, 60);
 
 INSERT INTO books(
 	id_book_reservation,id, availability, id_cover, isbn, review, summary, title, id_author,id_coauthor, id_edition, id_language, id_theme)
@@ -54,7 +54,7 @@ INSERT INTO lending(
 	id, end_date, id_user, renewal, return_date, start_date, id_books)
 	VALUES
 	(-1, '2019-12-29 14:00:00', -1, 0, null , '2019-12-01 14:00:00', -1),
-	(-2, '2019-12-30 14:00:00', -1, 0, null , '2019-12-02 14:00:00', -2);
+	(-2, '2020-01-30 14:00:00', -1, 0, null , '2020-01-02 14:00:00', -2);
 
 INSERT INTO reservation(
 	id, id_user_reservation, notification_date, reservation_date, state, id_books)

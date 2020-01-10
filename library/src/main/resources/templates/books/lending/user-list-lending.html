@@ -42,7 +42,7 @@
                             <div class="card mb-1 box-shadow" th:with="b = ${l.book }" >
                                 <p class="card-text mt-2 ml-2">
                                     <span class="badge badge-pill badge-success" th:if="${ fn.isInProgress( l ) }">Prêt en cours</span>
-                                    <span class="badge badge-pill badge-danger" th:if="${ fn.isOutOfTime( l ) }">Prêt hors délai</span>
+                                    <span class="badge badge-pill badge-danger" th:if="${ fn.isOutOfTime( l ) && !fn.isReturn( l ) }">Prêt hors délai</span>
                                     <span class="badge badge-pill badge-info" th:if="${ fn.isReturn( l ) }">Livre rendu</span>
                                 </p>
                                 <div class="d-flex justify-content-between align-items-center flex-wrap mb-1">
