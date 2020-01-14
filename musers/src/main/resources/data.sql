@@ -11,7 +11,7 @@ VALUES
 INSERT INTO "users"
 (id,email,active,last_name,password,first_name,phone)
 VALUES
-(1,'romaindavid.sergeant@gmail.com',
+(1,'user1',
 true,'ADMIN','$2a$10$mVLweGs6HLxItvuYt5W21e9sr7sgkqeuk6q.3pke4HEHJZry4fWSO',
 'Romain-David' ,'0768000001'),
 (2,'actuator@gmail.com',
