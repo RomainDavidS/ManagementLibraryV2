@@ -4,9 +4,9 @@ P10 - OCR Amélioration de la Gestion d'un bibliothèque d'une grande ville
 Description :
 
     Client UI : module library
-        user1 =  - mdp = a 
-        user2 =  - mdp = a 
-        user3 =  - mdp = a 
+        user1 = user1 - mdp = a 
+        user2 = user2 - mdp = a 
+        user3 = user3 - mdp = a 
     3 Microservices : modules mbooks, mfile et musers
     Edge service : module config-server , eureka-server, springadmin
     Gateway : module zuul-server
