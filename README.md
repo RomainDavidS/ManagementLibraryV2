@@ -4,9 +4,9 @@ P10 - OCR Amélioration de la Gestion d'un bibliothèque d'une grande ville
 Description :
 
     Client UI : module library
-        user1 = romaindavid.sergeant@gmail.com - mdp = a 
-        user2 = romaind.sergeant@gmail.com - mdp = a 
-        user3 = romaind.ocrlibrary@gmail.com - mdp = a 
+        user1 =  - mdp = a 
+        user2 =  - mdp = a 
+        user3 =  - mdp = a 
     3 Microservices : modules mbooks, mfile et musers
     Edge service : module config-server , eureka-server, springadmin
     Gateway : module zuul-server
